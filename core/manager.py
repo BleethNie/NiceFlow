@@ -50,7 +50,6 @@ class PluginManager(metaclass=SingletonMeta):
             for name, clazz in inspect.getmembers(module, inspect.isclass):
                 # 判断该类是不是IPlugin类的子类
                 if issubclass(clazz, IPlugin) and clazz.__name__ != IPlugin.__name__:
-                    print("clazz", clazz, "是子类")
                     cls.registered_plugins_dict[clazz.__name__] = clazz
 
     @classmethod

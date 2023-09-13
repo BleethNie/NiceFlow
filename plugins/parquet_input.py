@@ -1,17 +1,18 @@
 import json
+
 import duckdb
 
 from core.plugin import IPlugin
 
 
-class CsvInput(IPlugin):
+class ParquetInput(IPlugin):
 
     def init(self, param: json):
-        super(CsvInput, self).init(param)
+        super(ParquetInput, self).init(param)
 
     def execute(self):
         file_name = self.param["file_name"]
-        df = duckdb.read_csv(file_name)
+        df = duckdb.read_parquet(file_name)
         # 设置结果
         for node in self.next_nodes:
             node.set_result(self.name, df)
@@ -20,4 +21,4 @@ class CsvInput(IPlugin):
             node.execute()
 
     def to_json(self):
-        super(CsvInput, self).to_json()
+        super(ParquetInput, self).to_json()
