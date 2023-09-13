@@ -7,7 +7,6 @@ from core.flow import Flow
 from core.plugin import IPlugin
 
 
-# https://github.com/srn-g/pypluginbase/blob/main/src/PluginManager.py
 class SingletonMeta(type):
     def __call__(cls, *args, **kwargs):
         with cls._lock:
@@ -68,46 +67,25 @@ class PluginManager(metaclass=SingletonMeta):
 
 
 class FlowManager(metaclass=SingletonMeta):
-    __flowManagerDict: dict[str, Flow] = []
+    flow_manager_dict: dict[str, Flow] = {}
 
     # 注册系统插件
     PluginManager.register_plugin()
 
     @classmethod
-    def read(cls, json_path: str):
+    def read(cls, json_path: str) -> Flow:
         flow = Flow()
+        cls.flow_manager_dict[flow.flow_uid] = flow
         with open(json_path, 'r', encoding='utf8') as fp:
             flow_json = json.load(fp)
         nodes_array: json = flow_json["nodes"]
         edges_array: json = flow_json["edges"]
         # 组装node,edge
         for node_json in nodes_array:
-            id = node_json["id"]
-            node:IPlugin = PluginManager.get_plugin(id)
+            node_id: str = node_json["id"]
+            node: IPlugin = PluginManager.get_plugin(node_id)
             node.init(node_json)
             flow.add_node(node)
-
         for edge in edges_array:
-            print("")
-
-#
-# JSONArray
-# contents = job.getJSONArray("contents");
-# FlowApp
-# flowApp = create();
-# for (int i = 0; i < contents.size(); i++) {
-# JSONObject object = contents.getJSONObject(i);
-# String id = object.getStr("id");
-# AbstractPlugin p = FlowPluginManager.getFlowPluginManager().getPlugin(id);
-# AbstractPlugin plugin = (AbstractPlugin) object.toBean(p.getClass());
-# if (!StrUtil.isBlank(plugin.getFlowUid())) {
-# flowApp.setFlowUid(plugin.getFlowUid());
-# registeredFlows.remove(flowApp.getFlowUid());
-# registeredFlows.put(flowApp.getFlowUid(), flowApp);
-# } else {
-# plugin.setFlowUid(flowApp.getFlowUid());
-# }
-# plugin.setType(p.type);
-# flowApp.getFlowPlugins().put(plugin.getName(), plugin);
-# }
-# return flowApp;
+            flow.set_edge(edge["startId"], edge["endId"])
+        return flow

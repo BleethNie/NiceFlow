@@ -14,7 +14,7 @@
 
 ## 概念学习
 
-- 类型信息 https://www.dusaiphoto.com/article/164/
-- 
+- 类型信息     https://www.dusaiphoto.com/article/164/
+- 实现插件系统 https://github.com/srn-g/pypluginbase/blob/main/src/PluginManager.py
 
 
