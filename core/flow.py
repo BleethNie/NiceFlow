@@ -41,14 +41,19 @@ class Flow(metaclass=abc.ABCMeta):
 
     # 提交任务
     def run(self):
-        pass
+        # 找到首节点
+        for key in self.plugin_dict.keys():
+            node: IPlugin = self.plugin_dict[key]
+            pre_nodes: List[IPlugin] = node.pre_nodes
+            if len(pre_nodes) == 0:
+                # 找到首节点
+                node.execute()
 
     # flow转json
-    def to_flow_str(self):
+    def to_flow_json(self):
         nodes = []
         edges = []
         for key in self.plugin_dict.keys():
-            print("key,entry", key)
             node: IPlugin = self.plugin_dict[key]
             nodes.append(node.to_json())
             pre_nodes: List[IPlugin] = node.pre_nodes

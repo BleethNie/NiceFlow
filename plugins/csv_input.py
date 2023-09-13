@@ -10,12 +10,8 @@ class CsvInput(IPlugin):
 
     def execute(self):
         print("nice csv-input")
-        return 2
+        for node in self.next_nodes:
+            node.execute()
 
     def to_json(self):
-        return {
-            "name": self.name,
-            "id": self.id,
-            "type": self.type,
-            "properties": self.param
-        }
+        super(CsvInput, self).to_json()
