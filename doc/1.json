@@ -1,0 +1,28 @@
+{
+  "nodes": [
+    {
+      "id": "read",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "file_name": "D:/个人/项目/python/NodeGraphQt/examples/plugin/data/2.csv",
+        "type": "csv"
+      }
+    },
+    {
+      "id": "write",
+      "name": "write1",
+      "type": "output",
+      "properties": {
+        "file_name": "D:/个人/项目/python/NodeGraphQt/examples/plugin/data/3.xlsx",
+        "type": "excel"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "groupC_3",
+      "endId": "groupC1_1"
+    }
+  ]
+}
