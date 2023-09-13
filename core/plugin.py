@@ -11,15 +11,23 @@ class IPlugin(metaclass=abc.ABCMeta):
         self.type = ""
         # class名称
         self.id = ""
-        # class名称
+        # 参数
+        self.param = {}
+        # 下一步
         self.next_nodes = []
+        # 上一步
+        self.pre_nodes = []
 
     def init(self, param: json):
         self.id = param["id"]
         self.type = param["type"]
         self.name = param["name"]
-        print(param)
+        self.param = param["properties"]
 
     @abc.abstractmethod
     def execute(self):
+        pass
+
+
+    def to_json(self):
         pass

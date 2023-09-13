@@ -1,6 +1,7 @@
 import abc
 import uuid
 from enum import Enum
+from typing import List
 
 from core.plugin import IPlugin
 
@@ -28,6 +29,7 @@ class Flow(metaclass=abc.ABCMeta):
         start_node = self.plugin_dict[start_id]
         end_node = self.plugin_dict[end_id]
         start_node.next_nodes.append(end_node)
+        end_node.pre_nodes.append(start_node)
         return self
 
     def get_flow_uid(self):
@@ -43,6 +45,13 @@ class Flow(metaclass=abc.ABCMeta):
 
     # flow转json
     def to_flow_str(self):
-        for key, entry in enumerate(self.plugin_dict):
+        nodes = []
+        edges = []
+        for key in self.plugin_dict.keys():
             print("key,entry", key)
-        return ""
+            node: IPlugin = self.plugin_dict[key]
+            nodes.append(node.to_json())
+            pre_nodes: List[IPlugin] = node.pre_nodes
+            for node in pre_nodes:
+                edges.append({"startId": node.name, "endId": node.name})
+        return {"nodes": nodes, "edges": edges}

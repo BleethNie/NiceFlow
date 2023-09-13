@@ -21,8 +21,8 @@
   ],
   "edges": [
     {
-      "startId": "groupC_3",
-      "endId": "groupC1_1"
+      "startId": "read1",
+      "endId": "write1"
     }
   ]
 }
