@@ -25,7 +25,7 @@ class PluginManager(metaclass=SingletonMeta):
     plugins_folder_path = "plugins"
 
     @classmethod
-    def discover_plugins(cls):
+    def register_plugin(cls):
         """
         Find plugins and add them to list
         """
@@ -55,31 +55,40 @@ class PluginManager(metaclass=SingletonMeta):
                     cls.registered_plugins_dict[clazz.__name__] = clazz
 
     @classmethod
-    def get_register_plugins(cls):
-        print(cls.registered_plugins_dict)
+    def get_plugin(cls, plugin_name: str) -> IPlugin:
+        clazz = cls.registered_plugins_dict[plugin_name]
+        obj: IPlugin = clazz()
+        return obj
 
     @classmethod
-    def execute_plugin(cls, plugin_name):
+    def execute_plugin(cls, plugin_name: str):
         clazz = cls.registered_plugins_dict[plugin_name]
         obj: IPlugin = clazz()
         obj.execute()
 
 
-
-class FlowManager():
+class FlowManager(metaclass=SingletonMeta):
     __flowManagerDict: dict[str, Flow] = []
+
+    # 注册系统插件
+    PluginManager.register_plugin()
 
     @classmethod
     def read(cls, json_path: str):
+        flow = Flow()
         with open(json_path, 'r', encoding='utf8') as fp:
             flow_json = json.load(fp)
         nodes_array: json = flow_json["nodes"]
-        for node in nodes_array:
-            id = node["id"]
-            type = node["type"]
-            name = node["name"]
-            properties = node["properties"]
-            node_cls = importlib.import_module(type + '.' + id)
+        edges_array: json = flow_json["edges"]
+        # 组装node,edge
+        for node_json in nodes_array:
+            id = node_json["id"]
+            node:IPlugin = PluginManager.get_plugin(id)
+            node.init(node_json)
+            flow.add_node(node)
+
+        for edge in edges_array:
+            print("")
 
 #
 # JSONArray

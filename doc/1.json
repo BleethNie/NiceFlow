@@ -1,7 +1,7 @@
 {
   "nodes": [
     {
-      "id": "read",
+      "id": "CsvInput",
       "name": "read1",
       "type": "input",
       "properties": {
@@ -10,7 +10,7 @@
       }
     },
     {
-      "id": "write",
+      "id": "CsvInput",
       "name": "write1",
       "type": "output",
       "properties": {

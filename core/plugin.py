@@ -1,5 +1,5 @@
 import abc
-
+import json
 
 
 class IPlugin(metaclass=abc.ABCMeta):
@@ -7,14 +7,8 @@ class IPlugin(metaclass=abc.ABCMeta):
     def __init__(self):
         pass
 
-
-    def init(self, param: dict):
-        """
-            初始化参数
-        """
-        pass
-
-
+    def init(self, param: json):
+        print(param)
 
     @abc.abstractmethod
     def execute(self):

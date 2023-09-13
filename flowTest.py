@@ -1,10 +1,5 @@
-import glob
-import os
-
 # 指定文件夹路径
-from core.manager import PluginManager
+from core.manager import FlowManager
 
 if __name__ == '__main__':
-    PluginManager.discover_plugins()
-    PluginManager.get_register_plugins()
-    PluginManager.execute_plugin("CsvInput")
+    FlowManager.read("E:/02_Resource/01_Code/python/EasyFlow/doc/1.json");
