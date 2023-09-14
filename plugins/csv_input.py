@@ -1,4 +1,5 @@
 import json
+
 import duckdb
 
 from core.plugin import IPlugin

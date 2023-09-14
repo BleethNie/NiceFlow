@@ -3,8 +3,8 @@ import json
 import time
 from functools import wraps
 from typing import List, Dict
-
 from pandas import DataFrame
+
 
 
 class IPlugin(metaclass=abc.ABCMeta):
@@ -25,19 +25,19 @@ class IPlugin(metaclass=abc.ABCMeta):
         # 设置结果
         self._pre_result_dict: Dict[str, DataFrame] = {}
 
-    # 在类里定义一个装饰器
-    def timer(func):
-        @wraps(func)
-        def wrapper(self, *args, **kwargs):
-            s_time = time.time()
-            func(self, *args, **kwargs)
-            e_time = time.time()
-            diff = e_time - s_time
-            print('【{}】插件执行耗时【{}】秒'.format(self.plugin, diff))
+    # 带参数的装饰器
+    def query(self):
+        def wrapper(func):
+            def sub_wrapper(*args, **kwargs):
+                # 打印装饰器的参数
+                print(f'查询方式：{self.name}')
 
+                # 返回函数运行结果
+                return func(*args, **kwargs)
+            return sub_wrapper
         return wrapper
 
-    @timer
+
     @abc.abstractmethod
     def execute(self):
         pass

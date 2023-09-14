@@ -1,15 +1,20 @@
 from core.flow import Flow
 from core.manager import FlowManager
 
-def test2():
+def baseTest():
     path = "E:/02_Resource/01_Code/python/EasyFlow/doc/1.json"
     myFlow: Flow = FlowManager.read(path)
     myFlow.run()
 
-def test1():
+def parquetTest():
     path = "E:/02_Resource/01_Code/python/EasyFlow/doc/parquet_input_console.json"
     myFlow: Flow = FlowManager.read(path)
     myFlow.run()
 
+def fakerTest():
+    path = "E:/02_Resource/01_Code/python/EasyFlow/doc/faker_input_console.json"
+    myFlow: Flow = FlowManager.read(path)
+    myFlow.run()
+
 if __name__ == '__main__':
-    test1()
+    fakerTest()

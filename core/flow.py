@@ -4,7 +4,6 @@ from enum import Enum
 from typing import List
 
 from core.plugin import IPlugin
-from core.tool import timer
 
 
 class FlowStatusEnum(Enum):
