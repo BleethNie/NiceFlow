@@ -13,12 +13,8 @@ class ParquetInput(IPlugin):
     def execute(self):
         file_name = self.param["file_name"]
         df = duckdb.read_parquet(file_name)
-        # 设置结果
-        for node in self.next_nodes:
-            node.set_result(self.name, df)
-        # 执行下一步
-        for node in self.next_nodes:
-            node.execute()
+        # 设置下一步结果
+        self.set_result(df)
 
     def to_json(self):
         super(ParquetInput, self).to_json()

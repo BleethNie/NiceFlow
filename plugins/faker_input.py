@@ -8,19 +8,19 @@ from faker import Faker
 from core.plugin import IPlugin
 
 
-
 class FakerInput(IPlugin):
 
-    def init(self, param: json):
-        super(FakerInput, self).init(param)
+    def __init__(self):
+        super().__init__()
+        # 缓存编译字节码
+        self.compile_dict = {}
         # 创建一个duckdb连接
         self.con = duckdb.connect()
 
-        # 缓存编译字节码
-        self.compile_dict = {}
+    def init(self, param: json):
+        super(FakerInput, self).init(param)
         #  编译字节码对象
         columns = self.param["columns"]
-        faker = Faker('zh-CN')
         for column in columns:
             exec_str = "faker.{}()".format(column)
             compile_obj = compile(exec_str, '', 'eval')
@@ -31,13 +31,14 @@ class FakerInput(IPlugin):
         columns = self.param["columns"]
         randoms = self.param["randoms"]
         list_map = []
+        # faker不能去掉，因为compile_obj为动态编译
         faker = Faker('zh-CN')
         for i in range(rows):
             current_row = {}
             for column in columns:
                 compile_obj = self.compile_dict[column]
                 value = eval(compile_obj)
-                current_row[column] =value
+                current_row[column] = value
             for element in randoms:
                 key = element["key"]
                 values = element["values"]
@@ -48,13 +49,8 @@ class FakerInput(IPlugin):
         # 组装最后的结果
         df = pd.DataFrame(list_map)
         rel = self.con.from_df(df)
-
-        # 设置结果
-        for node in self.next_nodes:
-            node.set_result(self.name, rel)
-        # 执行下一步
-        for node in self.next_nodes:
-            node.execute()
+        # 设置下一步结果
+        self.set_result(rel)
 
     def to_json(self):
         super(FakerInput, self).to_json()

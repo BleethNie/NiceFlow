@@ -1,10 +1,8 @@
 import abc
 import json
-import time
-from functools import wraps
 from typing import List, Dict
-from pandas import DataFrame
 
+from pandas import DataFrame
 
 
 class IPlugin(metaclass=abc.ABCMeta):
@@ -25,20 +23,19 @@ class IPlugin(metaclass=abc.ABCMeta):
         # 设置结果
         self._pre_result_dict: Dict[str, DataFrame] = {}
 
+
     # 带参数的装饰器
     def query(self):
         def wrapper(func):
             def sub_wrapper(*args, **kwargs):
                 # 打印装饰器的参数
                 print(f'查询方式：{self.name}')
-
                 # 返回函数运行结果
                 return func(*args, **kwargs)
             return sub_wrapper
         return wrapper
 
 
-    @abc.abstractmethod
     def execute(self):
         pass
 
@@ -48,8 +45,13 @@ class IPlugin(metaclass=abc.ABCMeta):
         self.name = param["name"]
         self.param = param["properties"]
 
-    def set_result(self, node_id: str, df: DataFrame):
-        self._pre_result_dict[node_id] = df
+    def set_result(self, df: DataFrame):
+        # 设置结果
+        for node in self.next_nodes:
+            node._pre_result_dict[self.name] =  df
+        # 执行下一步
+        for node in self.next_nodes:
+            node.execute()
 
     def to_json(self):
         return {
