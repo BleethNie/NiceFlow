@@ -26,6 +26,11 @@ def sortTest():
     myFlow.run()
     myFlow.close()
 
+def samplesTest():
+    path = "E:/02_Resource/01_Code/python/EasyFlow/doc/samples_console.json"
+    myFlow: Flow = FlowManager.read(path)
+    myFlow.run()
+    myFlow.close()
 
 if __name__ == '__main__':
-    sortTest()
+    samplesTest()

@@ -2,23 +2,29 @@ import json
 
 import duckdb
 
+from core.flow import Flow
 from core.plugin import IPlugin
 
 
 class Samples(IPlugin):
+    """采样功能包括
+    reservoir/基本采样 5   采样5条
+    percent/百分比采样 10% 采样10%
+    """
 
-    def init(self, param: json):
-        super(Samples, self).init(param)
+    def init(self, param: json, flow: Flow):
+        super(Samples, self).init(param, flow)
 
     def execute(self):
-        self.param[""]
+        mode = self.param["mode"]
+        value = self.param["value"]
 
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
         df = self._pre_result_dict[pre_node.name]
-        res = duckdb.sql("SELECT * FROM tbl USING SAMPLE 10%;")
-
-
+        if mode == "reservoir":
+            pass
+        self.set_result(df)
 
     def to_json(self):
         super(Samples, self).to_json()
