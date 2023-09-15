@@ -22,6 +22,7 @@ class Flow(metaclass=abc.ABCMeta):
         self.flow_status: FlowStatusEnum = FlowStatusEnum.WAITING
         self.plugin_dict: dict[str, IPlugin] = {}
         self.con = duckdb.connect()
+        self.param_dict: dict[str, object] = {}
         print("创建Flow", self.flow_uid)
 
     def add_node(self, node: IPlugin):
@@ -40,6 +41,7 @@ class Flow(metaclass=abc.ABCMeta):
 
     # 设置flow层级的参数
     def set_param(self, param_dict: dict):
+        self.param_dict.update(param_dict)
         return self
 
     # 提交任务
@@ -50,7 +52,9 @@ class Flow(metaclass=abc.ABCMeta):
             pre_nodes: List[IPlugin] = node.pre_nodes
             if len(pre_nodes) == 0:
                 # 找到首节点
+                node.before_execute()
                 node.execute()
+
         # 按照顺序关闭资源
         for key in self.plugin_dict.keys():
             node: IPlugin = self.plugin_dict[key]

@@ -1,12 +1,13 @@
 import json
 
+from core.flow import Flow
 from core.plugin import IPlugin
 
 
 class ParquetOutput(IPlugin):
 
-    def init(self, param: json):
-        super(ParquetOutput, self).init(param)
+    def init(self, param: json,flow:Flow):
+        super(ParquetOutput, self).init(param,flow)
 
     def execute(self):
         file_name = self.param["file_name"]

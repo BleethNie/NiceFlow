@@ -48,7 +48,7 @@ def maskTest():
     myFlow.run()
     myFlow.close()
 
-
+# TODO: 未完成
 def mappingTest():
     path = "E:/02_Resource/01_Code/python/EasyFlow/doc/mapping_console.json"
     myFlow: Flow = FlowManager.read(path)

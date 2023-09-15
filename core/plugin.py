@@ -26,7 +26,6 @@ class IPlugin(metaclass=abc.ABCMeta):
         from core.flow import Flow
         self.flow: Flow = None
 
-
     def execute(self):
         pass
 
@@ -44,6 +43,7 @@ class IPlugin(metaclass=abc.ABCMeta):
             node._pre_result_dict[self.name] = df
         # 执行下一步
         for node in self.next_nodes:
+            node.before_execute()
             node.execute()
 
     # 关闭资源
@@ -51,6 +51,14 @@ class IPlugin(metaclass=abc.ABCMeta):
         # 执行下一步
         for node in self.next_nodes:
             node.close()
+
+    def before_execute(self):
+        # 变量更新
+        for key, value in self.param.items():
+            # 判断是变量，则进行更新
+            if str(value).startswith("${") and str(value).endswith("}"):
+                variable = str(value).removeprefix("${").removesuffix("}")
+                self.param[key] = self.flow.param_dict[variable]
 
     def to_json(self):
         return {

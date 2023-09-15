@@ -3,6 +3,7 @@
     "name": "",
     "uid": "",
     "param": {
+
     }
   },
   "nodes": [
@@ -11,23 +12,19 @@
       "name": "read1",
       "type": "input",
       "properties": {
-        "file_name": "F:/07_数据源大全/store_order/sales.csv",
+        "file_name": "${file_name}",
         "type": "csv"
       }
     },
     {
-      "id": "Mapping",
-      "name": "mapping",
+      "id": "Sort",
+      "name": "sort11",
       "type": "translate",
       "properties": {
         "columns": [
           {
-            "field": "date_id",
-            "default": "NONE",
-            "mapping": {
-              "1": "男",
-              "2": "女"
-            }
+            "field": "datehour_id",
+            "sort": "asc"
           }
         ]
       }
@@ -37,17 +34,17 @@
       "name": "print",
       "type": "output",
       "properties": {
-        "row": 10
+        "row": "${row}"
       }
     }
   ],
   "edges": [
     {
       "startId": "read1",
-      "endId": "mapping"
+      "endId": "sort11"
     },
     {
-      "startId": "mapping",
+      "startId": "sort11",
       "endId": "print"
     }
   ]

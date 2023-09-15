@@ -62,6 +62,7 @@ class PluginManager(metaclass=SingletonMeta):
     def execute_plugin(cls, plugin_name: str):
         clazz = cls.registered_plugins_dict[plugin_name]
         obj: IPlugin = clazz()
+        obj.before_execute()
         obj.execute()
 
 
@@ -85,6 +86,8 @@ class FlowManager(metaclass=SingletonMeta):
             node: IPlugin = PluginManager.get_plugin(node_id)
             node.init(node_json, flow)
             flow.add_node(node)
+            print("flow加载组件【{}】".format(node.name))
         for edge in edges_array:
             flow.set_edge(edge["startId"], edge["endId"])
+
         return flow
