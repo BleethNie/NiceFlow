@@ -4,14 +4,13 @@ import pandas
 from sqlalchemy import create_engine
 from sqlalchemy.sql.expression import text
 
-from core.flow import Flow
 from core.plugin import IPlugin
 
 
-class DorisInput(IPlugin):
+class MySQLInput(IPlugin):
 
-    def init(self, param: json, flow: Flow):
-        super(DorisInput, self).init(param,flow)
+    def init(self, param: json):
+        super(MySQLInput, self).init(param)
 
     def execute(self):
         engine = create_engine('doris://root:xxx@localhost:9030/hive_catalog.hive_db')
@@ -22,4 +21,4 @@ class DorisInput(IPlugin):
         self.set_result(df)
 
     def to_json(self):
-        super(DorisInput, self).to_json()
+        super(MySQLInput, self).to_json()

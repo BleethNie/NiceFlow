@@ -1,48 +1,59 @@
 ## python任务流
 
-- task任务【retry重复执行、delay延迟执行、beforeProcess、afterProcess、onSuccess、onError、process、init】
+### task任务组件功能
+
+- task任务【retry重复执行、delay延迟执行、onSuccess、onError、process、init】
+- for循环
+- while循环
+- if判断
+- switch分流
+- 串行和并行
+- 任务执行【异步执行】和监测
+
+### flow功能
 - flow工作流【flow工作流参数、子流程、暂停、启动】
 - 执行引擎【远程执行引擎、本地执行引擎、分布式执行引擎】
-- for循环、while循环、if判断、switch、串行和并行
 - 日志展示
 - store任务【mysql、mongo】
-- 任务执行【异步执行】和监测
 - xml、json加载flow、任务热加载
 - 任务管理Rest-API
 - 数据增量同步
+
 
 ## 概念学习
 
 - 类型信息     https://www.dusaiphoto.com/article/164/
 - 实现插件系统 https://github.com/srn-g/pypluginbase/blob/main/src/PluginManager.py
 
+
 ## 插件
 
 ### 输入
 
-| 插件              | 功能     | 类型  | 完成情况 |
-|-----------------|--------|-----|------|
-| CSVInput        |        |     |      |
-| FakerInput      |        |     |      |
-| ExcelInput      |        |     |      |
-| ParquetInput    |        |     |      |
-| MySQLInput      |        |     |      |
-| ESInput         |        |     |      |
-| DorisInput      |        |     |      |
-| SQLLiteInput    |        |     |      |
-| PostgrestInput  |        |     |      |
-| HiveInput       |        |     |      |
-| PulsarInput     |        |     |      |
-| PaimonInput     |        |     |      |
-| IceBergInput    |        |     |      |
-| ClickHouseInput |        |     |      |
-| KafkaInput      |        |     |      |
-| MqttInput       |        |     |      |
-| OracleInput     |        |     |      |
-| SqlserverInput  |        |     |      |
-| CdcInput        |        |     |      |
-| MongoInput      |        |     |      |
-| DuckDBInput     |        |     |      |
+| 插件              | 功能    | 类型  | 完成情况 |
+|-----------------|-------|-----|------|
+| Starter         | 启动器   |     |      |
+| CSVInput        |       |     |      |
+| FakerInput      | 假数据生成 |     | 完成   |
+| ExcelInput      |       |     |      |
+| ParquetInput    |       |     |      |
+| MySQLInput      |       |     |      |
+| ESInput         |       |     |      |
+| DorisInput      |       |     |      |
+| SQLLiteInput    |       |     |      |
+| PostgrestInput  |       |     |      |
+| HiveInput       |       |     |      |
+| PulsarInput     |       |     |      |
+| PaimonInput     |       |     |      |
+| IceBergInput    |       |     |      |
+| ClickHouseInput |       |     |      |
+| KafkaInput      |       |     |      |
+| MqttInput       |       |     |      |
+| OracleInput     |       |     |      |
+| SqlserverInput  |       |     |      |
+| FlinkCDCInput   |       |     |      |
+| MongoInput      |       |     | 完成   |
+| DuckDBInput     |       |     |      |
 
 ### 输出
 
@@ -53,49 +64,43 @@
 
 ### 转换
 
-| 插件          | 功能     | 类型  | 完成情况 |
-|-------------|--------|-----|------|
-| Starter     | 启动器    |     |      |
-| For         | 循环     |     |      |
-| Switch      | 分流     |     |      |
-| SQL         | SQL查询  |     |      |
-| Join        | 关联     |     |      |
-| Samples     | 采样     |     |      |
-| Union       | 合并流    |     |      |
-| SubFlow     | 子流程    |     |      |
-| HttpInput   | Http读  |     |      |
-| HttpWriter  | Http写  |     |      |
-| Masking     | 数据脱敏   |     |      |
-| Group       | 数据分组聚合 |     |      |
-| Checker     | 数据校验   |     |      |
-| Sort        | 数据排序   |     |      |
-| Function    | 函数     |     |      |
-| Mapping     | 字段映射   |     |      |
-| Split       | 列拆分为多行 |     |      |
-| RowToColumn | 行转列    |     |      |
-| Str         | 字符串处理  |     |      |
-| Duplicate   | 去重     |     |      |
-| Unique      | 唯一行    |     |      |
-| ColumnToRow | 列转行    |     |      |
+| 插件          | 功能        | 类型  | 完成情况 |
+|-------------|-----------|-----|------|
+| For         | 循环        |     |      |
+| Switch      | 分流        |     |      |
+| SQL         | SQL查询     |     |      |
+| Join        | 关联        |     |      |
+| Samples     | 采样        |     |      |
+| Union       | 合并流       |     |      |
+| SubFlow     | 子流程       |     |      |
+| HttpInput   | Http读     |     |      |
+| HttpWriter  | Http写     |     |      |
+| Masking     | 数据脱敏      |     |      |
+| Group       | 数据分组聚合    |     |      |
+| Checker     | 数据校验      |     |      |
+| Sort        | 数据排序      |     |      |
+| Function    | 函数        |     |      |
+| Mapping     | 字段映射      |     |      |
+| Split       | 列拆分为多行    |     |      |
+| RowToColumn | 行转列       |     |      |
+| Str         | 字符串处理     |     |      |
+| Duplicate   | 去重        |     |      |
+| Unique      | 唯一行       |     |      |
+| ColumnToRow | 列转行       |     |      |
 
 ### 专业
 
-| 插件   | 功能     | 类型  | 完成情况 |
-|------|--------|-----|------|
-| 金融   |     |     |      |
-| 财务   |     |     |      |
-| nlp  |     |     |      |
-| 深度学习 |     |     |      |
-| 报表展示 |     |     |      |
-|      |     |     |      |
-|      |     |     |      |
-|      |     |     |      |
-|      |     |     |      |
-|      |     |     |      |
-|      |     |     |      |
-|      |     |     |      |
-|      |     |     |      |
-|      |     |     |      |
+| 插件      | 功能     | 类型  | 完成情况 |
+|---------|--------|-----|------|
+| 金融      |     |     |      |
+| 财务      |     |     |      |
+| nlp     |     |     |      |
+| 深度学习    |     |     |      |
+| 报表展示    |     |     |      |
+|         |     |     |      |
+|         |     |     |      |
+|         |     |     |      |
+
 
 ## 分布式
 
@@ -111,6 +116,36 @@
 - master分配任务
 
 ### 定时器工具
+
+## 场景
+
+### 数据清洗
+
+### 数据分析
+
+### 数据管理
+
+### 报表展示
+
+### 大数据数据同步
+
+### 作为工具使用不同数据间转换
+- 需要打包发布
+- 
+
+
+### 爬虫
+
+## 程序打包发布
+
+
+## 数据资源
+
+- 可以用来做示例对比 https://github.com/TurboWay/bigdata_analyse
+- 地铁人流量数据 https://github.com/geekyouth/SZT-bigdata/blob/master/.file/2018record3.zip
+
+
+
 
 
 

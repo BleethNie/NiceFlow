@@ -2,13 +2,14 @@ import json
 
 from sqlalchemy import create_engine
 
+from core.flow import Flow
 from core.plugin import IPlugin
 
 
-class DorisOutput(IPlugin):
+class MySQLOutput(IPlugin):
 
-    def init(self, param: json):
-        super(DorisOutput, self).init(param)
+    def init(self, param: json, flow: Flow):
+        super(MySQLOutput, self).init(param,flow)
 
     def execute(self):
         # 获取上一步结果
@@ -21,4 +22,4 @@ class DorisOutput(IPlugin):
 
 
     def to_json(self):
-        super(DorisOutput, self).to_json()
+        super(MySQLOutput, self).to_json()

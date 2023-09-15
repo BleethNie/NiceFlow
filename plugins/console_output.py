@@ -1,12 +1,13 @@
 import json
 
+from core.flow import Flow
 from core.plugin import IPlugin
 
 
 class ConsoleOutput(IPlugin):
 
-    def init(self, param: json):
-        super(ConsoleOutput, self).init(param)
+    def init(self, param: json, flow: Flow):
+        super(ConsoleOutput, self).init(param, flow)
 
     def execute(self):
         # 获取上一步结果

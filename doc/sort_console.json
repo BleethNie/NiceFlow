@@ -1,0 +1,54 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+    }
+  },
+  "nodes": [
+    {
+      "id": "CsvInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "file_name": "F:\\07_数据源大全\\车站数据\\后两周的数据\\bus0416.csv",
+        "type": "csv"
+      }
+    },
+    {
+      "id": "Sort",
+      "name": "sort",
+      "type": "translate",
+      "properties": {
+        "columns": [
+          {
+            "field": "abc",
+            "sort": "desc"
+          },
+          {
+            "field": "def",
+            "sort": "desc"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ConsoleOutput",
+      "name": "print",
+      "type": "output",
+      "properties": {
+        "row": 10
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "sort"
+    },
+    {
+      "startId": "sort",
+      "endId": "print"
+    }
+  ]
+}

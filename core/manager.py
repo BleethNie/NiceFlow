@@ -83,7 +83,7 @@ class FlowManager(metaclass=SingletonMeta):
         for node_json in nodes_array:
             node_id: str = node_json["id"]
             node: IPlugin = PluginManager.get_plugin(node_id)
-            node.init(node_json)
+            node.init(node_json, flow)
             flow.add_node(node)
         for edge in edges_array:
             flow.set_edge(edge["startId"], edge["endId"])
