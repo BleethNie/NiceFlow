@@ -1,0 +1,52 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+    }
+  },
+  "nodes": [
+    {
+      "id": "CsvInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "file_name": "F:/07_数据源大全/store_order/sales.csv",
+        "type": "csv"
+      }
+    },
+    {
+      "id": "Masking",
+      "name": "mask",
+      "type": "translate",
+      "properties": {
+        "columns": [
+          {
+            "field": "service_type",
+            "startIndex": 1,
+            "length": 1,
+            "sign": "*"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ConsoleOutput",
+      "name": "print",
+      "type": "output",
+      "properties": {
+        "row": 10
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "mask"
+    },
+    {
+      "startId": "mask",
+      "endId": "print"
+    }
+  ]
+}

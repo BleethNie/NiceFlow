@@ -26,11 +26,35 @@ def sortTest():
     myFlow.run()
     myFlow.close()
 
+
 def samplesTest():
     path = "E:/02_Resource/01_Code/python/EasyFlow/doc/samples_console.json"
     myFlow: Flow = FlowManager.read(path)
     myFlow.run()
     myFlow.close()
 
+
+# TODO: 未完成
+def httpTest():
+    path = "E:/02_Resource/01_Code/python/EasyFlow/doc/http_input_console.json"
+    myFlow: Flow = FlowManager.read(path)
+    myFlow.run()
+    myFlow.close()
+
+
+def maskTest():
+    path = "E:/02_Resource/01_Code/python/EasyFlow/doc/masking_console.json"
+    myFlow: Flow = FlowManager.read(path)
+    myFlow.run()
+    myFlow.close()
+
+
+def mappingTest():
+    path = "E:/02_Resource/01_Code/python/EasyFlow/doc/mapping_console.json"
+    myFlow: Flow = FlowManager.read(path)
+    myFlow.run()
+    myFlow.close()
+
+
 if __name__ == '__main__':
-    samplesTest()
+    mappingTest()

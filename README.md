@@ -33,7 +33,7 @@
 | 插件              | 功能    | 类型  | 完成情况 |
 |-----------------|-------|-----|------|
 | Starter         | 启动器   |     |      |
-| CSVInput        |       |     |      |
+| CSVInput        |       |     |   完成   |
 | FakerInput      | 假数据生成 |     | 完成   |
 | ExcelInput      |       |     |      |
 | ParquetInput    |       |     |      |
@@ -54,39 +54,42 @@
 | FlinkCDCInput   |       |     |      |
 | MongoInput      |       |     | 完成   |
 | DuckDBInput     |       |     |      |
+| HttpInput   | Http读  |     |      |
+
 
 ### 输出
 
-| 插件              | 功能     | 类型  | 完成情况 |
-|-----------------|--------|-----|------|
-| ConsoleOutput             | 循环     |     |      |
-|           |      |     |      |
+| 插件              | 功能    | 类型  | 完成情况 |
+|-----------------|-------|-----|------|
+| ConsoleOutput             | 控制台打印 |     | 完成   |
+| HttpWriter  | Http写  |     |      |
 
 ### 转换
 
-| 插件          | 功能        | 类型  | 完成情况 |
-|-------------|-----------|-----|------|
-| For         | 循环        |     |      |
-| Switch      | 分流        |     |      |
-| SQL         | SQL查询     |     |      |
-| Join        | 关联        |     |      |
-| Samples     | 采样        |     |      |
-| Union       | 合并流       |     |      |
-| SubFlow     | 子流程       |     |      |
-| HttpInput   | Http读     |     |      |
-| HttpWriter  | Http写     |     |      |
-| Masking     | 数据脱敏      |     |      |
-| Group       | 数据分组聚合    |     |      |
-| Checker     | 数据校验      |     |      |
-| Sort        | 数据排序      |     |      |
-| Function    | 函数        |     |      |
-| Mapping     | 字段映射      |     |      |
-| Split       | 列拆分为多行    |     |      |
-| RowToColumn | 行转列       |     |      |
-| Str         | 字符串处理     |     |      |
-| Duplicate   | 去重        |     |      |
-| Unique      | 唯一行       |     |      |
-| ColumnToRow | 列转行       |     |      |
+| 插件          | 功能     | 类型  | 完成情况 |
+|-------------|--------|-----|------|
+| For         | 循环     |     |      |
+| Switch      | 分流     |     |      |
+| SQL         | SQL查询  |     |      |
+| Join        | 关联     |     |      |
+| Samples     | 采样     |     |      |
+| Union       | 合并流    |     |      |
+| SubFlow     | 子流程    |     |      |
+| Masking     | 数据脱敏   |     | 完成   |
+| Group       | 数据分组聚合 |     |      |
+| Checker     | 数据校验   |     |      |
+| Sort        | 数据排序   |     | 完成   |
+| AddField    | 新增字段   |     |      |
+| Function    | 函数     |     |      |
+| Mapping     | 字段映射   |     |      |
+| Rename      | 字段换名   |     |      |
+| SplitColumn | 列拆分为多行 |     |      |
+| CutRow      | 切割行    |     |      |
+| RowToColumn | 行转列    |     |      |
+| Str         | 字符串处理  |     |      |
+| Duplicate   | 去重     |     |      |
+| Unique      | 唯一行    |     |      |
+| ColumnToRow | 列转行    |     |      |
 
 ### 专业
 
@@ -130,6 +133,7 @@
 ### 大数据数据同步
 
 ### 作为工具使用不同数据间转换
+
 - 需要打包发布
 - 
 
@@ -144,9 +148,10 @@
 - 可以用来做示例对比 https://github.com/TurboWay/bigdata_analyse
 - 地铁人流量数据 https://github.com/geekyouth/SZT-bigdata/blob/master/.file/2018record3.zip
 
+## 二次开发
 
-
-
-
+- 后台管理   https://gitee.com/likeadmin/likeadmin_python?_from=gitee_search
+- sql编辑器  https://github.com/pinterest/querybook
+- 报表       https://github.com/lightdash/lightdash
 
 
