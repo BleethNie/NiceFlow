@@ -2,9 +2,7 @@ import abc
 import json
 from typing import List, Dict
 
-from pandas import DataFrame
-
-from core.flow import Flow
+import duckdb
 
 
 class IPlugin(metaclass=abc.ABCMeta):
@@ -23,34 +21,24 @@ class IPlugin(metaclass=abc.ABCMeta):
         # 上一步
         self.pre_nodes: List[IPlugin] = []
         # 设置结果
-        self._pre_result_dict: Dict[str, DataFrame] = {}
+        self._pre_result_dict: Dict[str, duckdb.DuckDBPyRelation] = {}
         # 当前任务Flow
+        from core.flow import Flow
         self.flow: Flow = None
 
-    # 带参数的装饰器
-    def query(self):
-        def wrapper(func):
-            def sub_wrapper(*args, **kwargs):
-                # 打印装饰器的参数
-                print(f'查询方式：{self.name}')
-                # 返回函数运行结果
-                return func(*args, **kwargs)
-
-            return sub_wrapper
-
-        return wrapper
 
     def execute(self):
         pass
 
-    def init(self, param: json, flow: Flow):
+    def init(self, param: json, flow):
         self.id = param["id"]
         self.type = param["type"]
         self.name = param["name"]
         self.param = param["properties"]
         self.flow = flow
 
-    def set_result(self, df: DataFrame):
+    def set_result(self, df: duckdb.DuckDBPyRelation):
+        self.flow.con.commit()
         # 设置结果
         for node in self.next_nodes:
             node._pre_result_dict[self.name] = df
@@ -60,8 +48,9 @@ class IPlugin(metaclass=abc.ABCMeta):
 
     # 关闭资源
     def close(self):
-
-        pass
+        # 执行下一步
+        for node in self.next_nodes:
+            node.close()
 
     def to_json(self):
         return {

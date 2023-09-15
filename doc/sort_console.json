@@ -11,23 +11,23 @@
       "name": "read1",
       "type": "input",
       "properties": {
-        "file_name": "F:\\07_数据源大全\\车站数据\\后两周的数据\\bus0416.csv",
+        "file_name": "F:/07_数据源大全/store_order/sales.csv",
         "type": "csv"
       }
     },
     {
       "id": "Sort",
-      "name": "sort",
+      "name": "sort11",
       "type": "translate",
       "properties": {
         "columns": [
           {
-            "field": "abc",
-            "sort": "desc"
+            "field": "date_id",
+            "sort": "asc"
           },
           {
-            "field": "def",
-            "sort": "desc"
+            "field": "datehour_id",
+            "sort": "asc"
           }
         ]
       }
@@ -44,10 +44,10 @@
   "edges": [
     {
       "startId": "read1",
-      "endId": "sort"
+      "endId": "sort11"
     },
     {
-      "startId": "sort",
+      "startId": "sort11",
       "endId": "print"
     }
   ]

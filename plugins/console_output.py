@@ -12,8 +12,12 @@ class ConsoleOutput(IPlugin):
     def execute(self):
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
-        df = self._pre_result_dict[pre_node.name]
-        print(df)
+        console_df = self._pre_result_dict[pre_node.name]
+        print(type(console_df))
+        print(console_df)
 
     def to_json(self):
         super(ConsoleOutput, self).to_json()
+
+    def close(self):
+        super(ConsoleOutput, self).close()

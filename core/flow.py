@@ -3,6 +3,8 @@ import uuid
 from enum import Enum
 from typing import List
 
+import duckdb
+
 from core.plugin import IPlugin
 
 
@@ -19,6 +21,7 @@ class Flow(metaclass=abc.ABCMeta):
         self.flow_uid = uuid.uuid1()
         self.flow_status: FlowStatusEnum = FlowStatusEnum.WAITING
         self.plugin_dict: dict[str, IPlugin] = {}
+        self.con = duckdb.connect()
         print("创建Flow", self.flow_uid)
 
     def add_node(self, node: IPlugin):
@@ -48,6 +51,17 @@ class Flow(metaclass=abc.ABCMeta):
             if len(pre_nodes) == 0:
                 # 找到首节点
                 node.execute()
+        # 按照顺序关闭资源
+        for key in self.plugin_dict.keys():
+            node: IPlugin = self.plugin_dict[key]
+            pre_nodes: List[IPlugin] = node.pre_nodes
+            if len(pre_nodes) == 0:
+                # 找到首节点
+                node.close()
+
+    # 关闭资源
+    def close(self):
+        self.con.close()
 
     # flow转json
     def to_flow_json(self):
