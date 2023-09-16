@@ -54,6 +54,7 @@ class Flow(metaclass=abc.ABCMeta):
                 # 找到首节点
                 node.before_execute()
                 node.execute()
+                node.after_execute()
 
         # 按照顺序关闭资源
         for key in self.plugin_dict.keys():

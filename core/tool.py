@@ -1,3 +1,4 @@
+import re
 import time
 
 
@@ -14,3 +15,13 @@ class XTimer:
             return res
 
         return wrapper
+
+
+# 提取变量
+def extract_variable(s):
+    pattern = r'\$\{(.*?)\}'
+    matches = re.findall(pattern, s)
+    return matches
+
+s = '${file_name}'
+print(extract_variable(s))  # 输出: ['file_name']

@@ -48,6 +48,7 @@ def maskTest():
     myFlow.run()
     myFlow.close()
 
+
 # TODO: 未完成
 def mappingTest():
     path = "E:/02_Resource/01_Code/python/EasyFlow/doc/mapping_console.json"
@@ -56,5 +57,15 @@ def mappingTest():
     myFlow.close()
 
 
+def whileTest():
+    path = "E:/02_Resource/01_Code/python/EasyFlow/doc/while_console.json"
+    myFlow: Flow = FlowManager.read(path) \
+        .set_param({"file_name": "F:/07_数据源大全/store_order/channel.csv",
+                    "while_var": 0}
+                   )
+    myFlow.run()
+    myFlow.close()
+
+
 if __name__ == '__main__':
-    mappingTest()
+    whileTest()

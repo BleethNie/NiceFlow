@@ -1,0 +1,95 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+    }
+  },
+  "nodes": [
+    {
+      "id": "Starter",
+      "name": "starter1",
+      "type": "input",
+      "properties": {
+        "variables": [
+          {
+            "name": "while_var",
+            "value": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "While",
+      "name": "while",
+      "type": "input",
+      "properties": {
+        "decide": "${while_var} <10"
+      }
+    },
+    {
+      "id": "CsvInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "file_name": "${file_name}"
+      }
+    },
+    {
+      "id": "Sort",
+      "name": "sort11",
+      "type": "translate",
+      "properties": {
+        "columns": [
+          {
+            "field": "datehour_id",
+            "sort": "asc"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ConsoleOutput",
+      "name": "print",
+      "type": "output",
+      "properties": {
+        "row": 10
+      }
+    },
+    {
+      "id": "Variable",
+      "name": "variable",
+      "type": "output",
+      "properties": {
+        "variable": "while_var",
+        "script": "${while_var}+1"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "starter1",
+      "endId": "while"
+    },
+    {
+      "startId": "while",
+      "endId": "read1"
+    },
+    {
+      "startId": "read1",
+      "endId": "sort11"
+    },
+    {
+      "startId": "sort11",
+      "endId": "print"
+    },
+    {
+      "startId": "print",
+      "endId": "variable"
+    },
+    {
+      "startId": "variable",
+      "endId": "while"
+    }
+  ]
+}
