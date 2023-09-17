@@ -16,15 +16,13 @@ class Samples(IPlugin):
         super(Samples, self).init(param, flow)
 
     def execute(self):
-        mode = self.param["mode"]
         value = self.param["value"]
 
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
-        df = self._pre_result_dict[pre_node.name]
-        if mode == "reservoir":
-            pass
-        self.set_result(df)
+        pre_df = self._pre_result_dict[pre_node.name]
+        sample_df = pre_df.query("pre_df","select * from pre_df USING SAMPLE {};".format(value))
+        self.set_result(sample_df)
 
     def to_json(self):
         super(Samples, self).to_json()

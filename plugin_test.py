@@ -79,4 +79,4 @@ def markdownTest():
     myFlow.close()
 
 if __name__ == '__main__':
-    markdownTest()
+    samplesTest()

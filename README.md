@@ -59,12 +59,13 @@
 
 ### 输出
 
-| 插件            | 功能         | 类型   | 完成情况 |
-|---------------|------------|--------|----------|
-| ConsoleOutput | 控制台打印      |        | 完成      |
-| HttpWriter    | Http写      |        |          |
-| CSVOutput     | CSV输出/切分文件 |      | 完成       |
-| HtmlOutput    | 将df写出到html |      |        |
+| 插件             | 功能            | 类型   | 完成情况 |
+|----------------|---------------|--------|----------|
+| ConsoleOutput  | 控制台打印         |        | 完成      |
+| HttpWriter     | Http写         |        |          |
+| CSVOutput      | CSV输出/切分文件    |      | 完成       |
+| HtmlOutput     | 将df写出到html    |      |        |
+| MarkdownOutput | 数据写出到markdown |     |   完成       |
 
 
 ### 转换
