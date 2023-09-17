@@ -64,34 +64,34 @@
 | ConsoleOutput | 控制台打印      |        | 完成      |
 | HttpWriter    | Http写      |        |          |
 | CSVOutput     | CSV输出/切分文件 |      | 完成       |
-| HtmlOutput    | 将df写出到html |      |   完成     |
+| HtmlOutput    | 将df写出到html |      |        |
 
 
 ### 转换
 
-| 插件          | 功能      | 类型  | 完成情况 |
-|-------------|---------|-----|------|
-| For         | 循环      |     |      |
-| While       | While循环 |     |      |
-| Switch      | 分流      |     |      |
-| SQL         | SQL查询   |     |      |
-| Join        | 关联      |     |      |
-| Samples     | 采样      |     |      |
-| Union       | 合并流     |     |      |
-| SubFlow     | 子流程     |     |      |
-| Masking     | 数据脱敏    |     | 完成   |
-| Group       | 数据分组聚合  |     |      |
-| Checker     | 数据校验    |     |      |
-| Sort        | 数据排序    |     | 完成   |
-| AddField    | 新增字段    |     |      |
-| Function    | 函数      |     |      |
-| Mapping     | 字段映射    |     |      |
-| Rename      | 字段换名    |     |      |
+| 插件         | 功能      | 类型  | 完成情况 |
+|------------|---------|-----|------|
+| For        | 循环      |     |      |
+| While      | While循环 |     | 完成   |
+| Switch     | 分流      |     |      |
+| SQL        | SQL查询   |     |      |
+| Join       | 关联      |     |      |
+| Samples    | 采样      |     |      |
+| Union      | 合并流     |     |      |
+| SubFlow    | 子流程     |     |      |
+| Masking    | 数据脱敏    |     | 完成   |
+| Group      | 数据分组聚合  |     |      |
+| Checker    | 数据校验    |     |      |
+| Sort       | 数据排序    |     | 完成   |
+| AddField   | 新增字段    |     |      |
+| EditField  | 函数      |     |      |
+| Mapping    | 字段映射    |     |      |
+| Rename     | 字段换名    |     |      |
 | SplitColumn | 列拆分为多行  |     |      |
 | RowToColumn | 行转列     |     |      |
-| Str         | 字符串处理   |     |      |
-| Duplicate   | 去重      |     |      |
-| Unique      | 唯一行     |     |      |
+| Str        | 字符串处理   |     |      |
+| Duplicate  | 去重      |     |      |
+| Unique     | 唯一行     |     |      |
 | ColumnToRow | 列转行     |     |      |
 
 ### 专业

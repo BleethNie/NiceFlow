@@ -1,0 +1,51 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+
+    }
+  },
+  "nodes": [
+    {
+      "id": "CsvInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "file_name": "F:/07_数据源大全/store_order/sales.csv",
+        "type": "csv"
+      }
+    },
+    {
+      "id": "Rename",
+      "name": "rename",
+      "type": "translate",
+      "properties": {
+        "columns": [
+          {
+            "field": "date_id",
+            "rename": "date_id_id"
+          }
+        ]
+      }
+    },
+    {
+      "id": "MarkdownOutput",
+      "name": "print",
+      "type": "output",
+      "properties": {
+        "file_path": "C:\\Users\\xiaow\\Desktop\\TestMarkdown\\a.md"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "rename"
+    },
+    {
+      "startId": "rename",
+      "endId": "print"
+    }
+  ]
+}

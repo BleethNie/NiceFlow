@@ -2,6 +2,7 @@ import json
 
 from pymongo import MongoClient
 
+from core.flow import Flow
 from core.plugin import IPlugin
 
 
@@ -10,8 +11,8 @@ class MongoOutput(IPlugin):
     def __init__(self):
         super().__init__()
 
-    def init(self, param: json):
-        super(MongoOutput, self).init(param)
+    def init(self, param: json,flow:Flow):
+        super(MongoOutput, self).init(param,flow)
         self.client = MongoClient("uri")
 
     def execute(self):

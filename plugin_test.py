@@ -66,6 +66,17 @@ def whileTest():
     myFlow.run()
     myFlow.close()
 
+def renameTest():
+    path = "E:/02_Resource/01_Code/python/EasyFlow/doc/rename_console.json"
+    myFlow: Flow = FlowManager.read(path)
+    myFlow.run()
+    myFlow.close()
+
+def markdownTest():
+    path = "E:/02_Resource/01_Code/python/EasyFlow/doc/rename_markdown.json"
+    myFlow: Flow = FlowManager.read(path)
+    myFlow.run()
+    myFlow.close()
 
 if __name__ == '__main__':
-    whileTest()
+    markdownTest()
