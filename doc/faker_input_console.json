@@ -17,7 +17,7 @@
       "name": "write1",
       "type": "output",
       "properties": {
-
+        "row": 10
       }
     }
   ],

@@ -8,7 +8,7 @@ from core.plugin import IPlugin
 class ParquetInput(IPlugin):
 
     def init(self, param: json):
-        super(ParquetInput, self).init(param)
+        super(ParquetInput, self).init(param,flow)
 
     def execute(self):
         file_name = self.param["file_name"]

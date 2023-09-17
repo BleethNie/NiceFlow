@@ -1,12 +1,13 @@
 import json
 
+from core.flow import Flow
 from core.plugin import IPlugin
 
 
 class For(IPlugin):
 
-    def init(self, param: json):
-        super(For, self).init(param)
+    def init(self, param: json,flow:Flow):
+        super(For, self).init(param,flow)
 
     def execute(self):
         self.param[""]

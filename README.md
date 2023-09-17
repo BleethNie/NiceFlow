@@ -77,7 +77,7 @@
 | Switch     | 分流      |     |      |
 | SQL        | SQL查询   |     |      |
 | Join       | 关联      |     |      |
-| Samples    | 采样      |     |      |
+| Samples    | 采样      |     | 完成   |
 | Union      | 合并流     |     |      |
 | SubFlow    | 子流程     |     |      |
 | Masking    | 数据脱敏    |     | 完成   |
@@ -87,7 +87,7 @@
 | AddField   | 新增字段    |     |      |
 | EditField  | 函数      |     |      |
 | Mapping    | 字段映射    |     |      |
-| Rename     | 字段换名    |     |      |
+| Rename     | 字段换名    |     | 完成   |
 | SplitColumn | 列拆分为多行  |     |      |
 | RowToColumn | 行转列     |     |      |
 | Str        | 字符串处理   |     |      |

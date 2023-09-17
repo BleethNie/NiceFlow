@@ -1,12 +1,13 @@
 import json
 
+from core.flow import Flow
 from core.plugin import IPlugin
 
 
 class HtmlOutput(IPlugin):
 
-    def init(self, param: json):
-        super(HtmlOutput, self).init(param)
+    def init(self, param: json,flow:Flow):
+        super(HtmlOutput, self).init(param,flow)
 
     def execute(self):
         html_path = self.param["html_path"]

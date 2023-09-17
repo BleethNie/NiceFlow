@@ -5,6 +5,7 @@ import duckdb
 import pandas as pd
 from faker import Faker
 
+from core.flow import Flow
 from core.plugin import IPlugin
 
 
@@ -17,8 +18,8 @@ class FakerInput(IPlugin):
         # 创建一个duckdb连接
         self.con = duckdb.connect()
 
-    def init(self, param: json):
-        super(FakerInput, self).init(param)
+    def init(self, param: json,flow:Flow):
+        super(FakerInput, self).init(param,flow)
         #  编译字节码对象
         columns = self.param["columns"]
         for column in columns:

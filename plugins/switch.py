@@ -1,12 +1,13 @@
 import json
 
+from core.flow import Flow
 from core.plugin import IPlugin
 
 
 class Switch(IPlugin):
 
-    def init(self, param: json):
-        super(Switch, self).init(param)
+    def init(self, param: json,flow:Flow):
+        super(Switch, self).init(param,flow)
 
     def execute(self):
         self.param[""]

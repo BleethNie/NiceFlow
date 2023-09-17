@@ -14,7 +14,7 @@ class ConsoleOutput(IPlugin):
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
         console_df = self._pre_result_dict[pre_node.name]
-        print(console_df.limit(row))
+        console_df.limit(row).show()
         self.set_result(None)
 
     def to_json(self):
