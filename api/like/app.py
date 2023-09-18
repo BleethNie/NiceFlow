@@ -73,22 +73,6 @@ def configure_admin_router(app: FastAPI, prefix='/api'):
     app.include_router(gen.router, prefix=prefix, dependencies=admin_deps)
 
 
-def configure_front_router(app: FastAPI, prefix='/api'):
-    """配置前台路由"""
-    from .dependencies.verify import front_login_verify
-    from .front.routers import index, upload, article, login, user, sms
-
-    # front 依赖
-    front_deps = [Depends(front_login_verify)]
-    # front
-    app.include_router(index.router, prefix=prefix, dependencies=front_deps)
-    app.include_router(upload.router, prefix=prefix, dependencies=front_deps)
-    app.include_router(article.router, prefix=prefix, dependencies=front_deps)
-    app.include_router(login.router, prefix=prefix, dependencies=front_deps)
-    app.include_router(user.router, prefix=prefix, dependencies=front_deps)
-    app.include_router(sms.router, prefix=prefix, dependencies=front_deps)
-
-
 def create_app() -> FastAPI:
     """创建FastAPI后台应用,并初始化"""
     from .exceptions.global_exc import configure_exception
@@ -102,16 +86,3 @@ def create_app() -> FastAPI:
     add_pagination(app)
     return app
 
-
-def create_front() -> FastAPI:
-    """创建FastAPI前台应用,并初始化"""
-    from .exceptions.global_exc import configure_exception
-
-    app = FastAPI()
-    configure_static(app)
-    configure_exception(app)
-    configure_event(app)
-    configure_middleware(app)
-    configure_front_router(app)
-    add_pagination(app)
-    return app

@@ -84,7 +84,7 @@ class Settings(BaseSettings):
     # 系统加密字符
     secret: str = 'UVTIyzCy'
     # Redis键前缀
-    redis_prefix: str = 'Like:'
+    redis_prefix: str = 'EasyFlow:'
     # 短信验证码
     redis_sms_code: str = 'smsCode:'
     # 禁止修改操作 (演示功能,限制POST请求)

@@ -29,84 +29,84 @@
 
 ### 输入
 
-| 插件              | 功能             | 类型  | 完成情况     |
-|-----------------|----------------|-----|----------|
-| Starter         | 启动器          |     |完成       |
-| CSVInput        | 读取CSV数据    |     |完成       |
-| FakerInput      | 假数据生成      |     |完成       |
-| ExcelInput      |                |     |完成        |
-| ParquetInput    |                |     |完成          |
-| MySQLInput      |                |     |          |
-| ESInput         |                |     |          |
-| DorisInput      |                |     |          |
-| SQLLiteInput    |                |     |          |
-| PostgrestInput  |                |     |          |
-| HiveInput       |                |     |          |
-| PulsarInput     |                |     |          |
-| PaimonInput     |                |     |          |
-| IceBergInput    |                |     |          |
-| ClickHouseInput |                |     |          |
-| KafkaInput      |                |     |          |
-| MqttInput       |                |     |          |
-| OracleInput     |                |     |          |
-| SqlserverInput  |                |     |          |
-| FlinkCDCInput   |                |     |          |
-| MongoInput      |                |     | 完成     |
-| DuckDBInput     |                |     |          |
-| HttpInput       | Http读          |     |          |
-| HtmlInput       | 读取Html中的表格     |     |          |
+| 插件              | 功能             | 类型  | 完成情况     | 文档  |
+|-----------------|----------------|-----|----------|---------|
+| Starter         | 启动器          |     |完成       |       |
+| CSVInput        | 读取CSV数据    |     |完成       |      |
+| FakerInput      | 假数据生成      |     |完成       |      |
+| ExcelInput      |                |     |完成        |      |
+| ParquetInput    |                |     |完成          |      |
+| MySQLInput      |                |     |          |      |
+| ESInput         |                |     |          |      |
+| DorisInput      |                |     |          |      |
+| SQLLiteInput    |                |     |          |      |
+| PostgrestInput  |                |     |          |      |
+| HiveInput       |                |     |          |      |
+| PulsarInput     |                |     |          |      |
+| PaimonInput     |                |     |          |      |
+| IceBergInput    |                |     |          |      |
+| ClickHouseInput |                |     |          |      |
+| KafkaInput      |                |     |          |      |
+| MqttInput       |                |     |          |      |
+| OracleInput     |                |     |          |      |
+| SqlserverInput  |                |     |          |      |
+| FlinkCDCInput   |                |     |          |      |
+| MongoInput      |                |     | 完成     |      |
+| DuckDBInput     |                |     |          |      |
+| HttpInput       | Http读          |     |          |      |
+| HtmlInput       | 读取Html中的表格     |     |          |      |
 
 
 ### 输出
 
-| 插件             | 功能            | 类型   | 完成情况 |
-|----------------|---------------|--------|----------|
-| ConsoleOutput  | 控制台打印         |        | 完成      |
-| HttpWriter     | Http写         |        |          |
-| CSVOutput      | CSV输出/切分文件    |      | 完成       |
-| HtmlOutput     | 将df写出到html    |      |        |
-| MarkdownOutput | 数据写出到markdown |     |   完成       |
+| 插件             | 功能            | 类型   | 完成情况 | 文档  |
+|----------------|---------------|--------|----------|-----|
+| ConsoleOutput  | 控制台打印         |        | 完成      |     |
+| HttpWriter     | Http写         |        |          |     |
+| CSVOutput      | CSV输出/切分文件    |      | 完成       |     |
+| HtmlOutput     | 将df写出到html    |      |        |     |
+| MarkdownOutput | 数据写出到markdown |     |   完成       |     |
 
 
 ### 转换
 
-| 插件         | 功能      | 类型  | 完成情况 |
-|------------|---------|-----|------|
-| For        | 循环      |     |      |
-| While      | While循环 |     | 完成   |
-| Switch     | 分流      |     |      |
-| SQL        | SQL查询   |     |      |
-| Join       | 关联      |     |      |
-| Samples    | 采样      |     | 完成   |
-| Union      | 合并流     |     |      |
-| SubFlow    | 子流程     |     |      |
-| Masking    | 数据脱敏    |     | 完成   |
-| Group      | 数据分组聚合  |     |      |
-| Checker    | 数据校验    |     |      |
-| Sort       | 数据排序    |     | 完成   |
-| AddField   | 新增字段    |     |      |
-| EditField  | 函数      |     |      |
-| Mapping    | 字段映射    |     |      |
-| Rename     | 字段换名    |     | 完成   |
-| SplitColumn | 列拆分为多行  |     |      |
-| RowToColumn | 行转列     |     |      |
-| Str        | 字符串处理   |     |      |
-| Duplicate  | 去重      |     |      |
-| Unique     | 唯一行     |     |      |
-| ColumnToRow | 列转行     |     |      |
+| 插件          | 功能      | 类型  | 完成情况 |文档 |
+|-------------|---------|-----|------|------|
+| For         | 循环      |     |      |      |
+| While       | While循环 |     | 完成   |      |
+| Switch      | 分流      |     |      |      |
+| SQL         | SQL查询   |     |      |      |
+| Join        | 关联      |     |      |      |
+| Samples     | 采样      |     | 完成   |      |
+| Union       | 合并流     |     |      |      |
+| SubFlow     | 子流程     |     |      |      |
+| Masking     | 数据脱敏    |     | 完成   |      |
+| Group       | 数据分组聚合  |     |      |      |
+| Checker     | 数据校验    |     |      |      |
+| Sort        | 数据排序    |     | 完成   |      |
+| AddField    | 新增字段    |     |      |      |
+| EditField   | 函数      |     |      |      |
+| Mapping     | 字段映射    |     |      |      |
+| Rename      | 字段换名    |     | 完成   |      |
+| SplitColumn | 列拆分为多行  |     |      |      |
+| RowToColumn | 行转列     |     |      |      |
+| Str         | 字符串处理   |     |      |      |
+| Duplicate   | 去重      |     |      |      |
+| Unique      | 唯一行     |     |      |      |
+| ColumnToRow | 列转行     |     |      |      |
+| Pivot   | 透视      |     |      |      |
 
 ### 专业
 
-| 插件        | 功能     | 类型  | 完成情况 |
-|-----------|------|-----|------|
-| 金融        |     |     |      |
-| 财务        |     |     |      |
-| nlp       |     |     |      |
-| 深度学习      |     |     |      |
-| 报表展示      |     |     |      |
-|           |     |     |      |
-|           |     |     |      |
-|           |     |     |      |
+| 插件        | 功能     | 类型  | 完成情况 | 文档  |
+|-----------|------|-----|------|-----|
+| 金融        |     |     |      |     |
+| 财务        |     |     |      |     |
+| nlp       |     |     |      |     |
+| 深度学习      |     |     |      |     |
+| 报表展示      |     |     |      |     |
+|           |     |     |      |     |
+
 
 ## 分布式
 
@@ -149,10 +149,21 @@
 - 可以用来做示例对比 https://github.com/TurboWay/bigdata_analyse
 - 地铁人流量数据 https://github.com/geekyouth/SZT-bigdata/blob/master/.file/2018record3.zip
 
+
 ## 二次开发
 
 - 后台管理   https://gitee.com/likeadmin/likeadmin_python?_from=gitee_search
 - sql编辑器  https://github.com/pinterest/querybook
 - 报表       https://github.com/lightdash/lightdash
 
+## 项目表情况
 
+- 项目
+- flow表
+- 插件表
+- 任务表
+- 任务实例表
+- 用户
+- 权限表
+- 角色表
+- 日志表
