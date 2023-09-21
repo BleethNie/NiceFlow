@@ -1,0 +1,61 @@
+{
+  "nodes": [
+    {
+      "id": "CsvInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "file_name": "F:\\07_数据源大全\\store_order\\sales.csv",
+        "type": "csv"
+      }
+    },
+    {
+      "id": "CsvInput",
+      "name": "read2",
+      "type": "input",
+      "properties": {
+        "file_name": "F:\\07_数据源大全\\store_order\\store.csv",
+        "type": "csv"
+      }
+    },
+    {
+      "id": "SQL",
+      "name": "sql",
+      "type": "translate",
+      "properties": {
+        "inputs": [
+          {
+            "step": "read1",
+            "table": "sales_df"
+          },
+          {
+            "step": "read2",
+            "table": "store_df"
+          }
+        ],
+        "sql": "select store_df.store_pk,sales_df.date_id as ddd from sales_df left join  store_df  on sales_df.store_id = sales_df.store_id limit 10"
+      }
+    },
+    {
+      "id": "ConsoleOutput",
+      "name": "write1",
+      "type": "output",
+      "properties": {
+        "row": 100
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "sql"
+    },{
+      "startId": "read2",
+      "endId": "sql"
+    },
+    {
+      "startId": "sql",
+      "endId": "write1"
+    }
+  ]
+}

@@ -8,7 +8,7 @@
         "rows":10000,
         "columns": ["name","address","city","street_address","date_of_birth","phone_number"],
         "randoms":[
-          {"key":"sex","values":["男","女"]}
+          {"key":"sex","values":["男","女","未知"]}
         ]
       }
     },
@@ -17,7 +17,7 @@
       "name": "write1",
       "type": "output",
       "properties": {
-        "row": 10
+        "row": 100
       }
     }
   ],

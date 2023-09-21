@@ -1,7 +1,5 @@
 import json
 
-from pymongo import MongoClient
-
 from core.flow import Flow
 from core.plugin import IPlugin
 

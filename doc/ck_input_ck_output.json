@@ -1,0 +1,39 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+    }
+  },
+  "nodes": [
+    {
+      "id": "CKInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "host": "192.168.1.90",
+        "port": 9000,
+        "db": "default",
+        "table": "station",
+        "sql": "select * from station limit 100000"
+      }
+    },
+    {
+      "id": "CKOutput",
+      "name": "print",
+      "type": "output",
+      "properties": {
+        "host": "192.168.1.90",
+        "port": 9000,
+        "db": "default",
+        "table": "new_station"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "print"
+    }
+  ]
+}

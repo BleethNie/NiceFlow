@@ -16,16 +16,11 @@
       }
     },
     {
-      "id": "Sort",
-      "name": "sort11",
+      "id": "SubFlow",
+      "name": "subflow",
       "type": "translate",
       "properties": {
-        "columns": [
-          {
-            "field": "date_id",
-            "sort": "asc"
-          }
-        ]
+          "flow": "E:\\02_Resource\\01_Code\\python\\EasyFlow\\doc\\sort_console.json"
       }
     },
     {
@@ -40,10 +35,10 @@
   "edges": [
     {
       "startId": "read1",
-      "endId": "sort11"
+      "endId": "subflow"
     },
     {
-      "startId": "sort11",
+      "startId": "subflow",
       "endId": "print"
     }
   ]

@@ -1,18 +1,20 @@
 import json
-from sanic import Sanic, text, Config
 
 import duckdb
-import pandas as pd
 
 from core.flow import Flow
 from core.plugin import IPlugin
 
 
-def function_mapping(x: str, start: int, length: int, sign: str) -> str:
-    start_str = x[:start]
-    end_str = x[start + length:]
-    sign_str = sign * length
-    return start_str + sign_str + end_str
+def function_mapping(field: str, default: str, mapping: dict) -> str:
+    keys = mapping["key"]
+    values = mapping["value"]
+    mapping = {}
+    for index, key in enumerate(keys):
+        mapping[key] = values[index]
+    if field in mapping:
+        return mapping[field]
+    return default
 
 
 class Mapping(IPlugin):
@@ -23,18 +25,23 @@ class Mapping(IPlugin):
 
     def execute(self):
         columns = self.param["columns"]
-        column = columns[0]
-        field = column["field"]
-        startIndex = column["startIndex"]
-        length = column["length"]
-        sign = column["sign"]
-
+        field_sql = ""
+        for column in columns:
+            field = column["field"]
+            default = column.get("default",None)
+            mapping = column["mapping"]
+            if default is not None:
+                field_sql = field_sql + "function_mapping( {},'{}',map {} ) as {}_mapping , " \
+                    .format(field, default, mapping, field)
+            if default is None:
+                field_sql = field_sql + "function_mapping( {},{},map {} ) as {}_mapping ," \
+                    .format(field, field, mapping, field)
+        field_sql = field_sql.removesuffix(",")
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
         df = self._pre_result_dict[pre_node.name]
 
-        sql = "select *,function_mapping( {} ,{},{},'{}') as {}_mask from df" \
-            .format(field, startIndex, length, sign, field)
+        sql = "select *,{} from df".format(field_sql)
         print("sql = {}".format(sql))
         df = duckdb.from_df(duckdb.sql(sql).df())
         self.set_result(df)

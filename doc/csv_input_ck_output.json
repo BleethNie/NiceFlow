@@ -1,0 +1,37 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+
+    }
+  },
+  "nodes": [
+    {
+      "id": "CsvInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "file_name": "${file_name}",
+        "type": "csv"
+      }
+    },
+    {
+      "id": "CKOutput",
+      "name": "print",
+      "type": "output",
+      "properties": {
+        "host": "192.168.1.90",
+        "port": 9000,
+        "db": "default",
+        "table": "station"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "print"
+    }
+  ]
+}

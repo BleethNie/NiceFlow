@@ -7,12 +7,11 @@
   },
   "nodes": [
     {
-      "id": "HttpInput",
+      "id": "CsvInput",
       "name": "read1",
       "type": "input",
       "properties": {
-        "port": 8080,
-        "handler_url": "/data"
+        "file_name": "F:\\07_数据源大全\\ssb.csv"
       }
     },
     {
@@ -22,18 +21,19 @@
       "properties": {
         "columns": [
           {
-            "field": "date_id",
+            "field": "a",
             "sort": "asc"
           }
         ]
       }
     },
     {
-      "id": "ConsoleOutput",
+      "id": "HttpOutput",
       "name": "print",
       "type": "output",
       "properties": {
-        "row": 10
+        "host": "0.0.0.0",
+        "port": 7890
       }
     }
   ],

@@ -4,6 +4,7 @@ from enum import Enum
 from typing import List
 
 import duckdb
+from event_bus import EventBus
 
 from core.plugin import IPlugin
 
@@ -23,6 +24,7 @@ class Flow(metaclass=abc.ABCMeta):
         self.plugin_dict: dict[str, IPlugin] = {}
         self.con = duckdb.connect()
         self.param_dict: dict[str, object] = {}
+        self.bus = EventBus()
         print("创建Flow", self.flow_uid)
 
     def add_node(self, node: IPlugin):
@@ -45,7 +47,27 @@ class Flow(metaclass=abc.ABCMeta):
         return self
 
     # 提交任务
-    def run(self):
+    def run(self, df: duckdb.DuckDBPyRelation = None):
+        # 找到首节点
+        for key in self.plugin_dict.keys():
+            node: IPlugin = self.plugin_dict[key]
+            pre_nodes: List[IPlugin] = node.pre_nodes
+            if len(pre_nodes) == 0:
+                # 找到首节点
+                node.before_execute()
+                node.execute()
+                node.after_execute()
+
+        # 按照顺序关闭资源
+        for key in self.plugin_dict.keys():
+            node: IPlugin = self.plugin_dict[key]
+            pre_nodes: List[IPlugin] = node.pre_nodes
+            if len(pre_nodes) == 0:
+                # 找到首节点
+                node.close()
+
+    # stream方式处理数据
+    def stream(self, df: duckdb.DuckDBPyRelation = None):
         # 找到首节点
         for key in self.plugin_dict.keys():
             node: IPlugin = self.plugin_dict[key]

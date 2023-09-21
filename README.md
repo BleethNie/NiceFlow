@@ -1,81 +1,113 @@
-## python任务流
+## EasyFlow
 
-### task任务组件功能
+> 类似Kettle工具，主要实现数据ETL处理
+
+### 使用
+
+#### python环境
+
+python 3.10
+
+#### 安装依赖
+
+```shell
+pip install -r requirement.txt
+```
+
+#### 测试案例
+
+- plugin_test.py 测试插件功能
+- flow_test.py 测试flow功能
+
+
+### 架构图
+
+TODO
+
+
+### plugin组件功能
 
 - task任务【retry重复执行、delay延迟执行、onSuccess、onError、process、init】
 - for循环
-- while循环
+- [x] while循环
 - if判断
 - switch分流
 - 串行和并行
-- 任务执行【异步执行】和监测
+- 任务执行【异步执行】
+- [x] 任务时间打印
+
+- 数据库自动建表
 
 ### flow功能
+
 - [x] 增加变量
 - flow工作流【flow工作流参数、子流程、暂停、启动】
 - 执行引擎【远程执行引擎、本地执行引擎、分布式执行引擎】
 - 日志展示
+- 日志监控，性能监控
 - store任务【mysql、mongo】
 - xml、 json加载flow、任务热加载
 - 任务管理Rest-API
+- 新增、修改、删除、启动、停止、任务日志、任务开发
 - 数据增量同步
+- 保存上一次同步字段信息
 
-## 概念学习
+### 概念参考
 
 - 类型信息     https://www.dusaiphoto.com/article/164/
 - 实现插件系统 https://github.com/srn-g/pypluginbase/blob/main/src/PluginManager.py
 
-## 插件
+### 插件
 
-### 输入
+#### 输入
 
-| 插件              | 功能             | 类型  | 完成情况     | 文档  |
-|-----------------|----------------|-----|----------|---------|
-| Starter         | 启动器          |     |完成       |       |
-| CSVInput        | 读取CSV数据    |     |完成       |      |
-| FakerInput      | 假数据生成      |     |完成       |      |
-| ExcelInput      |                |     |完成        |      |
-| ParquetInput    |                |     |完成          |      |
-| MySQLInput      |                |     |          |      |
-| ESInput         |                |     |          |      |
-| DorisInput      |                |     |          |      |
-| SQLLiteInput    |                |     |          |      |
-| PostgrestInput  |                |     |          |      |
-| HiveInput       |                |     |          |      |
-| PulsarInput     |                |     |          |      |
-| PaimonInput     |                |     |          |      |
-| IceBergInput    |                |     |          |      |
-| ClickHouseInput |                |     |          |      |
-| KafkaInput      |                |     |          |      |
-| MqttInput       |                |     |          |      |
-| OracleInput     |                |     |          |      |
-| SqlserverInput  |                |     |          |      |
-| FlinkCDCInput   |                |     |          |      |
-| MongoInput      |                |     | 完成     |      |
-| DuckDBInput     |                |     |          |      |
-| HttpInput       | Http读          |     |          |      |
-| HtmlInput       | 读取Html中的表格     |     |          |      |
+| 插件            | 功能         | 类型  | 完成情况     | 文档  |
+|---------------|------------|-----|----------|---------|
+| Starter       | 启动器        |     |完成       |       |
+| CSVInput      | 读取CSV数据    |     |完成       |      |
+| FakerInput    | 假数据生成      |     |完成       |      |
+| ExcelInput    |            |     |完成        |      |
+| ParquetInput  |            |     |完成          |      |
+| MySQLInput    |            |     |          |      |
+| ESInput       |            |     |          |      |
+| DorisInput    |            |     |          |      |
+| SQLiteInput   |            |     |          |      |
+| PostgrestInput|            |     |          |      |
+| HiveInput     |            |     |          |      |
+| PulsarInput   |            |     |          |      |
+| PaimonInput   |            |     |          |      |
+| IceBergInput  |            |     |          |      |
+| CKInput       | CK数据读取     |     |   完成       |      |
+| KafkaInput    |            |     |          |      |
+| MqttInput     |            |     |          |      |
+| OracleInput   |            |     |          |      |
+| SqlserverInput |            |     |          |      |
+| FlinkCDCInput |            |     |          |      |
+| MongoInput    |            |     | 完成     |      |
+| DuckDBInput   |            |     |          |      |
+| HttpInput     | Http读      |     |   完成       |      |
+| HtmlInput     | 读取Html中的表格 |     |          |      |
 
-
-### 输出
+#### 输出
 
 | 插件             | 功能            | 类型   | 完成情况 | 文档  |
 |----------------|---------------|--------|----------|-----|
 | ConsoleOutput  | 控制台打印         |        | 完成      |     |
-| HttpWriter     | Http写         |        |          |     |
+| CKOutput       | CK数据写入        |        | 完成      |     |
+| HttpOutput     | Http写         |        |     完成     |     |
 | CSVOutput      | CSV输出/切分文件    |      | 完成       |     |
 | HtmlOutput     | 将df写出到html    |      |        |     |
 | MarkdownOutput | 数据写出到markdown |     |   完成       |     |
 
-
-### 转换
+#### 转换
 
 | 插件          | 功能      | 类型  | 完成情况 |文档 |
 |-------------|---------|-----|------|------|
 | For         | 循环      |     |      |      |
+| variable    | 变量      |     |      |      |
 | While       | While循环 |     | 完成   |      |
 | Switch      | 分流      |     |      |      |
-| SQL         | SQL查询   |     |      |      |
+| SQL         | SQL查询   |     | 完成     |      |
 | Join        | 关联      |     |      |      |
 | Samples     | 采样      |     | 完成   |      |
 | Union       | 合并流     |     |      |      |
@@ -86,7 +118,7 @@
 | Sort        | 数据排序    |     | 完成   |      |
 | AddField    | 新增字段    |     |      |      |
 | EditField   | 函数      |     |      |      |
-| Mapping     | 字段映射    |     |      |      |
+| Mapping     | 字段映射    |     |  完成    |      |
 | Rename      | 字段换名    |     | 完成   |      |
 | SplitColumn | 列拆分为多行  |     |      |      |
 | RowToColumn | 行转列     |     |      |      |
@@ -96,7 +128,7 @@
 | ColumnToRow | 列转行     |     |      |      |
 | Pivot   | 透视      |     |      |      |
 
-### 专业
+#### 专业
 
 | 插件        | 功能     | 类型  | 完成情况 | 文档  |
 |-----------|------|-----|------|-----|
@@ -108,63 +140,52 @@
 |           |     |     |      |     |
 
 
-## 分布式
+### 分布式
 
-### 角色
+#### 角色
 
 - master:分配任务者
 - worker:任务执行者
 - operator:任务开发者
 
-### 任务执行
+#### 任务执行
 
 - 手动指定任务
 - master分配任务
 
-### 定时器工具
+#### 定时器工具
 
-## 场景
+### 场景
 
-### 数据清洗
+#### 数据清洗
 
-### 数据分析
+#### 数据分析
 
-### 数据管理
+#### 数据管理
 
-### 报表展示
+#### 报表展示
 
-### 大数据数据同步
+#### 大数据数据同步
 
-### 作为工具使用不同数据间转换
+#### 数据迁移
+
+#### 作为工具使用不同数据间转换
 
 - 需要打包发布
 -
 
-### 爬虫
+#### 爬虫
 
-## 程序打包发布
+### 程序打包发布
 
-## 数据资源
+### 数据资源
 
 - 可以用来做示例对比 https://github.com/TurboWay/bigdata_analyse
 - 地铁人流量数据 https://github.com/geekyouth/SZT-bigdata/blob/master/.file/2018record3.zip
 
-
-## 二次开发
+### 二次开发
 
 - 后台管理    https://gitee.com/likeadmin/likeadmin_python?_from=gitee_search
 - sql编辑器   https://github.com/pinterest/querybook
 - 报表       https://github.com/lightdash/lightdash
-- 报表       https://github.com/getredash/redash 
-
-## 项目表情况
-
-- 项目
-- flow表
-- 插件表
-- 任务表
-- 任务实例表
-- 用户
-- 权限表
-- 角色表
-- 日志表
+- 报表       https://github.com/getredash/redash

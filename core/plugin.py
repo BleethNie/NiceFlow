@@ -3,6 +3,7 @@ import json
 from typing import List, Dict
 
 import duckdb
+from event_bus import bus, EventBus
 
 from core.tool import extract_variable
 
@@ -28,6 +29,9 @@ class IPlugin(metaclass=abc.ABCMeta):
         self.pre_nodes: List[IPlugin] = []
         # 设置结果
         self._pre_result_dict: Dict[str, duckdb.DuckDBPyRelation] = {}
+        # 记录任务执行时间和次数
+        from core.plugin_time_record import PluginTimeRecord
+        self.run_record: PluginTimeRecord = PluginTimeRecord(self)
         # 当前任务Flow
         from core.flow import Flow
         self.flow: Flow = None
@@ -41,27 +45,38 @@ class IPlugin(metaclass=abc.ABCMeta):
         self.name = param["name"]
         self.param = param["properties"]
         self.flow = flow
+        self.bus: EventBus = self.flow.bus
+        event = f"{self.id}:{self.name}"
+        event_after = f"{self.id}:{self.name}:after"
+        self.bus.add_event(self.execute, event)
+        self.bus.add_event(self.after_execute, event_after)
+
 
     def set_result(self, df: duckdb.DuckDBPyRelation):
-        self.flow.con.commit()
         # 设置结果
         for node in self.next_nodes:
             node._pre_result_dict[self.name] = df
         # 执行下一步
         for node in self.next_nodes:
             node.before_execute()
-            node.execute()
-            node.after_execute()
+            if len(node._pre_result_dict) < len(node.pre_nodes):
+                continue
+            node.bus.emit(event= f"{node.id}:{node.name}")
+            print("event 执行完后执行after")
+            node.bus.emit(event= f"{node.id}:{node.name}:after")
+
 
     # 关闭资源
     def close(self):
         if self.status != "STOP":
-            self.status= "STOP"
+            self.status = "STOP"
             # 执行下一步
             for node in self.next_nodes:
                 node.close()
 
     def before_execute(self):
+        # 记录执行开始时间
+        self.run_record.start()
         if len(self.shadow_variable_param) > 0:
             for key, value in self.shadow_variable_param.items():
                 variable_list = extract_variable(str(value))
@@ -83,9 +98,17 @@ class IPlugin(metaclass=abc.ABCMeta):
                         self.shadow_variable_param[key] = value
 
     def after_execute(self):
+        print("执行after。。。")
+        # 记录执行结束时间
+        self.run_record.stop()
+        self.run_record.print()
         # 变量还原
         for key, value in self.shadow_variable_param.items():
             self.param[key] = value
+
+    def __param_check(self):
+        # 必要参数校验失败则直接退出
+        pass
 
     def to_json(self):
         return {

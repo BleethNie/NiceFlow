@@ -4,3 +4,5 @@ pandas==2.1.0
 SQLAlchemy==2.0.20
 Faker==19.6.1
 pymongo==4.5.0
+clickhouse-driver==0.2.6
+pyarrow==13.0.0

@@ -3,16 +3,20 @@
     "name": "",
     "uid": "",
     "param": {
+
     }
   },
   "nodes": [
     {
-      "id": "HttpInput",
+      "id": "FakerInput",
       "name": "read1",
       "type": "input",
       "properties": {
-        "port": 8080,
-        "handler_url": "/data"
+        "rows":10000,
+        "columns": ["name"],
+        "randoms":[
+          {"key":"sex","values":["男","女","未知"]}
+        ]
       }
     },
     {
@@ -22,18 +26,21 @@
       "properties": {
         "columns": [
           {
-            "field": "date_id",
+            "field": "name",
             "sort": "asc"
           }
         ]
       }
     },
     {
-      "id": "ConsoleOutput",
+      "id": "CKOutput",
       "name": "print",
       "type": "output",
       "properties": {
-        "row": 10
+        "host": "192.168.1.90",
+        "port": 9000,
+        "db": "default",
+        "table": "test"
       }
     }
   ],

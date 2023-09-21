@@ -7,12 +7,16 @@
   },
   "nodes": [
     {
-      "id": "CsvInput",
+      "id": "FakerInput",
       "name": "read1",
       "type": "input",
       "properties": {
-        "file_name": "F:/07_数据源大全/store_order/sales.csv",
-        "type": "csv"
+        "rows":1000,
+        "columns": ["name","address","city","street_address","date_of_birth","phone_number"],
+        "randoms":[
+          {"key":"sex1","values":["男","女","未知"]},
+          {"key":"sex2","values":["男","女","未知"]}
+        ]
       }
     },
     {
@@ -22,11 +26,18 @@
       "properties": {
         "columns": [
           {
-            "field": "date_id",
+            "field": "sex1",
             "default": "NONE",
             "mapping": {
-              "1": "男",
-              "2": "女"
+              "男": "\"1\"",
+              "女": "2"
+            }
+          },
+          {
+            "field": "sex2",
+            "mapping": {
+              "男": "1",
+              "女": "2"
             }
           }
         ]
