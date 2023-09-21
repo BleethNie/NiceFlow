@@ -1,7 +1,5 @@
 import json
 
-import duckdb
-import pandas as pd
 from confluent_kafka import Consumer
 
 from core.flow import Flow

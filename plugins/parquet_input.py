@@ -2,12 +2,13 @@ import json
 
 import duckdb
 
+from core.flow import Flow
 from core.plugin import IPlugin
 
 
 class ParquetInput(IPlugin):
 
-    def init(self, param: json):
+    def init(self, param: json,flow:Flow):
         super(ParquetInput, self).init(param,flow)
 
     def execute(self):

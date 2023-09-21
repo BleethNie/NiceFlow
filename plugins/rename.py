@@ -1,7 +1,6 @@
 import json
 
 import duckdb
-import pandas as pd
 
 from core.flow import Flow
 from core.plugin import IPlugin

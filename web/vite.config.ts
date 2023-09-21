@@ -14,7 +14,7 @@ export default defineConfig({
     // base: '/admin/',
     server: {
         host: '0.0.0.0',
-        port: 9123
+        port: 9889
     },
     plugins: [
         vue(),

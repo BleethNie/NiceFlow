@@ -1,12 +1,8 @@
 import json
 
 from fastapi import Request
-from fastapi.security import APIKeyHeader
 
-from like.exceptions.base import AppException
-from like.front.config import FrontConfig
 from like.http_base import HttpResp
-from like.utils.redis import RedisUtil
 
 
 async def verify_token(request: Request):
@@ -78,50 +74,6 @@ async def verify_token(request: Request):
     if not (menus and auths in menus.split(',')):
         raise AppException(HttpResp.NO_PERMISSION)
 
-
-async def front_login_verify(request: Request):
-    """
-    front 登录验证
-    :param request:
-    :return:
-    """
-    # 路由转权限
-    auths = request.url.path
-
-    token = await APIKeyHeader(name="token", auto_error=False)(request)
-    redis_key = f'{FrontConfig.frontendTokenKey}{token}'
-    # 免登录接口
-    if auths in FrontConfig.not_login_uri:
-        if token:
-            uid_str = await RedisUtil.get(redis_key)
-            if uid_str and uid_str.isdigit():
-                uid = int(uid_str)
-                request.state.user_id = uid
-        return
-
-    # Token是否为空
-    if not token:
-        raise AppException(HttpResp.TOKEN_EMPTY)
-
-    # Token是否过期
-    exist_cnt = await RedisUtil.exists(redis_key)
-    if exist_cnt == 0:
-        raise AppException(HttpResp.TOKEN_INVALID)
-    uid_str = await RedisUtil.get(redis_key)
-    uid = int(uid_str)
-
-    from like.front.service.login import LoginService
-    user = await LoginService(request).query_user_by_uid(uid)
-
-    if user.is_disable == 1:
-        raise AppException(HttpResp.LOGIN_DISABLE_ERROR)
-
-    # 令牌剩余30分钟自动续签
-    if await RedisUtil.ttl(redis_key) < FrontConfig.token_renew_time:
-        await RedisUtil.expire(redis_key, FrontConfig.token_valid_time)
-
-    request.state.user_id = uid
-    request.state.username = user.username
 
 
 async def verify_show_mode(request: Request):

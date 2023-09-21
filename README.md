@@ -152,9 +152,10 @@
 
 ## 二次开发
 
-- 后台管理   https://gitee.com/likeadmin/likeadmin_python?_from=gitee_search
-- sql编辑器  https://github.com/pinterest/querybook
+- 后台管理    https://gitee.com/likeadmin/likeadmin_python?_from=gitee_search
+- sql编辑器   https://github.com/pinterest/querybook
 - 报表       https://github.com/lightdash/lightdash
+- 报表       https://github.com/getredash/redash 
 
 ## 项目表情况
 

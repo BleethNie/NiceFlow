@@ -1,7 +1,5 @@
 import json
 
-import duckdb
-
 from core.flow import Flow
 from core.plugin import IPlugin
 
