@@ -1,4 +1,4 @@
-## EasyFlow
+## NiceFlow
 
 > 类似Kettle工具，主要实现数据ETL处理
 
@@ -101,32 +101,32 @@ TODO
 
 #### 转换
 
-| 插件          | 功能      | 类型  | 完成情况 |文档 |
-|-------------|---------|-----|------|------|
-| For         | 循环      |     |      |      |
-| variable    | 变量      |     |      |      |
-| While       | While循环 |     | 完成   |      |
-| Switch      | 分流      |     |      |      |
-| SQL         | SQL查询   |     | 完成     |      |
-| Join        | 关联      |     |      |      |
-| Samples     | 采样      |     | 完成   |      |
-| Union       | 合并流     |     |      |      |
-| SubFlow     | 子流程     |     |      |      |
-| Masking     | 数据脱敏    |     | 完成   |      |
-| Group       | 数据分组聚合  |     |      |      |
-| Checker     | 数据校验    |     |      |      |
-| Sort        | 数据排序    |     | 完成   |      |
-| AddField    | 新增字段    |     |      |      |
-| EditField   | 函数      |     |      |      |
-| Mapping     | 字段映射    |     |  完成    |      |
-| Rename      | 字段换名    |     | 完成   |      |
-| SplitColumn | 列拆分为多行  |     |      |      |
-| RowToColumn | 行转列     |     |      |      |
-| Str         | 字符串处理   |     |      |      |
-| Duplicate   | 去重      |     |      |      |
-| Unique      | 唯一行     |     |      |      |
-| ColumnToRow | 列转行     |     |      |      |
-| Pivot   | 透视      |     |      |      |
+| 插件          | 功能        | 类型  | 完成情况 |文档 |
+|-------------|-----------|-----|------|------|
+| For         | 循环        |     |      |      |
+| variable    | 变量        |     |  完成    |      |
+| While       | While变量循环 |     | 完成   |      |
+| Switch      | 分流        |     |      |      |
+| SQL         | SQL查询     |     | 完成     |      |
+| Join        | 关联        |     |      |      |
+| Samples     | 采样        |     | 完成   |      |
+| Union       | 合并流       |     |      |      |
+| SubFlow     | 子流程       |     |      |      |
+| Masking     | 数据脱敏      |     | 完成   |      |
+| Group       | 数据分组聚合    |     |      |      |
+| Checker     | 数据校验      |     |      |      |
+| Sort        | 数据排序      |     | 完成   |      |
+| AddField    | 新增字段      |     |      |      |
+| EditField   | 函数        |     |      |      |
+| Mapping     | 字段映射      |     |  完成    |      |
+| Rename      | 字段换名      |     | 完成   |      |
+| SplitColumn | 列拆分为多行    |     |      |      |
+| RowToColumn | 行转列       |     |      |      |
+| Str         | 字符串处理     |     |      |      |
+| Duplicate   | 去重        |     |      |      |
+| Unique      | 唯一行       |     |      |      |
+| ColumnToRow | 列转行       |     |      |      |
+| Pivot   | 透视        |     |      |      |
 
 #### 专业
 
@@ -189,3 +189,8 @@ TODO
 - sql编辑器   https://github.com/pinterest/querybook
 - 报表       https://github.com/lightdash/lightdash
 - 报表       https://github.com/getredash/redash
+
+
+### 其他参考
+
+- 项目打包 https://www.cjlmonster.cn/python/setuptools/

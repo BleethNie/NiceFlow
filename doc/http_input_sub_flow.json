@@ -20,7 +20,7 @@
       "name": "subflow",
       "type": "translate",
       "properties": {
-          "flow": "E:\\02_Resource\\01_Code\\python\\EasyFlow\\doc\\sort_console.json"
+          "flow": "E:\\02_Resource\\01_Code\\python\\NiceFlow\\doc\\sort_console.json"
       }
     },
     {
