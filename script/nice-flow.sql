@@ -71,3 +71,16 @@ CREATE TABLE `easy_flow_instance`
     `delete_time`  datetime(0)  COMMENT '删除时间',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COMMENT 'flow执行实例表' COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE `easy_data_source`
+(
+    `id`           int     NOT NULL AUTO_INCREMENT,
+    `flow_id`      varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '项目名称',
+    `source_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '数据源配置名称',
+    `source_config` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '数据源配置',
+    `is_delete`    tinyint NOT NULL DEFAULT '0' COMMENT '是否删除: 0=否, 1=是',
+    `create_time`  datetime(0) NOT NULL COMMENT '创建时间',
+    `update_time`  datetime(0) NOT NULL COMMENT '更新时间',
+    `delete_time`  datetime(0)  COMMENT '删除时间',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COMMENT 'flow执行实例表' COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;

@@ -23,6 +23,8 @@ class IPlugin(metaclass=abc.ABCMeta):
         self.status = ""
         # 影子参数
         self.shadow_variable_param = {}
+        # 字段注释信息
+        self.plugin_fields = []
         # 下一步
         self.next_nodes: List[IPlugin] = []
         # 上一步
