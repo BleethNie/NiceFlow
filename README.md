@@ -37,7 +37,7 @@ TODO
 - [x] 任务时间打印
 
 - 数据库自动建表
-
+- 自动字段类型转换【自动建表】
 ### flow功能
 
 - [x] 增加变量
@@ -194,3 +194,32 @@ TODO
 ### 其他参考
 
 - 项目打包 https://www.cjlmonster.cn/python/setuptools/
+
+
+### 打包发布命令
+ 
+- 构建源码发布包
+
+```shell
+# python setup.py sdist –formats = gztar,zip
+# python setup.py bdist_wininst   生成.exe
+# python setup.py bdist_rpm       生成.rpm
+# python setup.py bdist_egg       生成.egg
+# python setup.py bdist           生成多个平台安装包
+
+
+
+python setup.py sdist
+```
+
+六、使用setup.py安装包
+python setup.py install 将模块安装到全局环境中
+
+python setup.py develop 创建一个软链接指向实际所在目录，不会真正安装
+
+七、如何发布到PyPI
+注册PyPI账号，创建~/.pypirc文件，配置PyPI访问地址和账号。
+
+python setup.py register 使用该信息注册
+
+python setup.py upload 上传源码包
