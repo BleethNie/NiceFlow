@@ -15,7 +15,8 @@ class ConsoleOutput(IPlugin):
         pre_node = self.pre_nodes[0]
         console_df = self._pre_result_dict[pre_node.name]
         console_df.limit(row).show()
-        self.set_result(None)
+        self.set_result(console_df)
+
 
     def to_json(self):
         super(ConsoleOutput, self).to_json()

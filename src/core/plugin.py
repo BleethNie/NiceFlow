@@ -29,6 +29,8 @@ class IPlugin(metaclass=abc.ABCMeta):
         self.next_nodes: List[IPlugin] = []
         # 上一步
         self.pre_nodes: List[IPlugin] = []
+        # 处理数据量
+        self.df_count: int = 0
         # 设置结果
         self._pre_result_dict: Dict[str, duckdb.DuckDBPyRelation] = {}
         # 记录任务执行时间和次数
@@ -53,9 +55,9 @@ class IPlugin(metaclass=abc.ABCMeta):
         self.bus.add_event(self.execute, event)
         self.bus.add_event(self.after_execute, event_after)
 
-
     def set_result(self, df: duckdb.DuckDBPyRelation):
         # 设置结果
+        self.df_count = len(df)
         for node in self.next_nodes:
             node._pre_result_dict[self.name] = df
         # 执行下一步
@@ -63,10 +65,9 @@ class IPlugin(metaclass=abc.ABCMeta):
             node.before_execute()
             if len(node._pre_result_dict) < len(node.pre_nodes):
                 continue
-            node.bus.emit(event= f"{node.id}:{node.name}")
+            node.bus.emit(event=f"{node.id}:{node.name}")
             print("event 执行完后执行after")
-            node.bus.emit(event= f"{node.id}:{node.name}:after")
-
+            node.bus.emit(event=f"{node.id}:{node.name}:after")
 
     # 关闭资源
     def close(self):

@@ -24,8 +24,8 @@ class SQL(IPlugin):
             print(table,step)
             duckdb.register(table, self._pre_result_dict[step].to_df())
         result_df = duckdb.sql(sql)
-        result_df.show()
-
+        # 写入结果
+        self.set_result(result_df)
 
 
     def to_json(self):
