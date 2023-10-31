@@ -17,6 +17,7 @@ class FieldType(Enum):
 class PluginField(metaclass=abc.ABCMeta):
 
     def __init__(self):
+        # 类型同duckdb
         self.type = None,
         self.length = 0,
         self.scale = 0,
