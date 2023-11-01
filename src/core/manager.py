@@ -8,6 +8,7 @@ from core.flow import Flow
 from core.plugin import IPlugin
 from loguru import logger
 import logging
+import plugins
 
 
 class SingletonMeta(type):
@@ -24,8 +25,6 @@ class PluginManager(metaclass=SingletonMeta):
 
     registered_plugins_dict: dict = {}
 
-    plugins_folder_path = "plugins"
-
     @classmethod
     def register_log_handler(cls, handler: logging.Handler = None):
         if handler is None:
@@ -38,6 +37,7 @@ class PluginManager(metaclass=SingletonMeta):
         """
         Find plugins from other directory
         """
+
         # 获取当前文件的绝对路径
         current_file = os.path.abspath(__file__)
         # 获取当前文件所在目录的绝对路径
@@ -57,30 +57,34 @@ class PluginManager(metaclass=SingletonMeta):
                 if plugin_file_name != 'plugin.py':
                     continue
                 cls.plugins_list.append(plugin_name)
-                cls.__register_plugin(plugin_name,"hello")
+                cls.__register_plugin(plugin_name, "hello")
 
     @classmethod
     def register_plugin(cls):
         """
         Find plugins and add them to list
         """
-        for file_name in os.scandir(cls.plugins_folder_path):
+        plugins_folder_path = os.path.dirname(plugins.__file__)
+        for file_name in os.scandir(plugins_folder_path):
             if file_name.is_file():
                 head, tail = os.path.split(file_name.path)
                 plugin_name, extension = os.path.splitext(tail)
                 if extension != '.py':
                     continue
                 cls.plugins_list.append(plugin_name)
-                cls.__register_plugin(plugin_name,cls.plugins_folder_path)
+                cls.__register_plugin(plugin_name)
 
     @classmethod
-    def __register_plugin(cls, plugin_name: str, plugins_folder_path=""):
+    def __register_plugin(cls, plugin_name: str, plugins_folder_path=None):
         """
         Load the plugin and get its information
         """
         if plugin_name in cls.plugins_list:
             loaded_plugin: IPlugin
-            module_str = f'{plugins_folder_path}.{plugin_name}'
+            if plugins_folder_path == None:
+                module_str = f'plugins.{plugin_name}'
+            else:
+                module_str = f'{plugins_folder_path}.{plugin_name}'
             try:
                 module = importlib.import_module(module_str)
             except ModuleNotFoundError as e:

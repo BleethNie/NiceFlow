@@ -1,15 +1,17 @@
 # 命令行工具
 import click
 from core.flow import Flow
-
 from core.manager import FlowManager
 
 
 @click.command()
-@click.option("--name", default="admin", help="input your name")
-def run(name:str):
-    path = "../../doc/hello_input_console.json."
+@click.option("--path", default="admin", help="input your name")
+def run(path: str):
+    print("path:", path)
     myFlow: Flow = FlowManager.read(path)
     myFlow.run()
     myFlow.close()
-    print("nice:",name)
+
+
+if __name__ == '__main__':
+    run("nice")

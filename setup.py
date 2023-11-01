@@ -25,6 +25,7 @@ setup(
     # 包含所有src文件夹下的包，但排除tests包
     packages=find_packages('src', exclude=['*.tests', '*.tests.*', 'tests.*', 'tests']),
     package_dir={'': 'src'},  # find_packages指定了文件夹后，这里也需要配置
+    include_package_data=True,
     package_data={
         # 任何包中含有.txt文件，都包含它
         '': ['*.txt']
@@ -35,17 +36,17 @@ setup(
         'demo01': ['data/abc.txt']
     },
     # 支持Python版本
-    python_requires='>=3',
+    python_requires='>=3.8',
     # 表明当前模块依赖哪些包，若环境中没有，则会从pypi中下载安装
     install_requires=[
         'duckdb >= 0.8.1',
         'pandas >= 2.1.0',
         'event-bus>=1.0.2',
-        'pyarrow >= 13.0.0'
+        'pyarrow >= 13.0.0',
+        'loguru >= 0.7.2'
     ],
     # 用来支持自动生成脚本，如下配置
-    # 在类Unix系统下，会在 /usr/local/bin下生成 test1和test2 两个命令
-    # 在Windows系统下，会在当前Python环境下的 scripts 目录下生成 test1.exe和test2.exe
+    # 在类Unix系统下，会在 /usr/local/bin下生成 NiceFlow 命令
     entry_points={
         'console_scripts': [
             'NiceFlow = cli.cli:run',  # 入口指向demo01包下的first文件里的 test1 函数
