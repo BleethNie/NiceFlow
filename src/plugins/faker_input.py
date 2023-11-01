@@ -5,8 +5,8 @@ import duckdb
 import pandas as pd
 from faker import Faker
 
-from src.core.flow import Flow
-from src.core.plugin import IPlugin
+from core.flow import Flow
+from core.plugin import IPlugin
 
 
 class FakerInput(IPlugin):

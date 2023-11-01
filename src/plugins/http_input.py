@@ -4,8 +4,8 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 import duckdb
 import pandas as pd
 from loguru import  logger
-from src.core.flow import Flow
-from src.core.plugin import IPlugin
+from core.flow import Flow
+from core.plugin import IPlugin
 
 
 class HttpInput(IPlugin):

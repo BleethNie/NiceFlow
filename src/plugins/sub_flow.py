@@ -1,7 +1,7 @@
 import json
 
-from src.core.flow import Flow
-from src.core.plugin import IPlugin
+from core.flow import Flow
+from core.plugin import IPlugin
 
 
 class SubFlow(IPlugin):
@@ -11,7 +11,7 @@ class SubFlow(IPlugin):
 
     def execute(self):
         flow_path = self.param("flow","")
-        from src.core.manager import FlowManager
+        from core.manager import FlowManager
         myFlow: Flow = FlowManager.read(flow_path)
         myFlow.run()
         myFlow.close()

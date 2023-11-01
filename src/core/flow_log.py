@@ -1,6 +1,6 @@
 import time
 
-from src.core.plugin import IPlugin
+from core.plugin import IPlugin
 from loguru import logger
 
 class PluginLog:

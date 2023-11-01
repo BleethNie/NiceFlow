@@ -38,16 +38,17 @@ setup(
     python_requires='>=3',
     # 表明当前模块依赖哪些包，若环境中没有，则会从pypi中下载安装
     install_requires=[
-        'flask >= 2.0.1',
-        'pillow >= 6.2.2, < 7.0.0'
+        'duckdb >= 0.8.1',
+        'pandas >= 2.1.0',
+        'event-bus>=1.0.2',
+        'pyarrow >= 13.0.0'
     ],
     # 用来支持自动生成脚本，如下配置
     # 在类Unix系统下，会在 /usr/local/bin下生成 test1和test2 两个命令
     # 在Windows系统下，会在当前Python环境下的 scripts 目录下生成 test1.exe和test2.exe
     entry_points={
         'console_scripts': [
-            'test1 = demo01.first:test1',  # 入口指向demo01包下的first文件里的 test1 函数
-            'test2 = demo01.first:test2',  # 入口指向demo01包下的first文件里的 test2 函数
+            'NiceFlow = cli.cli:run',  # 入口指向demo01包下的first文件里的 test1 函数
         ],
     }
 )

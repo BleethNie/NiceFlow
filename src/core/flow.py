@@ -6,7 +6,7 @@ from typing import List
 import duckdb
 from event_bus import EventBus
 
-from src.core.plugin import IPlugin
+from core.plugin import IPlugin
 from loguru import logger
 
 

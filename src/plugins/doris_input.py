@@ -4,8 +4,8 @@ import pandas
 from sqlalchemy import create_engine
 from sqlalchemy.sql.expression import text
 
-from src.core.flow import Flow
-from src.core.plugin import IPlugin
+from core.flow import Flow
+from core.plugin import IPlugin
 
 
 class DorisInput(IPlugin):

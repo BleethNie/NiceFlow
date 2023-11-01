@@ -3,7 +3,7 @@ import json
 import pandas as pd
 from pymongo import MongoClient
 
-from src.core.plugin import IPlugin
+from core.plugin import IPlugin
 
 
 class MongoInput(IPlugin):

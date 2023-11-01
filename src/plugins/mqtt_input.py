@@ -4,8 +4,8 @@ import duckdb
 import pandas as pd
 from clickhouse_driver import Client
 
-from src.core.flow import Flow
-from src.core.plugin import IPlugin
+from core.flow import Flow
+from core.plugin import IPlugin
 import paho.mqtt.client as mqtt
 
 

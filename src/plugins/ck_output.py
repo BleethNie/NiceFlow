@@ -3,8 +3,8 @@ import json
 from clickhouse_driver import Client
 from pyarrow import RecordBatch
 
-from src.core.flow import Flow
-from src.core.plugin import IPlugin
+from core.flow import Flow
+from core.plugin import IPlugin
 from loguru import  logger
 
 class CKOutput(IPlugin):

@@ -5,7 +5,7 @@ from typing import List, Dict
 import duckdb
 from event_bus import EventBus
 from loguru import  logger
-from src.core.tool import extract_variable
+from core.tool import extract_variable
 
 
 class IPlugin(metaclass=abc.ABCMeta):
@@ -34,10 +34,10 @@ class IPlugin(metaclass=abc.ABCMeta):
         # 设置结果
         self._pre_result_dict: Dict[str, duckdb.DuckDBPyRelation] = {}
         # 记录任务执行时间和次数
-        from src.core.plugin_time_record import PluginTimeRecord
+        from core.plugin_time_record import PluginTimeRecord
         self.run_record: PluginTimeRecord = PluginTimeRecord(self)
         # 当前任务Flow
-        from src.core.flow import Flow
+        from core.flow import Flow
         self.flow: Flow = None
 
     def execute(self):

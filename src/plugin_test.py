@@ -1,7 +1,7 @@
 import os
 
-from src.core.flow import Flow
-from src.core.manager import FlowManager
+from core.flow import Flow
+from core.manager import FlowManager
 
 
 def baseTest():

@@ -1,4 +1,4 @@
-from src.core.plugin import IPlugin
+from core.plugin import IPlugin
 
 
 class PluginLog:

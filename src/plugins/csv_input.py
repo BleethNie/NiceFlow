@@ -1,7 +1,7 @@
 import json
 
-from src.core.flow import Flow
-from src.core.plugin import IPlugin
+from core.flow import Flow
+from core.plugin import IPlugin
 
 
 class StringConverter(dict):

@@ -35,15 +35,17 @@ TODO
 - 串行和并行
 - 任务执行【异步执行】
 - [x] 任务时间打印
-
+- 自定义插件功能
 - 数据库自动建表
 - 自动字段类型转换【自动建表】
+
+
 ### flow功能
 
 - [x] 增加变量
 - flow工作流【flow工作流参数、子流程、暂停、启动】
 - 执行引擎【远程执行引擎、本地执行引擎、分布式执行引擎】
-- 日志展示
+- [x] 日志展示
 - 日志监控，性能监控
 - store任务【mysql、mongo】
 - xml、 json加载flow、任务热加载
@@ -56,6 +58,7 @@ TODO
 
 - 类型信息     https://www.dusaiphoto.com/article/164/
 - 实现插件系统 https://github.com/srn-g/pypluginbase/blob/main/src/PluginManager.py
+
 
 ### 插件
 
@@ -209,10 +212,28 @@ TODO
 # python setup.py bdist_egg       生成.egg
 # python setup.py bdist           生成多个平台安装包
 
-
-
 python setup.py sdist
+
+
+
+
+
 ```
+
+## 使用
+
+```shell
+#打包
+python setup.py bdist_wheel
+
+#安装
+conda activate test_flow
+
+pip install NiceFlow-0.0.1-py3-none-any.whl
+
+
+```
+
 
 六、使用setup.py安装包
 python setup.py install 将模块安装到全局环境中
@@ -222,6 +243,6 @@ python setup.py develop 创建一个软链接指向实际所在目录，不会�
 七、如何发布到PyPI
 注册PyPI账号，创建~/.pypirc文件，配置PyPI访问地址和账号。
 
-python setup.py register 使用该信息注册
+python setup.py register sdist upload -r http://pypi.org 使用该信息注册
 
 python setup.py upload 上传源码包

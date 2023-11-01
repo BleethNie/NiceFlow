@@ -3,8 +3,8 @@ import json
 import duckdb
 from odps import ODPS
 
-from src.core.flow import Flow
-from src.core.plugin import IPlugin
+from core.flow import Flow
+from core.plugin import IPlugin
 
 
 class ODPSInput(IPlugin):

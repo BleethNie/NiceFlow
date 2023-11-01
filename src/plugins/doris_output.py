@@ -2,8 +2,8 @@ import json
 
 from sqlalchemy import create_engine
 
-from src.core.flow import Flow
-from src.core.plugin import IPlugin
+from core.flow import Flow
+from core.plugin import IPlugin
 
 
 class DorisOutput(IPlugin):
