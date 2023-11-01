@@ -1,0 +1,26 @@
+{
+  "nodes": [
+    {
+      "id": "HelloInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+
+      }
+    },
+    {
+      "id": "ConsoleOutput",
+      "name": "write1",
+      "type": "output",
+      "properties": {
+        "row": 100
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "write1"
+    }
+  ]
+}

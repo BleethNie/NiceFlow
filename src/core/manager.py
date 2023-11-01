@@ -2,6 +2,7 @@ import importlib
 import inspect
 import json
 import os
+import sys
 
 from src.core.flow import Flow
 from src.core.plugin import IPlugin
@@ -33,6 +34,32 @@ class PluginManager(metaclass=SingletonMeta):
             logger.configure(handlers=[{"sink": handler, "serialize": True}])
 
     @classmethod
+    def register_user_plugin(cls):
+        """
+        Find plugins from other directory
+        """
+        # 获取当前文件的绝对路径
+        current_file = os.path.abspath(__file__)
+        # 获取当前文件所在目录的绝对路径
+        current_directory = os.path.dirname(current_file)
+        # 获取当前项目的根目录
+        project_root = os.path.dirname(os.path.dirname(current_directory))
+        plugin_root_path = project_root + "/plugins"
+        # 动态加载可执行的python文件
+        sys.path.append(plugin_root_path)
+
+        for plugin_dir in os.scandir(plugin_root_path):
+            if not plugin_dir.is_dir():
+                continue
+            for plugin_file in os.scandir(plugin_dir.path):
+                head, plugin_file_name = os.path.split(plugin_file.path)
+                plugin_name, extension = os.path.splitext(plugin_file_name)
+                if plugin_file_name != 'plugin.py':
+                    continue
+                cls.plugins_list.append(plugin_name)
+                cls.__register_plugin(plugin_name,"hello")
+
+    @classmethod
     def register_plugin(cls):
         """
         Find plugins and add them to list
@@ -44,22 +71,27 @@ class PluginManager(metaclass=SingletonMeta):
                 if extension != '.py':
                     continue
                 cls.plugins_list.append(plugin_name)
-                cls.__register_plugin(plugin_name)
+                cls.__register_plugin(plugin_name,cls.plugins_folder_path)
 
     @classmethod
-    def __register_plugin(cls, plugin_name: str):
+    def __register_plugin(cls, plugin_name: str, plugins_folder_path=""):
         """
         Load the plugin and get its information
         """
         if plugin_name in cls.plugins_list:
             loaded_plugin: IPlugin
-            module_str = f'{cls.plugins_folder_path}.{plugin_name}'
-            module = importlib.import_module(module_str)
-            # 获取python脚本中的所有类
+            module_str = f'{plugins_folder_path}.{plugin_name}'
+            try:
+                module = importlib.import_module(module_str)
+            except ModuleNotFoundError as e:
+                print(e)
+                logger.error('Flow注册组件【{}】失败,请先安装相关依赖', module_str)
+                return
+                # 获取python脚本中的所有类
             for name, clazz in inspect.getmembers(module, inspect.isclass):
                 # 判断该类是不是IPlugin类的子类
                 if issubclass(clazz, IPlugin) and clazz.__name__ != IPlugin.__name__:
-                    logger.info("Flow注册组件【{}】".format(clazz.__name__))
+                    logger.debug("Flow注册组件【{}】".format(clazz.__name__))
                     cls.registered_plugins_dict[clazz.__name__] = clazz
 
     @classmethod
@@ -81,6 +113,7 @@ class FlowManager(metaclass=SingletonMeta):
 
     # 注册系统插件
     PluginManager.register_plugin()
+    PluginManager.register_user_plugin()
 
     @classmethod
     def read(cls, json_path: str) -> Flow:

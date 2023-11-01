@@ -112,6 +112,12 @@ def SQLTest():
     myFlow.run()
     myFlow.close()
 
+# 自定义插件功能
+def HelloTest():
+    path = "../doc/hello_input_console.json."
+    myFlow: Flow = FlowManager.read(path)
+    myFlow.run()
+    myFlow.close()
 
 def csvInput_CKOutputTest():
     path = "../doc/csv_input_ck_output.json"
@@ -124,4 +130,4 @@ def csvInput_CKOutputTest():
 
 
 if __name__ == '__main__':
-    SQLTest()
+    HelloTest()
