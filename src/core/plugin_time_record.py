@@ -1,7 +1,7 @@
 import time
 
 from src.core.plugin import IPlugin
-
+from loguru import  logger
 
 class PluginTimeRecord:
 
@@ -28,6 +28,6 @@ class PluginTimeRecord:
         run_time = round(run_time/1000,3)
         df_count = self.plugin.df_count
 
-        print(f"【{self.plugin.id}】/【{self.plugin.name}】执行第【{self.__run_count}】次，"
+        logger.info(f"【{self.plugin.id}】/【{self.plugin.name}】执行第【{self.__run_count}】次，"
               f"执行开始时间为【{start_format}】，结束时间为【{end_format}】,"
               f"执行耗时【{run_time}】,处理数据量为【{df_count}】")

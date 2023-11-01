@@ -16,7 +16,7 @@ class ODPSOutput(IPlugin):
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
         df = self._pre_result_dict[pre_node.name]
-        print(self.param)
+        logger.debug(self.param)
 
         # param信息
         access_key = self.param["access_key"]

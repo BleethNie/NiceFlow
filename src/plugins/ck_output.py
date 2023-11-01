@@ -5,7 +5,7 @@ from pyarrow import RecordBatch
 
 from src.core.flow import Flow
 from src.core.plugin import IPlugin
-
+from loguru import  logger
 
 class CKOutput(IPlugin):
 
@@ -16,7 +16,7 @@ class CKOutput(IPlugin):
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
         df = self._pre_result_dict[pre_node.name]
-        print(self.param)
+        logger.debug(self.param)
 
         # param信息
         host = self.param["host"]
@@ -32,7 +32,7 @@ class CKOutput(IPlugin):
         # 批量写数据库
         total_count = len(df.to_df())
         rel = df.fetch_arrow_reader(batch_size)
-        print(f"总记录数据为 {total_count}")
+        logger.info(f"总记录数据为 {total_count}")
         count = 0
         while True:
             batch: RecordBatch = rel.read_next_batch()
@@ -41,7 +41,7 @@ class CKOutput(IPlugin):
             client.execute(sql, batch.to_pandas().to_dict(orient="records"), types_check=False)
 
             count = count + 1
-            print(f"执行次数{count}")
+            logger.debug(f"执行次数{count}")
 
             if total_count <= count * batch_size:
                 break

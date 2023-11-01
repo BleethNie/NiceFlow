@@ -4,7 +4,7 @@ from typing import List, Dict
 
 import duckdb
 from event_bus import EventBus
-
+from loguru import  logger
 from src.core.tool import extract_variable
 
 
@@ -66,7 +66,7 @@ class IPlugin(metaclass=abc.ABCMeta):
             if len(node._pre_result_dict) < len(node.pre_nodes):
                 continue
             node.bus.emit(event=f"{node.id}:{node.name}")
-            print("event 执行完后执行after")
+            logger.debug("event 执行完后执行after")
             node.bus.emit(event=f"{node.id}:{node.name}:after")
 
     # 关闭资源
@@ -101,7 +101,7 @@ class IPlugin(metaclass=abc.ABCMeta):
                         self.shadow_variable_param[key] = value
 
     def after_execute(self):
-        print("执行after。。。")
+        logger.debug("执行after。。。")
         # 记录执行结束时间
         self.run_record.stop()
         self.run_record.print()

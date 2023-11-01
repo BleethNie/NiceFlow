@@ -7,6 +7,7 @@ import duckdb
 from event_bus import EventBus
 
 from src.core.plugin import IPlugin
+from loguru import logger
 
 
 class FlowStatusEnum(Enum):
@@ -25,7 +26,7 @@ class Flow(metaclass=abc.ABCMeta):
         self.con = duckdb.connect()
         self.param_dict: dict[str, object] = {}
         self.bus = EventBus()
-        print("创建Flow", self.flow_uid)
+        logger.info("Flow Task创建成功,FlowUid = 【{}】".format(self.flow_uid))
 
     def add_node(self, node: IPlugin):
         self.plugin_dict[node.name] = node

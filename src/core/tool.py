@@ -1,6 +1,6 @@
 import re
 import time
-
+from loguru import  logger
 
 class XTimer:
 
@@ -11,7 +11,7 @@ class XTimer:
             res = func(*args, **kwargs)
             e_time = time.time()
             diff = e_time - s_time
-            print('【{}】插件执行耗时【{}】秒'.format("plugin", diff))
+            logger.info('【{}】插件执行耗时【{}】秒'.format("plugin", diff))
             return res
 
         return wrapper

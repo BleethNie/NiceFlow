@@ -3,7 +3,7 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 
 import duckdb
 import pandas as pd
-
+from loguru import  logger
 from src.core.flow import Flow
 from src.core.plugin import IPlugin
 
@@ -38,7 +38,7 @@ class HttpInput(IPlugin):
         handler_url = self.param["handler_url"]
         host_info = (host, port)
         server = HTTPServer(host_info, self.make_handler())
-        print("host启动成功，http://{}:{}".format(host_info[0], host_info[1]))
+        logger.debug("host启动成功，http://{}:{}".format(host_info[0], host_info[1]))
         server.serve_forever()  # 开启服务
 
     def to_json(self):

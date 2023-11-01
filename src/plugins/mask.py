@@ -4,6 +4,7 @@ import duckdb
 
 from src.core.flow import Flow
 from src.core.plugin import IPlugin
+from loguru import  logger
 
 
 def function_mask(x: str, start: int, length: int, sign: str) -> str:
@@ -33,7 +34,7 @@ class Masking(IPlugin):
 
         sql = "select *,function_mask( {} ,{},{},'{}') as {}_mask from df" \
             .format(field, startIndex, length, sign, field)
-        print("sql = {}".format(sql))
+        logger.debug("sql = {}".format(sql))
         df = duckdb.from_df(duckdb.sql(sql).df())
         self.set_result(df)
 

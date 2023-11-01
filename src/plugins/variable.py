@@ -2,7 +2,7 @@ import json
 
 from src.core.flow import Flow
 from src.core.plugin import IPlugin
-
+from loguru import  logger
 
 # 只对变量做更新
 class Variable(IPlugin):
@@ -14,7 +14,7 @@ class Variable(IPlugin):
         variable = self.param["variable"]
         script = self.param.get("script")
         compile_obj = compile(script, '', 'eval')
-        print("{}--xx--{}".format(variable,self))
+        logger.info("{}--xx--{}".format(variable,self))
         self.flow.param_dict[variable] = eval(compile_obj)
         self.set_result(None)
 

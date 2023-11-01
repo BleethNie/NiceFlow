@@ -5,6 +5,8 @@ import os
 
 from src.core.flow import Flow
 from src.core.plugin import IPlugin
+from loguru import logger
+import logging
 
 
 class SingletonMeta(type):
@@ -22,6 +24,13 @@ class PluginManager(metaclass=SingletonMeta):
     registered_plugins_dict: dict = {}
 
     plugins_folder_path = "plugins"
+
+    @classmethod
+    def register_log_handler(cls, handler: logging.Handler = None):
+        if handler is None:
+            logger.configure(handlers=[{"sink": logging.StreamHandler, "serialize": True}])
+        else:
+            logger.configure(handlers=[{"sink": handler, "serialize": True}])
 
     @classmethod
     def register_plugin(cls):
@@ -50,6 +59,7 @@ class PluginManager(metaclass=SingletonMeta):
             for name, clazz in inspect.getmembers(module, inspect.isclass):
                 # 判断该类是不是IPlugin类的子类
                 if issubclass(clazz, IPlugin) and clazz.__name__ != IPlugin.__name__:
+                    logger.info("Flow注册组件【{}】".format(clazz.__name__))
                     cls.registered_plugins_dict[clazz.__name__] = clazz
 
     @classmethod
@@ -86,7 +96,7 @@ class FlowManager(metaclass=SingletonMeta):
             node: IPlugin = PluginManager.get_plugin(node_id)
             node.init(node_json, flow)
             flow.add_node(node)
-            print("flow加载组件【{}】".format(node.name))
+            logger.info("Flow Node创建完成【{}--{}】".format(node.id, node.name))
         for edge in edges_array:
             flow.set_edge(edge["startId"], edge["endId"])
 

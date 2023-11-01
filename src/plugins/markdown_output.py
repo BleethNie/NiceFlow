@@ -14,12 +14,10 @@ class MarkdownOutput(IPlugin):
 
     def execute(self):
         file_path = self.param["file_path"]
-        print("file_path",file_path)
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
         df = self._pre_result_dict[pre_node.name]
         df.limit(10).to_df().to_markdown(file_path)
-        print("file_path1",file_path)
 
 
 

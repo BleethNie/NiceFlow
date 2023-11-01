@@ -4,7 +4,7 @@ import duckdb
 
 from src.core.flow import Flow
 from src.core.plugin import IPlugin
-
+from loguru import  logger
 
 # 空执行实际没有啥作用
 class SQL(IPlugin):
@@ -21,7 +21,7 @@ class SQL(IPlugin):
         for input in inputs:
             step = input["step"]
             table = input["table"]
-            print(table,step)
+            logger.debug(table,step)
             duckdb.register(table, self._pre_result_dict[step].to_df())
         result_df = duckdb.sql(sql)
         # 写入结果
