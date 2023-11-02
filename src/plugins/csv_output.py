@@ -10,11 +10,12 @@ class CsvOutput(IPlugin):
         super(CsvOutput, self).init(param,flow)
 
     def execute(self):
-        self.param[""]
+        file_name = self.param["file_name"]
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
-        df = self._pre_result_dict[pre_node.name]
-        df.to_csv()
+        duck_df = self._pre_result_dict[pre_node.name]
+        df = duck_df.to_df()
+        df.to_csv(file_name,index=False)
 
 
     def to_json(self):

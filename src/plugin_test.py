@@ -119,6 +119,14 @@ def HelloTest():
     myFlow.run()
     myFlow.close()
 
+
+# 自定义插件功能
+def CsvOutput():
+    path = "../doc/faker_input_csv_output.json."
+    myFlow: Flow = FlowManager.read(path)
+    myFlow.run()
+    myFlow.close()
+
 def csvInput_CKOutputTest():
     path = "../doc/csv_input_ck_output.json"
     data_dir = "F:\\07_数据源大全\\车站数据\\后两周的数据"
@@ -130,4 +138,4 @@ def csvInput_CKOutputTest():
 
 
 if __name__ == '__main__':
-    HelloTest()
+    CsvOutput()

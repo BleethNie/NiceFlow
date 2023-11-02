@@ -43,7 +43,9 @@ setup(
         'pandas >= 2.1.0',
         'event-bus>=1.0.2',
         'pyarrow >= 13.0.0',
-        'loguru >= 0.7.2'
+        'loguru >= 0.7.2',
+        'click>=8.1.7',
+        'Faker>=19.6.1'
     ],
     # 用来支持自动生成脚本，如下配置
     # 在类Unix系统下，会在 /usr/local/bin下生成 NiceFlow 命令
