@@ -1,5 +1,5 @@
-from core.flow import Flow
-from core.manager import FlowManager
+from NiceFlow.core.flow import Flow
+from NiceFlow.core.manager import FlowManager
 
 
 def paramTest():
