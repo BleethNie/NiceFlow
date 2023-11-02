@@ -30,4 +30,4 @@ class PluginTimeRecord:
 
         logger.info(f"【{self.plugin.id}】/【{self.plugin.name}】执行第【{self.__run_count}】次，"
               f"执行开始时间为【{start_format}】，结束时间为【{end_format}】,"
-              f"执行耗时【{run_time}】,处理数据量为【{df_count}】")
+              f"执行耗时【{run_time}】,输出数据量为【{df_count}】")
