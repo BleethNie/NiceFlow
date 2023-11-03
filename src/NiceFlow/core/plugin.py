@@ -3,8 +3,9 @@ import json
 from typing import List, Dict
 
 import duckdb
-from event_bus import EventBus
-from loguru import  logger
+# from event_bus import EventBus
+from blinker import signal
+from loguru import logger
 from NiceFlow.core.tool import extract_variable
 
 
@@ -39,9 +40,14 @@ class IPlugin(metaclass=abc.ABCMeta):
         # 当前任务Flow
         from NiceFlow.core.flow import Flow
         self.flow: Flow = None
+        # 设置信号
+        self.signal = signal(self.name+"execute")
+
+    def receiver(self,sender):
+        self.execute()
 
     def execute(self):
-        pass
+        self.before_execute()
 
     def init(self, param: json, flow):
         self.id = param["id"]
@@ -49,11 +55,12 @@ class IPlugin(metaclass=abc.ABCMeta):
         self.name = param["name"]
         self.param = param["properties"]
         self.flow = flow
-        self.bus: EventBus = self.flow.bus
-        event = f"{self.id}:{self.name}"
-        event_after = f"{self.id}:{self.name}:after"
-        self.bus.add_event(self.execute, event)
-        self.bus.add_event(self.after_execute, event_after)
+
+        # self.bus: EventBus = self.flow.bus
+        # event = f"{self.id}:{self.name}"
+        # event_after = f"{self.id}:{self.name}:after"
+        # self.bus.add_event(self.execute, event)
+        # self.bus.add_event(self.after_execute, event_after)
 
     def set_result(self, df: duckdb.DuckDBPyRelation):
         # 设置结果
@@ -62,12 +69,14 @@ class IPlugin(metaclass=abc.ABCMeta):
             node._pre_result_dict[self.name] = df
         # 执行下一步
         for node in self.next_nodes:
-            node.before_execute()
-            if len(node._pre_result_dict) < len(node.pre_nodes):
-                continue
-            node.bus.emit(event=f"{node.id}:{node.name}")
-            logger.debug("event 执行完后执行after")
-            node.bus.emit(event=f"{node.id}:{node.name}:after")
+            self.signal.connect(node.receiver, sender=self)
+            # if len(node._pre_result_dict) < len(node.pre_nodes):
+            #     continue
+            # node.bus.emit(event=f"{node.id}:{node.name}")
+            # logger.debug("event 执行完后执行after")
+            # node.bus.emit(event=f"{node.id}:{node.name}:after")
+        self.after_execute()
+        self.signal.send(self)
 
     # 关闭资源
     def close(self):
@@ -101,7 +110,6 @@ class IPlugin(metaclass=abc.ABCMeta):
                         self.shadow_variable_param[key] = value
 
     def after_execute(self):
-        logger.debug("执行after。。。")
         # 记录执行结束时间
         self.run_record.stop()
         self.run_record.print()

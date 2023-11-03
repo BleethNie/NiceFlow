@@ -4,7 +4,8 @@ from enum import Enum
 from typing import List
 
 import duckdb
-from event_bus import EventBus
+# from event_bus import EventBus
+from blinker import signal
 
 from NiceFlow.core.plugin import IPlugin
 from loguru import logger
@@ -25,7 +26,7 @@ class Flow(metaclass=abc.ABCMeta):
         self.plugin_dict: dict[str, IPlugin] = {}
         self.con = duckdb.connect()
         self.param_dict: dict[str, object] = {}
-        self.bus = EventBus()
+        self.start_signal = signal("")
         logger.info("Flow Task创建成功,FlowUid = 【{}】".format(self.flow_uid))
 
     def add_node(self, node: IPlugin):
@@ -54,10 +55,8 @@ class Flow(metaclass=abc.ABCMeta):
             node: IPlugin = self.plugin_dict[key]
             pre_nodes: List[IPlugin] = node.pre_nodes
             if len(pre_nodes) == 0:
-                # 找到首节点
-                node.before_execute()
-                node.execute()
-                node.after_execute()
+                self.start_signal.connect(node.receiver, sender=self)
+        self.start_signal.send(self)
 
         # 按照顺序关闭资源
         for key in self.plugin_dict.keys():

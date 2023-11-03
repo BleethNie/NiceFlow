@@ -10,6 +10,7 @@ class ConsoleOutput(IPlugin):
         super(ConsoleOutput, self).init(param, flow)
 
     def execute(self):
+        super(ConsoleOutput, self).execute()
         row = int(self.param["row"])
         # 获取上一步结果
         pre_node = self.pre_nodes[0]

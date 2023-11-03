@@ -1,4 +1,7 @@
 import os
+import time
+
+import loguru
 
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.manager import FlowManager
@@ -146,4 +149,4 @@ def csvInput_CKOutputTest():
 
 
 if __name__ == '__main__':
-    CsvOutput()
+    fakerTest()

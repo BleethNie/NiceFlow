@@ -28,6 +28,7 @@ class FakerInput(IPlugin):
             self.compile_dict[column] = compile_obj
 
     def execute(self):
+        super(FakerInput, self).execute()
         rows = self.param["rows"]
         columns = self.param["columns"]
         randoms = self.param["randoms"]

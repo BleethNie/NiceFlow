@@ -45,9 +45,9 @@ class PluginManager(metaclass=SingletonMeta):
         # 获取当前项目的根目录
         project_root = os.path.dirname(os.path.dirname(current_directory))
         plugin_root_path = project_root + "/plugins"
+        logger.info("开始扫描自定义插件安装目录{}",plugin_root_path)
         if not os.path.exists(plugin_root_path):
             os.makedirs(plugin_root_path)
-            logger.warning("{}目录下未找到可用的自定义插件", plugin_root_path)
             return
         # 动态加载可执行的python文件
         sys.path.append(plugin_root_path)
