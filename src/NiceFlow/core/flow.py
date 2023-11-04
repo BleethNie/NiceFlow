@@ -1,4 +1,5 @@
 import abc
+import logging
 import uuid
 from enum import Enum
 from typing import List
@@ -28,6 +29,14 @@ class Flow(metaclass=abc.ABCMeta):
         self.param_dict: dict[str, object] = {}
         self.start_signal = signal("")
         logger.info("Flow Task创建成功,FlowUid = 【{}】".format(self.flow_uid))
+
+
+    @classmethod
+    def register_log_handler(cls, handler: logging.Handler = None):
+        if handler is None:
+            logger.configure(handlers=[{"sink": logging.StreamHandler, "serialize": True}])
+        else:
+            logger.configure(handlers=[{"sink": handler, "serialize": True}])
 
     def add_node(self, node: IPlugin):
         self.plugin_dict[node.name] = node

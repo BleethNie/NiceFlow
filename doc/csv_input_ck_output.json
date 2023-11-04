@@ -24,7 +24,9 @@
         "host": "192.168.1.90",
         "port": 9000,
         "db": "default",
-        "table": "station"
+        "table": "station",
+        "username": "root",
+        "password": "AES(fdfdfdfd)"
       }
     }
   ],

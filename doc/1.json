@@ -1,28 +1,30 @@
 {
-  "nodes": [
-    {
-      "id": "CsvInput",
-      "name": "read1",
-      "type": "input",
-      "properties": {
-        "file_name": "F:\\07_数据源大全\\车站数据\\后两周的数据\\bus0416.csv",
-        "type": "csv"
-      }
-    },
-    {
-      "id": "ParquetOutput",
-      "name": "write1",
-      "type": "output",
-      "properties": {
-        "file_name": "F:\\07_数据源大全\\车站数据\\后两周的数据\\bus0416.parquet",
-        "type": "parquet"
-      }
-    }
-  ],
-  "edges": [
-    {
-      "startId": "read1",
-      "endId": "write1"
-    }
-  ]
+    "nodes": [
+        {
+            "id": "CsvInput",
+            "name": "read1",
+            "type": "input",
+            "properties": {
+                "file_name": "F:\\07_数据源大全\\车站数据\\后两周的数据\\bus0416.csv",
+                "type": "csv",
+                "password": "AES(rr33M9w7y2xBwJ+sqGhFEW9pku+JN+2ol89MuzZX1+sxE/GdAQXjNM4txTsyOnTJG3ARyKFNAMYSD1PxXkZ3Ng==)",
+                "passwd": "AES(u5MX3rMc0X+AR1tJjxfNG9j9R5whh74SUwju/m4QnweoXp3YknirkpkFGcptwMZYG3ARyKFNAMYSD1PxXkZ3Ng==)"
+            }
+        },
+        {
+            "id": "ParquetOutput",
+            "name": "write1",
+            "type": "output",
+            "properties": {
+                "file_name": "F:\\07_数据源大全\\车站数据\\后两周的数据\\bus0416.parquet",
+                "type": "parquet"
+            }
+        }
+    ],
+    "edges": [
+        {
+            "startId": "read1",
+            "endId": "write1"
+        }
+    ]
 }

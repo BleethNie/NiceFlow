@@ -25,12 +25,7 @@ class PluginManager(metaclass=SingletonMeta):
 
     registered_plugins_dict: dict = {}
 
-    @classmethod
-    def register_log_handler(cls, handler: logging.Handler = None):
-        if handler is None:
-            logger.configure(handlers=[{"sink": logging.StreamHandler, "serialize": True}])
-        else:
-            logger.configure(handlers=[{"sink": handler, "serialize": True}])
+
 
     @classmethod
     def register_user_plugin(cls):

@@ -1,6 +1,17 @@
+import os
+
+from NiceFlow.core.db_loggin_handler import DBLogHandler
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.manager import FlowManager
 
+def getProjectPath()->str:
+    # 获取当前文件的绝对路径
+    current_file = os.path.abspath(__file__)
+    # 获取当前文件所在目录的绝对路径
+    current_directory = os.path.dirname(current_file)
+    # 获取当前项目的根目录
+    project_root = os.path.dirname(os.path.dirname(current_directory))
+    return project_root
 
 def paramTest():
     path = "E:/02_Resource/01_Code/python/NiceFlow/doc/flow/flow_param_console.json"
@@ -13,5 +24,14 @@ def paramTest():
     myFlow.run()
 
 
+def fakerTest():
+    handler =DBLogHandler()
+    Flow.register_log_handler(handler)
+    path = getProjectPath()+"/doc/faker_input_console.json"
+    myFlow: Flow = FlowManager.read(path)
+
+    myFlow.run()
+
+
 if __name__ == '__main__':
-    paramTest()
+    fakerTest()
