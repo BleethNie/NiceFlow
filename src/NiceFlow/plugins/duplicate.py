@@ -10,7 +10,8 @@ class Duplicate(IPlugin):
         super(Duplicate, self).init(param,flow)
 
     def execute(self):
-        
+        super(Duplicate, self).execute()
+
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
         df = self._pre_result_dict[pre_node.name]

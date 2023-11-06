@@ -13,6 +13,8 @@ class ExcelInput(IPlugin):
         super(ExcelInput, self).init(param, flow)
 
     def execute(self):
+        super(ExcelInput, self).execute()
+
         file_name = self.param["file_name"]
         sheet_name = self.param["sheet_name"]
         df = pd.read_excel(file_name,sheet_name=sheet_name)
