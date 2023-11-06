@@ -5,9 +5,10 @@
       "name": "read1",
       "type": "input",
       "properties": {
-        "api_name":"article_epu_index",
+        "api_name":"fund_info_index_em",
         "params": {
-          "index": "China"
+          "symbol": "沪深指数",
+          "indicator": "增强指数型"
         }
       }
     },

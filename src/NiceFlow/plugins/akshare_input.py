@@ -25,11 +25,11 @@ class AKShareInput(IPlugin):
             if k_v_str is None:
                 k_v_str = ""
             k_v_str = k_v_str + "{}='{}',".format(key, value)
-            k_v_str = k_v_str.removesuffix(",")
+        k_v_str = k_v_str.removesuffix(",")
         script_str = "ak.{api_name}({k_v})".format(api_name=api_name, k_v=k_v_str)
         logger.info("执行脚本为：{}", script_str)
-        # df = exec(script_str)
-        df = ak.article_epu_index(index='China')
+        compile_obj = compile(script_str, '', 'eval')
+        df = eval(compile_obj)
         duck_df = duckdb.from_df(df)
         # 写入结果
         self.set_result(duck_df)

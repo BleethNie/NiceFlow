@@ -40,9 +40,9 @@ class IPlugin(metaclass=abc.ABCMeta):
         from NiceFlow.core.flow import Flow
         self.flow: Flow = None
         # 设置信号
-        self.signal = signal(self.name+"execute")
+        self.signal = signal(self.name + "execute")
 
-    def receiver(self,sender):
+    def receiver(self, sender):
         self.execute()
 
     def execute(self):
@@ -61,9 +61,9 @@ class IPlugin(metaclass=abc.ABCMeta):
         # self.bus.add_event(self.execute, event)
         # self.bus.add_event(self.after_execute, event_after)
 
-    def set_result(self, df: duckdb.DuckDBPyRelation):
+    def set_result(self, df: duckdb.DuckDBPyRelation = None):
         # 设置结果
-        self.df_count = len(df)
+        self.df_count = 0 if df is None else len(df)
         for node in self.next_nodes:
             node._pre_result_dict[self.name] = df
         # 执行下一步
