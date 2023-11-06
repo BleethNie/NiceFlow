@@ -1,10 +1,12 @@
 import os
+import unittest
 
 from NiceFlow.core.db_loggin_handler import DBLogHandler
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.manager import FlowManager
 
-def getProjectPath()->str:
+
+def getProjectPath() -> str:
     # 获取当前文件的绝对路径
     current_file = os.path.abspath(__file__)
     # 获取当前文件所在目录的绝对路径
@@ -13,25 +15,27 @@ def getProjectPath()->str:
     project_root = os.path.dirname(os.path.dirname(current_directory))
     return project_root
 
-def paramTest():
-    path = "E:/02_Resource/01_Code/python/NiceFlow/doc/flow/flow_param_console.json"
-    myFlow: Flow = FlowManager.read(path)
-    flow_param = {
-        "file_name": "F:/07_数据源大全/store_order/channel.csv",
-        "row": 20
-    }
-    myFlow.set_param(flow_param)
-    myFlow.run()
 
+class TestFlow(unittest.TestCase):
 
-def fakerTest():
-    handler =DBLogHandler()
-    Flow.register_log_handler(handler)
-    path = getProjectPath()+"/doc/faker_input_console.json"
-    myFlow: Flow = FlowManager.read(path)
+    def test_param(self):
+        path = "E:/02_Resource/01_Code/python/NiceFlow/doc/flow/flow_param_console.json"
+        myFlow: Flow = FlowManager.read(path)
+        flow_param = {
+            "file_name": "F:/07_数据源大全/store_order/channel.csv",
+            "row": 20
+        }
+        myFlow.set_param(flow_param)
+        myFlow.run()
 
-    myFlow.run()
+    def test_faker(self):
+        handler = DBLogHandler()
+        Flow.register_log_handler(handler)
+        path = getProjectPath() + "/doc/faker_input_console.json"
+        myFlow: Flow = FlowManager.read(path)
+
+        myFlow.run()
 
 
 if __name__ == '__main__':
-    fakerTest()
+    unittest.main()

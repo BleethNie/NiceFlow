@@ -1,10 +1,11 @@
 import json
 
 import duckdb
+from loguru import logger
 
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
-from loguru import  logger
+
 
 class While(IPlugin):
 
@@ -22,14 +23,17 @@ class While(IPlugin):
         true_or_false = eval(compile_obj)
 
         for node in self.next_nodes:
+            # 执行完成，false_step没有
             if true_or_false is False and false_step is None:
                 logger.info(" false_step is None")
                 break
+            # 未执行完成,执行下一步
             if true_or_false and node.name != false_step:
                 node.before_execute()
                 node.execute()
                 node.after_execute()
                 break
+            # 执行完成,执行完成步骤
             if true_or_false is False and node.name == false_step:
                 node.before_execute()
                 node.execute()

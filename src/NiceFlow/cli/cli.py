@@ -32,12 +32,11 @@ def chart():
     pass
 
 
-# @cli.command('encrypt', short_help='encrypt a task flow password config')
-# @click.option("--path", default="", help="input your task json file path")
-# @click.password_option()
+@cli.command('encrypt', short_help='encrypt a task flow password config')
+@click.option("--path", default="", help="input your task json file path")
+@click.password_option()
 def encrypt(path: str, password: str):
     eg = EncryptData(password)
-
     with open(path, 'r', encoding='utf8') as fp:
         flow_json = json.load(fp)
         nodes_array: json = flow_json["nodes"]
@@ -50,12 +49,12 @@ def encrypt(path: str, password: str):
                     encrypt_data = eg.encrypt(value)
                     node_properties[key] = "AES({})".format(encrypt_data)
     with open(path, 'w', encoding='utf8') as fp:
-        json.dump(flow_json, fp, indent=4, ensure_ascii=False)
+        json.dump(flow_json, fp, indent=2, ensure_ascii=False)
 
 
-# @cli.command('decrypt', short_help='decrypt a task flow password config')
-# @click.option("--path", default="", help="input your task json file path")
-# @click.password_option()
+@cli.command('decrypt', short_help='decrypt a task flow password config')
+@click.option("--path", default="", help="input your task json file path")
+@click.password_option()
 def decrypt(path: str, password: str):
     eg = EncryptData(password)
     with open(path, 'r', encoding='utf8') as fp:
@@ -73,9 +72,9 @@ def decrypt(path: str, password: str):
                         return
                     node_properties[key] = decrypt
     with open(path, 'w', encoding='utf8') as fp:
-        json.dump(flow_json, fp, indent=4, ensure_ascii=False)
+        json.dump(flow_json, fp, indent=2, ensure_ascii=False)
 
 
 if __name__ == '__main__':
-    encrypt("E:\\02_Resource\\01_Code\\python\\NiceFlow\\NiceFlow\\doc\\1.json", "1234567")
+    encrypt("E:\\02_Resource\\01_Code\\python\\NiceFlow\\NiceFlow\\doc\\1.json", "123456")
     decrypt("E:\\02_Resource\\01_Code\\python\\NiceFlow\\NiceFlow\\doc\\1.json", "123456")
