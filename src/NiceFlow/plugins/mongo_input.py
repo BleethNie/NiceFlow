@@ -16,6 +16,8 @@ class MongoInput(IPlugin):
         self.client = MongoClient("uri")
 
     def execute(self):
+        super(MongoInput, self).execute()
+
         db = self.client['database_name']
         collection = db['collection_name']
         df = pd.DataFrame(list(collection.find()))

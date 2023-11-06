@@ -13,6 +13,7 @@ class Starter(IPlugin):
         super(Starter, self).init(param,flow)
 
     def execute(self):
+        super(Starter, self).execute()
         df = pd.DataFrame()
         self.set_result(df)
 

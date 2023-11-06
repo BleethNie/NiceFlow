@@ -21,6 +21,7 @@ class CsvInput(IPlugin):
         super(CsvInput, self).init(param, flow)
 
     def execute(self):
+        super(CsvInput, self).execute()
         file_name = self.param["file_name"]
         csv_df = self.flow.con.read_csv(file_name,header=True)
         self.set_result(csv_df)

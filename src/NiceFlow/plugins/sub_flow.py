@@ -10,6 +10,7 @@ class SubFlow(IPlugin):
         super(SubFlow, self).init(param,flow)
 
     def execute(self):
+        super(SubFlow, self).execute()
         flow_path = self.param("flow","")
         from NiceFlow.core.manager import FlowManager
         myFlow: Flow = FlowManager.read(flow_path)

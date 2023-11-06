@@ -10,6 +10,8 @@ class Pivot(IPlugin):
         super(Pivot, self).init(param,flow)
 
     def execute(self):
+        super(Pivot, self).execute()
+
         self.param[""]
         # 获取上一步结果
         pre_node = self.pre_nodes[0]

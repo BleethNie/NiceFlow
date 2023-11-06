@@ -10,6 +10,8 @@ class HtmlOutput(IPlugin):
         super(HtmlOutput, self).init(param,flow)
 
     def execute(self):
+        super(HtmlOutput, self).execute()
+
         html_path = self.param["html_path"]
         # 获取上一步结果
         pre_node = self.pre_nodes[0]

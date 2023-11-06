@@ -10,6 +10,7 @@ class Switch(IPlugin):
         super(Switch, self).init(param,flow)
 
     def execute(self):
+        super(Switch, self).execute()
         self.param[""]
         # 获取上一步结果
         pre_node = self.pre_nodes[0]

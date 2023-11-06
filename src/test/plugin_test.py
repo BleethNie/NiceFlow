@@ -136,6 +136,13 @@ class TestPlugin(unittest.TestCase):
             myFlow.run()
             myFlow.close()
 
+    # akshare
+    def test_AKShare(self):
+        path = getProjectPath() + "/doc/akshare_input_csv_output.json."
+        myFlow: Flow = FlowManager.read(path)
+        myFlow.run()
+        myFlow.close()
+
 
 if __name__ == '__main__':
     unittest.main()

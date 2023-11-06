@@ -32,6 +32,8 @@ class HttpInput(IPlugin):
         return ResultHandler
 
     def execute(self):
+        super(HttpInput, self).execute()
+
         # 启动一个server
         host = self.param.get("host", "0.0.0.0")
         port = self.param["port"]

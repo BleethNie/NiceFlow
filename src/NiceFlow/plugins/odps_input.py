@@ -13,6 +13,8 @@ class ODPSInput(IPlugin):
         super().init(param, flow)
 
     def execute(self):
+        super(ODPSInput, self).execute()
+
         # param信息
         access_key = self.param["access_key"]
         access_secret = self.param.get("access_secret", "")

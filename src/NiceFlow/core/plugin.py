@@ -3,9 +3,8 @@ import json
 from typing import List, Dict
 
 import duckdb
-# from event_bus import EventBus
 from blinker import signal
-from loguru import logger
+
 from NiceFlow.core.tool import extract_variable
 
 

@@ -1,7 +1,7 @@
 import json
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
-from loguru import  logger
+from loguru import logger
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
 
@@ -27,16 +27,18 @@ class HttpOutput(IPlugin):
                 # 发给请求客户端的响应数据
                 self.send_header('Content-type', 'application/json')
                 self.end_headers()
-                data = json.loads(df.to_df().to_json(orient = orient))
-                self.wfile.write(json.dumps({"data":data }).encode())
+                data = json.loads(df.to_df().to_json(orient=orient))
+                self.wfile.write(json.dumps({"data": data}).encode())
 
         return ResultHandler
 
     def execute(self):
+        super(HttpOutput, self).execute()
+
         # 启动一个server
         host = self.param.get("host", "0.0.0.0")
         port = self.param["port"]
-        handler_url = self.param.get("handler_url","")
+        handler_url = self.param.get("handler_url", "")
         host_info = (host, port)
         server = HTTPServer(host_info, self.make_handler())
         logger.debug("host启动成功，http://{}:{}".format(host_info[0], host_info[1]))

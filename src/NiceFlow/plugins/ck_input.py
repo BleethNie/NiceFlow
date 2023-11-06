@@ -14,6 +14,7 @@ class CKInput(IPlugin):
         super(CKInput, self).init(param, flow)
 
     def execute(self):
+        super(CKInput, self).execute()
         # param信息
         host = self.param["host"]
         port = self.param.get("port", 9000)

@@ -13,6 +13,8 @@ class MarkdownOutput(IPlugin):
         super(MarkdownOutput, self).init(param,flow)
 
     def execute(self):
+        super(MarkdownOutput, self).execute()
+
         file_path = self.param["file_path"]
         # 获取上一步结果
         pre_node = self.pre_nodes[0]

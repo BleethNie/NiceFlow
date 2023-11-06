@@ -1,11 +1,13 @@
 import json
 
 import duckdb
+from loguru import logger
 import pandas as pd
 from clickhouse_driver import Client
 
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
+import akshare as ak
 
 
 class AKShareInput(IPlugin):
@@ -14,25 +16,23 @@ class AKShareInput(IPlugin):
         super(AKShareInput, self).init(param, flow)
 
     def execute(self):
+        super(AKShareInput, self).execute()
         # param信息
-        host = self.param["host"]
-        port = self.param.get("port", 9000)
-        db = self.param["db"]
-        user = self.param.get("user", "default")
-        password = self.param.get("password", "")
-        table = self.param.get("table", "")
-        sql = self.param.get("sql", "")
-
-        # 配置数据库
-        client = Client(host=host, port=port, database=db, user=user, password=password)
-
-        # 读取数据
-        data,columns = client.execute(sql,with_column_types=True)
-        real_columns = [item[0] for item in columns]
-        df = pd.DataFrame(data,columns=real_columns)
-        ck_df = duckdb.from_df(df)
+        api_name = self.param["api_name"]
+        params = self.param.get("params", {})
+        k_v_str = None
+        for key, value in params.items():
+            if k_v_str is None:
+                k_v_str = ""
+            k_v_str = k_v_str + "{}='{}',".format(key, value)
+            k_v_str = k_v_str.removesuffix(",")
+        script_str = "ak.{api_name}({k_v})".format(api_name=api_name, k_v=k_v_str)
+        logger.info("执行脚本为：{}", script_str)
+        # df = exec(script_str)
+        df = ak.article_epu_index(index='China')
+        duck_df = duckdb.from_df(df)
         # 写入结果
-        self.set_result(ck_df)
+        self.set_result(duck_df)
 
     def to_json(self):
         super(AKShareInput, self).to_json()

@@ -13,6 +13,7 @@ class SQL(IPlugin):
         super(SQL, self).init(param, flow)
 
     def execute(self):
+        super(SQL, self).execute()
         sql = self.param["sql"]
         inputs = self.param["inputs"]
 

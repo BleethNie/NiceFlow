@@ -16,6 +16,8 @@ class MongoOutput(IPlugin):
         self.client = MongoClient("uri")
 
     def execute(self):
+        super(MongoOutput, self).execute()
+
         db = self.client['database_name']
         collection = db['collection_name']
 

@@ -30,6 +30,8 @@ class MqttOutput(IPlugin):
 
 
     def execute(self):
+        super(MqttOutput, self).execute()
+
         # param信息
         host = self.param["host"]
         port = self.param.get("port", 1883)

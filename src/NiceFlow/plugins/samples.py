@@ -14,6 +14,8 @@ class Samples(IPlugin):
         super(Samples, self).init(param, flow)
 
     def execute(self):
+        super(Samples, self).execute()
+
         value = self.param["value"]
 
         # 获取上一步结果

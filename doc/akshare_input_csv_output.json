@@ -1,0 +1,29 @@
+{
+  "nodes": [
+    {
+      "id": "AKShareInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "api_name":"article_epu_index",
+        "params": {
+          "index": "China"
+        }
+      }
+    },
+    {
+      "id": "CsvOutput",
+      "name": "write1",
+      "type": "output",
+      "properties": {
+        "file_name": "1.csv"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "write1"
+    }
+  ]
+}

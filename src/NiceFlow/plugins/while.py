@@ -13,6 +13,7 @@ class While(IPlugin):
         super(While, self).init(param,flow)
 
     def execute(self):
+        super(While, self).execute()
         self.set_result(None)
 
     def set_result(self, df: duckdb.DuckDBPyRelation):

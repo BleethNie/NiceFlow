@@ -1,5 +1,7 @@
 import json
 
+from loguru import logger
+
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
 from odps import ODPS
@@ -12,6 +14,8 @@ class ODPSOutput(IPlugin):
 
 
     def execute(self):
+        super(ODPSOutput, self).execute()
+
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
         df = self._pre_result_dict[pre_node.name]

@@ -24,6 +24,8 @@ class Mapping(IPlugin):
         duckdb.create_function('function_mapping', function_mapping)
 
     def execute(self):
+        super(Mapping, self).execute()
+
         columns = self.param["columns"]
         field_sql = ""
         for column in columns:

@@ -11,6 +11,7 @@ class Variable(IPlugin):
         super(Variable, self).init(param,flow)
 
     def execute(self):
+        super(Variable, self).execute()
         variable = self.param["variable"]
         script = self.param.get("script")
         compile_obj = compile(script, '', 'eval')

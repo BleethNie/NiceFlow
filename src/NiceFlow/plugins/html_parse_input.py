@@ -8,12 +8,14 @@ from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
 
 
-class AKShareInput(IPlugin):
+class HtmlParse(IPlugin):
 
     def init(self, param: json, flow: Flow):
-        super(AKShareInput, self).init(param, flow)
+        super(HtmlParse, self).init(param, flow)
 
     def execute(self):
+        super(HtmlParse, self).execute()
+
         # param信息
         host = self.param["host"]
         port = self.param.get("port", 9000)
@@ -35,4 +37,4 @@ class AKShareInput(IPlugin):
         self.set_result(ck_df)
 
     def to_json(self):
-        super(AKShareInput, self).to_json()
+        super(HtmlParse, self).to_json()

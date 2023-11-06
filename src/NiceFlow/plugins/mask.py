@@ -21,6 +21,8 @@ class Masking(IPlugin):
         duckdb.create_function('function_mask', function_mask)
 
     def execute(self):
+        super(Masking, self).execute()
+
         columns = self.param["columns"]
         column = columns[0]
         field = column["field"]

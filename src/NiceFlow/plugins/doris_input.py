@@ -14,6 +14,7 @@ class DorisInput(IPlugin):
         super(DorisInput, self).init(param,flow)
 
     def execute(self):
+        super(DorisInput, self).execute()
         engine = create_engine('doris://root:xxx@localhost:9030/hive_catalog.hive_db')
         connection = engine.connect()
         rows = connection.execute(text("SELECT * FROM hive_table")).fetchall()

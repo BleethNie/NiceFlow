@@ -10,6 +10,8 @@ class Sort(IPlugin):
         super(Sort, self).init(param, flow)
 
     def execute(self):
+        super(Sort, self).execute()
+
         columns = self.param["columns"]
         order_exp = ""
         for column in columns:

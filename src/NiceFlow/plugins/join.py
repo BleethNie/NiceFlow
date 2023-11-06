@@ -10,6 +10,8 @@ class Join(IPlugin):
         super(Join, self).init(param,flow)
 
     def execute(self):
+        super(Join, self).execute()
+
         # 获取上一步结果
         for index,pre_node in self.pre_nodes:
             df = self._pre_result_dict[pre_node.name]

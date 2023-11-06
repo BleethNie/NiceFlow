@@ -13,10 +13,11 @@ class HelloInput(IPlugin):
         super(HelloInput, self).init(param, flow)
 
     def execute(self):
-       df = pd.DataFrame([{"F1":"1","F2":"2"}])
-       ck_df = duckdb.from_df(df)
-       # 写入结果
-       self.set_result(ck_df)
+        super(HelloInput, self).execute()
+        df = pd.DataFrame([{"F1":"1","F2":"2"}])
+        ck_df = duckdb.from_df(df)
+        # 写入结果
+        self.set_result(ck_df)
 
 
     def to_json(self):

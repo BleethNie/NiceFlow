@@ -14,6 +14,8 @@ class MySQLInput(IPlugin):
         super(MySQLInput, self).init(param, flow)
 
     def execute(self):
+        super(MySQLInput, self).execute()
+
         query = self.param["query"]
         host = self.param["host"]
         db = self.param["db"]

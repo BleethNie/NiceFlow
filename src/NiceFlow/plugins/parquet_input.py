@@ -12,6 +12,8 @@ class ParquetInput(IPlugin):
         super(ParquetInput, self).init(param,flow)
 
     def execute(self):
+        super(ParquetInput, self).execute()
+
         file_name = self.param["file_name"]
         df = duckdb.read_parquet(file_name)
         # 设置下一步结果

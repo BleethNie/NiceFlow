@@ -10,6 +10,8 @@ class ParquetOutput(IPlugin):
         super(ParquetOutput, self).init(param,flow)
 
     def execute(self):
+        super(ParquetOutput, self).execute()
+
         file_name = self.param["file_name"]
         # 获取上一步结果
         pre_node = self.pre_nodes[0]

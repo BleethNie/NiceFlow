@@ -13,6 +13,8 @@ class Rename(IPlugin):
         super(Rename, self).init(param, flow)
 
     def execute(self):
+        super(Rename, self).execute()
+
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
         df = self._pre_result_dict[pre_node.name]

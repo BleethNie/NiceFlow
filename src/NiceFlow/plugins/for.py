@@ -10,6 +10,8 @@ class For(IPlugin):
         super(For, self).init(param,flow)
 
     def execute(self):
+        super(For, self).execute()
+
         self.param[""]
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
