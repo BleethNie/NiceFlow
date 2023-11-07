@@ -22,8 +22,13 @@ class TestPlugin(unittest.TestCase):
         myFlow: Flow = FlowManager.read(path)
         myFlow.run()
 
-    def test_parquet(self):
+    def test_parquet_input(self):
         path = getProjectPath() + "/doc/parquet_input_console.json"
+        myFlow: Flow = FlowManager.read(path)
+        myFlow.run()
+
+    def test_parquet_output(self):
+        path = getProjectPath() + "/doc/faker_input_parquet_output.json"
         myFlow: Flow = FlowManager.read(path)
         myFlow.run()
 

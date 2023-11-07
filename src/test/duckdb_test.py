@@ -21,5 +21,13 @@ class TestDuckDB(unittest.TestCase):
         final_df.to_df().to_excel(data_dir + "/result.xlsx", index=False)
 
 
+    def test_httpfs(self):
+        duckdb.sql('''INSTALL httpfs;''')
+        duckdb.sql('''LOAD httpfs;''')
+        duckdb.sql('''SELECT * FROM read_parquet('http://192.168.1.88/chfs/shared/tmp/1.parquet');''')
+
+
+
+
 if __name__ == '__main__':
     unittest.main()

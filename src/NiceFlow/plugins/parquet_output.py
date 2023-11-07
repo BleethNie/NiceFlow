@@ -18,5 +18,7 @@ class ParquetOutput(IPlugin):
         df = self._pre_result_dict[pre_node.name]
         df.to_parquet(file_name)
 
+        self.set_result(df)
+
     def to_json(self):
         super(ParquetOutput, self).to_json()

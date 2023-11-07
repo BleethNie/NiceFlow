@@ -2,9 +2,6 @@ import json
 
 import duckdb
 from loguru import logger
-import pandas as pd
-from clickhouse_driver import Client
-
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
 import akshare as ak

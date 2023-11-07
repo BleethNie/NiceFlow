@@ -1,0 +1,44 @@
+{
+  "nodes": [
+    {
+      "id": "FakerInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "rows": 10000,
+        "columns": [
+          "name",
+          "address",
+          "city",
+          "street_address",
+          "date_of_birth",
+          "phone_number"
+        ],
+        "randoms": [
+          {
+            "key": "sex",
+            "values": [
+              "男",
+              "女",
+              "未知"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "ParquetOutput",
+      "name": "write1",
+      "type": "output",
+      "properties": {
+        "file_name": "E:\\02_Resource\\01_Code\\python\\NiceFlow\\NiceFlow\\tmp\\1.parquet"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "write1"
+    }
+  ]
+}
