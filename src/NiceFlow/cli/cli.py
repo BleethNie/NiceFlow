@@ -47,18 +47,16 @@ def sql(db_path: str):
         if line == "exit":
             con.close()
             return
-        input_str = input_str + " " + str(line)
         while True:
-            if input_str.endswith(";"):
-                break
-            line = input("> ")
             if line.endswith(";"):
-                input_str = input_str + ";"
+                input_str = input_str + " " + str(line)
                 break
+            else:
+                input_str = input_str + " " + str(line)+"\n"
+            line = input("> ")
             if line == "exit":
                 con.close()
                 return
-            input_str = input_str + " " + str(line)
         input_str = input_str.strip()
         keyword = input_str.split(" ")[0]
         print("查询语句：", input_str)
