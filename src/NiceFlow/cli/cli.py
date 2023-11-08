@@ -2,6 +2,8 @@
 import json
 import re
 import click
+import duckdb
+from loguru import logger
 
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.manager import FlowManager
@@ -11,6 +13,7 @@ from NiceFlow.core.utils.encrypt_data import EncryptData
 @click.group()
 def cli():
     """A simple command line tool."""
+    pass
 
 
 @cli.command('exec', short_help='exec flow task')
@@ -30,6 +33,46 @@ def explore():
 @cli.command('chart', short_help='chart a data ')
 def chart():
     pass
+
+
+@cli.command('sql', short_help='sql a data ')
+@click.option("--db_path", default="", help="输入duckdb数据库的路径")
+def sql(db_path: str):
+    con = duckdb.connect(db_path)
+    while True:
+        print("=" * 200)
+        input_str = ''
+        print("请输入sql语句[输入exit退出执行]:")
+        line = input()
+        if line == "exit":
+            con.close()
+            return
+        input_str = input_str + " " + str(line)
+        while True:
+            if input_str.endswith(";"):
+                break
+            line = input("> ")
+            if line.endswith(";"):
+                input_str = input_str + ";"
+                break
+            if line == "exit":
+                con.close()
+                return
+            input_str = input_str + " " + str(line)
+        input_str = input_str.strip()
+        keyword = input_str.split(" ")[0]
+        print("查询语句：", input_str)
+        try:
+            if str(keyword).lower() in ["show","select"]:
+                duck = con.sql(input_str)
+                duck.show()
+            else:
+                duck = con.execute(input_str)
+                duck.commit()
+                print(duck.description)
+        except Exception as e:
+            print("SQL语句执行异常,", e)
+            continue
 
 
 @cli.command('encrypt', short_help='encrypt a task flow password config')
@@ -66,7 +109,7 @@ def decrypt(path: str, password: str):
             items = node_properties.items()
             for key, value in items:
                 if key in ["password", "passwd"]:
-                    decrypt_content =re.findall("AES\\((.*)\\)", value)[0]
+                    decrypt_content = re.findall("AES\\((.*)\\)", value)[0]
                     decrypt = eg.decrypt(decrypt_content)
                     if decrypt is None:
                         return
@@ -76,5 +119,4 @@ def decrypt(path: str, password: str):
 
 
 if __name__ == '__main__':
-    encrypt("E:\\02_Resource\\01_Code\\python\\NiceFlow\\NiceFlow\\doc\\1.json", "123456")
-    decrypt("E:\\02_Resource\\01_Code\\python\\NiceFlow\\NiceFlow\\doc\\1.json", "123456")
+    sql("file.db")

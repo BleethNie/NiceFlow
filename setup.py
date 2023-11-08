@@ -51,7 +51,7 @@ setup(
     # 在类Unix系统下，会在 /usr/local/bin下生成 NiceFlow 命令
     entry_points={
         'console_scripts': [
-            'NiceFlow = cli.cli:run',  # 入口指向demo01包下的first文件里的 test1 函数
+            'NiceFlow = NiceFlow.cli.cli:cli',  # 入口指向demo01包下的first文件里的 test1 函数
         ],
     }
 )

@@ -7,9 +7,9 @@ from typing import List
 import duckdb
 # from event_bus import EventBus
 from blinker import signal
+from loguru import logger
 
 from NiceFlow.core.plugin import IPlugin
-from loguru import logger
 
 
 class FlowStatusEnum(Enum):
@@ -21,15 +21,15 @@ class FlowStatusEnum(Enum):
 
 class Flow(metaclass=abc.ABCMeta):
 
-    def __init__(self):
+    def __init__(self, work_dir: str = None):
         self.flow_uid = uuid.uuid1()
         self.flow_status: FlowStatusEnum = FlowStatusEnum.WAITING
         self.plugin_dict: dict[str, IPlugin] = {}
-        self.con = duckdb.connect()
+        if work_dir==None:
+            self.con = duckdb.connect()
         self.param_dict: dict[str, object] = {}
         self.start_signal = signal("")
         logger.info("Flow Task创建成功,FlowUid = 【{}】".format(self.flow_uid))
-
 
     @classmethod
     def register_log_handler(cls, handler: logging.Handler = None):

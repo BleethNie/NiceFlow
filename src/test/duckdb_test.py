@@ -27,6 +27,11 @@ class TestDuckDB(unittest.TestCase):
         duckdb.sql('''SELECT * FROM read_parquet('http://192.168.1.88/chfs/shared/tmp/1.parquet');''')
 
 
+    def test_partition(self):
+        duckdb.sql('''INSTALL httpfs;''')
+        duckdb.sql('''LOAD httpfs;''')
+        duckdb.sql('''SELECT * FROM read_parquet('http://192.168.1.88/chfs/shared/tmp/1.parquet');''')
+
 
 
 if __name__ == '__main__':
