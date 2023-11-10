@@ -49,7 +49,7 @@
       }
     },
     {
-      "id": "ConsoleOutput",
+      "id": "Console",
       "name": "print",
       "type": "output",
       "properties": {

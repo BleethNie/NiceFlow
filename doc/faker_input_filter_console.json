@@ -13,6 +13,14 @@
       }
     },
     {
+      "id": "Filter",
+      "name": "filter",
+      "type": "output",
+      "properties": {
+        "condition": "address like '广东%' and sex = '未知' "
+      }
+    },
+    {
       "id": "Console",
       "name": "write1",
       "type": "output",
@@ -24,6 +32,9 @@
   "edges": [
     {
       "startId": "read1",
+      "endId": "filter"
+    },{
+      "startId": "filter",
       "endId": "write1"
     }
   ]

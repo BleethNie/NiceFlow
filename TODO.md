@@ -47,7 +47,7 @@ A->For->B[获取一行记录]->执行一个子流程->B[是否执行完成]->C[�
 2.时间变量
 3.[参考](https://dolphinscheduler.apache.org/zh-cn/docs/3.2.0/guide/project/workflow-instance)
 
-- 支持HTTP、HDFS、COS、S3直接访问数据库
+- 支持HTTP、HDFS、COS、S3直接访问数据源
 - 支持Git读取任务【动态读取任务】
 - 支持数据源配置加密
 - 插件执行异常通知【飞书、钉钉、邮件、HTTP】

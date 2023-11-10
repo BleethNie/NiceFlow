@@ -21,7 +21,7 @@
       }
     },
     {
-      "id": "ConsoleOutput",
+      "id": "Console",
       "name": "write1",
       "type": "output",
       "properties": {

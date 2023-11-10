@@ -27,11 +27,17 @@ class TestDuckDB(unittest.TestCase):
         duckdb.sql('''SELECT * FROM read_parquet('http://192.168.1.88/chfs/shared/tmp/1.parquet');''')
 
 
-    def test_partition(self):
+    def test_httpfs_2(self):
         duckdb.sql('''INSTALL httpfs;''')
         duckdb.sql('''LOAD httpfs;''')
-        duckdb.sql('''SELECT * FROM read_parquet('http://192.168.1.88/chfs/shared/tmp/1.parquet');''')
+        duckdb.sql(''' CREATE TABLE trek_facts AS SELECT * FROM 'https://raw.githubusercontent.com/Alex-Monahan/example_datasets/main/Star_Trek-Season_1.csv';''')
+        result= duckdb.sql('''DESCRIBE trek_facts;''')
+        print(result)
 
+    def test_httpfs_3(self):
+        duckdb.sql('''INSTALL httpfs;''')
+        duckdb.sql('''LOAD httpfs;''')
+        duckdb.sql('''CREATE TABLE trek_facta AS SELECT * FROM  'https://192.168.1.88/chfs/shared/tmp/1.parquet';''')
 
 
 if __name__ == '__main__':

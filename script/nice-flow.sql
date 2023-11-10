@@ -14,7 +14,7 @@ CREATE TABLE `easy_flow`
 (
     `id`               int     NOT NULL AUTO_INCREMENT,
     `project_id`       int     NOT NULL COMMENT '项目id',
-    `flow_name`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'flow名称',
+    `flow_name`        text  CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'flow名称',
     `flow_code`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'flow编码',
     `flow_content`     varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'flow内容',
     `flow_param`       varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'flow参数',
@@ -75,7 +75,7 @@ CREATE TABLE `easy_flow_instance`
 CREATE TABLE `easy_data_source`
 (
     `id`           int     NOT NULL AUTO_INCREMENT,
-    `flow_id`      varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '项目名称',
+    `project_id`      int CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '项目名称',
     `source_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '数据源配置名称',
     `source_config` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '数据源配置',
     `is_delete`    tinyint NOT NULL DEFAULT '0' COMMENT '是否删除: 0=否, 1=是',
