@@ -16,12 +16,12 @@ class Samples(IPlugin):
     def execute(self):
         super(Samples, self).execute()
 
-        value = self.param["value"]
+        sample_size = self.param.get("sample_size")
 
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
         pre_df = self._pre_result_dict[pre_node.name]
-        sample_df = pre_df.query("pre_df","select * from pre_df USING SAMPLE {};".format(value))
+        sample_df = pre_df.query("pre_df","select * from pre_df USING SAMPLE {};".format(sample_size))
         self.set_result(sample_df)
 
     def to_json(self):

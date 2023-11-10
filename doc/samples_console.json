@@ -20,7 +20,7 @@
       "name": "samples",
       "type": "translate",
       "properties": {
-        "value": 50
+        "sample_size": 50
       }
     },
     {

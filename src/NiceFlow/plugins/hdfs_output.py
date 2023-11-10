@@ -6,13 +6,13 @@ from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
 
 
-class KafkaOutput(IPlugin):
+class HDFSOutput(IPlugin):
 
     def init(self, param: json, flow: Flow):
-        super(KafkaOutput, self).init(param, flow)
+        super(HDFSOutput, self).init(param, flow)
 
     def execute(self):
-        super(KafkaOutput, self).execute()
+        super(HDFSOutput, self).execute()
 
         conf = {'bootstrap.servers': 'host1:9092,host2:9092',
                 'group.id': 'foo',
@@ -21,7 +21,7 @@ class KafkaOutput(IPlugin):
         consumer = Consumer(conf)
 
     def to_json(self):
-        super(KafkaOutput, self).to_json()
+        super(HDFSOutput, self).to_json()
 
     def close(self):
-        super(KafkaOutput, self).close()
+        super(HDFSOutput, self).close()
