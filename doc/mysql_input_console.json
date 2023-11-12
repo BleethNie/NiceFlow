@@ -1,0 +1,32 @@
+{
+  "nodes": [
+    {
+      "id": "MySQLInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "host":"127.0.0.1",
+        "port":3306,
+        "db":"che",
+        "username":"root",
+        "password":"123456",
+        "query": "select * from cde_dictionary;"
+      }
+    },
+    {
+      "id": "ExcelOutput",
+      "name": "write1",
+      "type": "output",
+      "properties": {
+        "file_name": "1.xlsx",
+        "sheet_name": "sheet1"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "write1"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+import json
+
+import duckdb
+import pandas as pd
+
+from NiceFlow.core.flow import Flow
+from NiceFlow.core.plugin import IPlugin
+from loguru import logger
+
+
+class ExcelOutput(IPlugin):
+
+    def init(self, param: json, flow: Flow):
+        super(ExcelOutput, self).init(param, flow)
+
+    def execute(self):
+        super(ExcelOutput, self).execute()
+        # 获取上一步结果
+        pre_node = self.pre_nodes[0]
+        duckdb_df = self._pre_result_dict[pre_node.name]
+        logger.debug(self.param)
+
+        file_name = self.param["file_name"]
+        sheet_name = self.param["sheet_name"]
+        duckdb_df.to_df().to_excel(file_name, sheet_name, index=False)
+
+        self.set_result(None)
+
+    def to_json(self):
+        super(ExcelOutput, self).to_json()
+
+    def close(self):
+        super(ExcelOutput, self).close()

@@ -31,8 +31,12 @@ class TestDuckDB(unittest.TestCase):
         duckdb.sql('''INSTALL httpfs;''')
         duckdb.sql('''LOAD httpfs;''')
         duckdb.sql(''' CREATE TABLE trek_facts AS SELECT * FROM 'https://raw.githubusercontent.com/Alex-Monahan/example_datasets/main/Star_Trek-Season_1.csv';''')
-        result= duckdb.sql('''DESCRIBE trek_facts;''')
-        print(result)
+        result= duckdb.execute('''
+        DESCRIBE trek_facts;
+        DESCRIBE trek_facts;
+        DESCRIBE trek_facts;
+        ''')
+        print(result.df())
 
     def test_httpfs_3(self):
         duckdb.sql('''INSTALL httpfs;''')

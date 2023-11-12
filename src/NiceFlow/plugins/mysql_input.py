@@ -17,11 +17,11 @@ class MySQLInput(IPlugin):
         super(MySQLInput, self).execute()
 
         query = self.param["query"]
-        host = self.param["host"]
+        host = self.param.get("host","127.0.0.1")
+        port = self.param.get("port",3306)
         db = self.param["db"]
-        user = self.param["user"]
-        password = self.param["password"]
-        port = self.param["port"]
+        user = self.param.get("user","root")
+        password = self.param.get("password","123456")
         engine = create_engine('mysql+pymysql://%s:%s@%s:%s/%s?charset=utf8'
                                % (user, password, host, port, db))
         connection = engine.connect()
