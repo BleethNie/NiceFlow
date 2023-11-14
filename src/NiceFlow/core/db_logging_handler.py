@@ -3,13 +3,13 @@ import logging
 from queue import Queue
 
 
-class DBLogHandler(logging.Handler):
+class DuckDBLogHandler(logging.Handler):
     """
-   自定义logging.Handler模块，自定义将日志输出到指定位置(这里是输出到kafka)
+   自定义logging.Handler模块，自定义将日志输出到指定位置(这里是输出到DuckDB)
    """
 
-    def __init__(self, name=""):
-        super(DBLogHandler, self).__init__()
+    def __init__(self, path="",table_name=""):
+        super(DuckDBLogHandler, self).__init__()
         self.queue = Queue()
 
     def emit(self, record):
