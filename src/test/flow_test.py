@@ -1,9 +1,9 @@
 import os
 import unittest
 
-from NiceFlow.core.db_loggin_handler import DBLogHandler
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.manager import FlowManager
+from NiceFlow.core.mysqldb_logging_handler import MySQLDBLogHandler
 
 
 def getProjectPath() -> str:
@@ -28,8 +28,8 @@ class TestFlow(unittest.TestCase):
         myFlow.set_param(flow_param)
         myFlow.run()
 
-    def test_faker(self):
-        handler = DBLogHandler()
+    def test_mysql_log_handler(self):
+        handler = MySQLDBLogHandler()
         Flow.register_log_handler(handler)
         path = getProjectPath() + "/doc/faker_input_console.json"
         myFlow: Flow = FlowManager.read(path)
