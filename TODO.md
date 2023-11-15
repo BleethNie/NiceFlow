@@ -70,11 +70,42 @@ A->For->B[获取一行记录]->执行一个子流程->B[是否执行完成]->C[�
 
 - 如何实现增量更新，哪种方式比较高效，不会出错
 - 如何实现数据同步，同步过程中不出现问题【多数据，少数据】
+- -- 同步完成后查询两端数据量是否一致
+- -- 
 - 数据监控如何实现，能够监控数据层面的问题
+- -- 任务是否停止告警
 - 如何实现报表展示
 - 
 
 
+#### 辅助命令【基本信息探查】
+
+- 查询hive文件大小/文件数目
+
+```shell
+dbs=$(hadoop fs -ls /user/hive/warehouse | awk '{print $8}')
+
+for db in $dbs
+do
+echo "统计库：$db"
+tables=$(hadoop fs -ls "$db" | awk '{print $8}')
+for table in $tables
+do
+echo "统计表：$table"
+size=$(hadoop fs -count -h "$table" | awk '{print $3}')
+echo "表 $table 占用空间为：$size"
+echo "$table,$size" >> result.csv
+done
+done
+
+```
+
+- maxcompute 表大小/文件数目/count数目
+- 表分区信息
+- 表元数据信息
+- 表创建时间/修改时间/更新时间
+
+- mysql 数据库表数目/数量/每天新增数量
 
 
 

@@ -1,6 +1,5 @@
 import json
 import logging
-from queue import Queue
 
 import pymysql
 
