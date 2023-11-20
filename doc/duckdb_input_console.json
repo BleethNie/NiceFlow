@@ -1,0 +1,27 @@
+{
+  "nodes": [
+    {
+      "id": "DuckDbInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "path":"10000",
+        "sql": ["name","address","city","street_address","date_of_birth","phone_number"]
+      }
+    },
+    {
+      "id": "Console",
+      "name": "write1",
+      "type": "output",
+      "properties": {
+        "row": 100
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "write1"
+    }
+  ]
+}

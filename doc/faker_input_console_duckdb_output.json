@@ -1,0 +1,42 @@
+{
+  "nodes": [
+    {
+      "id": "FakerInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "rows":10000,
+        "columns": ["name","address","city","street_address","date_of_birth","phone_number"],
+        "randoms":[
+          {"key":"sex","values":["男","女","未知"]}
+        ]
+      }
+    },
+    {
+      "id": "Console",
+      "name": "write1",
+      "type": "output",
+      "properties": {
+        "row": 100
+      }
+    },
+    {
+      "id": "DuckDBOutput",
+      "name": "duck",
+      "type": "output",
+      "properties": {
+        "path": "C:\\Users\\xiaow\\Desktop\\duck\\1.db",
+        "table": "ab"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "write1"
+    },{
+      "startId": "write1",
+      "endId": "duck"
+    }
+  ]
+}

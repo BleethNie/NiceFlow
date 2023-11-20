@@ -25,7 +25,7 @@ class Flow(metaclass=abc.ABCMeta):
         self.flow_uid = uuid.uuid1()
         self.flow_status: FlowStatusEnum = FlowStatusEnum.WAITING
         self.plugin_dict: dict[str, IPlugin] = {}
-        if work_dir==None:
+        if work_dir == None:
             self.con = duckdb.connect()
         self.param_dict: dict[str, object] = {}
         self.start_signal = signal("")

@@ -109,3 +109,42 @@ done
 
 
 
+
+### plugin组件功能
+
+- task任务【retry重复执行、delay延迟执行、onSuccess、onError、process、init】
+> 重要：plugin分type，一个plugin有多个type实现不同的功能，比如mysqlOutput插件，可以有insert类型、 可以有update类型、也可以有merge功能
+
+
+- for循环
+- [x] while循环
+- if判断
+- switch分流
+- 串行和并行
+- [x] 任务执行【异步执行】
+- [x] 任务时间打印
+- [x] 自定义插件功能
+- 数据库自动建表
+- 自动字段类型转换【自动建表】
+
+
+### flow功能
+
+- [x] 增加变量
+- flow工作流【flow工作流参数、子流程、暂停、启动】
+- 执行引擎【远程执行引擎、本地执行引擎、分布式执行引擎】
+- [x] 日志展示
+- 日志监控，性能监控
+- store任务【mysql、mongo】
+- xml、 json加载flow、任务热加载
+- 任务管理Rest-API 【】
+- 新增、修改、删除、启动、停止、任务日志、任务开发
+- 数据增量同步
+- 保存上一次同步字段信息
+
+
+### 概念参考
+
+- 类型信息     https://www.dusaiphoto.com/article/164/
+- 实现插件系统 https://github.com/srn-g/pypluginbase/blob/main/src/PluginManager.py
+

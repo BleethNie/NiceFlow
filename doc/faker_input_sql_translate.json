@@ -27,17 +27,25 @@
       }
     },
     {
+      "id": "Console",
+      "name": "console",
+      "type": "output",
+      "properties": {
+        "row": 100
+      }
+    },
+    {
       "id": "SQL",
       "name": "sql",
       "type": "translate",
       "properties": {
         "inputs": [
           {
-            "step": "read1",
+            "step": "console",
             "table": "ff_dd"
           }
         ],
-        "sql":"select address from ff_dd  limit 10"
+        "sql":"select *,concat(address,'aaa') as nice from ff_dd  limit 10"
       }
     },
     {
@@ -52,6 +60,9 @@
   "edges": [
     {
       "startId": "read1",
+      "endId": "console"
+    }, {
+      "startId": "console",
       "endId": "sql"
     },
     {
