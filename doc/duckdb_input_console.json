@@ -1,12 +1,12 @@
 {
   "nodes": [
     {
-      "id": "DuckDbInput",
+      "id": "DuckDBInput",
       "name": "read1",
       "type": "input",
       "properties": {
-        "path":"10000",
-        "sql": ["name","address","city","street_address","date_of_birth","phone_number"]
+        "path":"C:\\Users\\xiaow\\Desktop\\duck\\1.db",
+        "sql": "select * from ab"
       }
     },
     {

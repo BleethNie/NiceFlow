@@ -76,7 +76,7 @@ class TestInputPlugin(unittest.TestCase):
         myFlow.close()
 
     def test_duckdb_input(self):
-        path = getProjectPath() + "/doc/mysql_input_console.json"
+        path = getProjectPath() + "/doc/duckdb_input_console.json"
         myFlow: Flow = FlowManager.read(path)
         myFlow.run()
         myFlow.close()

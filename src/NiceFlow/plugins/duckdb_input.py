@@ -20,7 +20,7 @@ class DuckDBInput(IPlugin):
         sql = self.param["sql"]
 
         con = duckdb.connect(path)
-        df = con.execute(sql).fetchdf()
+        df = duckdb.sql(sql,connection=con)
         self.set_result(df)
 
 
