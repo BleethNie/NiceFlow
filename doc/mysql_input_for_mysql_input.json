@@ -1,0 +1,59 @@
+{
+  "nodes": [
+    {
+      "id": "MySQLInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "host":"127.0.0.1",
+        "port":3306,
+        "username":"root",
+        "password":"123456",
+        "query": "select * from che.cde_config;"
+      }
+    },
+    {
+      "id": "For",
+      "name": "for",
+      "type": "output",
+      "properties": {
+
+      }
+    },
+    {
+      "id": "MySQLInput",
+      "name": "read2",
+      "type": "output",
+      "properties": {
+        "host":"127.0.0.1",
+        "port":3306,
+        "username":"root",
+        "password":"123456",
+        "query": "select * from ${row.db_name}.${row.table_name};"
+      }
+    },
+    {
+      "id": "Console",
+      "name": "console",
+      "type": "output",
+      "properties": {
+        "row":100
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "for"
+    },{
+      "startId": "for",
+      "endId": "read2"
+    },{
+      "startId": "read2",
+      "endId": "console"
+    },{
+      "startId": "console",
+      "endId": "for"
+    }
+  ]
+}

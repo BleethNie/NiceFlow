@@ -5,7 +5,7 @@ from typing import List, Dict
 import duckdb
 from blinker import signal
 
-from NiceFlow.core.tool import extract_variable
+from NiceFlow.core.tool import extract_variable, replace_vars
 
 
 class IPlugin(metaclass=abc.ABCMeta):
@@ -96,17 +96,12 @@ class IPlugin(metaclass=abc.ABCMeta):
                     var_key = "${" + variable + "}"
                     self.param[key] = str(value).replace(var_key, str(flow_value))
         # 变量更新
-        for key, value in self.param.items():
-            # 判断是变量，则进行更新
-            if "${" not in str(value):
-                continue
-            for flow_key, flow_value in self.flow.param_dict.items():
-                var_flow_key = "${" + flow_key + "}"
-                if var_flow_key in str(value):
-                    self.param[key] = str(value).replace(var_flow_key, str(flow_value))
-                    # 设置影子变量
-                    if key not in self.shadow_variable_param:
-                        self.shadow_variable_param[key] = value
+        for param_key, param_value in self.param.items():
+            new_param_value, is_contains_var = replace_vars(param_value, self.flow.param_dict)
+            if is_contains_var:
+                self.param[param_key] = new_param_value
+                if param_key not in self.shadow_variable_param:
+                    self.shadow_variable_param[param_key] = param_value
 
     def after_execute(self):
         # 记录执行结束时间

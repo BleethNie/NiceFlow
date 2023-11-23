@@ -13,14 +13,6 @@
       }
     },
     {
-      "id": "Console",
-      "name": "write1",
-      "type": "output",
-      "properties": {
-        "row": 100
-      }
-    },
-    {
       "id": "For",
       "name": "for",
       "type": "output",
@@ -33,9 +25,6 @@
     {
       "startId": "read1",
       "endId": "for"
-    },{
-      "startId": "for",
-      "endId": "write1"
     }
   ]
 }
