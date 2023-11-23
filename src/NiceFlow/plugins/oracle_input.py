@@ -26,7 +26,7 @@ class ODPSInput(IPlugin):
                  project=project, endpoint=end_point)
         query_job = o.execute_sql(sql)
         result = query_job.open_reader(tunnel=True)
-        df = result.to_pandas(n_process=1)  # n_process配置可参考机器配置，取值大于1时可以开启多线程加速。
+        df = result.to_pandas(n_process=1)
         odps_df = duckdb.from_df(df)
         # 写入结果
         self.set_result(odps_df)

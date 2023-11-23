@@ -8,13 +8,13 @@ from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
 
 
-class CKInput(IPlugin):
+class DB2Output(IPlugin):
 
     def init(self, param: json, flow: Flow):
-        super(CKInput, self).init(param, flow)
+        super(DB2Output, self).init(param, flow)
 
     def execute(self):
-        super(CKInput, self).execute()
+        super(DB2Output, self).execute()
         # param信息
         host = self.param["host"]
         port = self.param.get("port", 9000)
@@ -36,4 +36,4 @@ class CKInput(IPlugin):
         self.set_result(ck_df)
 
     def to_json(self):
-        super(CKInput, self).to_json()
+        super(DB2Output, self).to_json()

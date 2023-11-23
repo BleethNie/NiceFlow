@@ -12,7 +12,6 @@ class ODPSOutput(IPlugin):
     def init(self, param: json, flow: Flow):
         super().init(param, flow)
 
-
     def execute(self):
         super(ODPSOutput, self).execute()
 

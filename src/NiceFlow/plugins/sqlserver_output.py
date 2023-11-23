@@ -7,13 +7,13 @@ from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
 
 
-class ODPSInput(IPlugin):
+class SqlserverOutput(IPlugin):
 
     def init(self, param: json, flow: Flow):
-        super().init(param, flow)
+        super(SqlserverOutput,self).init(param, flow)
 
     def execute(self):
-        super(ODPSInput, self).execute()
+        super(SqlserverOutput, self).execute()
 
         # param信息
         access_key = self.param["access_key"]
@@ -33,7 +33,7 @@ class ODPSInput(IPlugin):
 
 
     def to_json(self):
-        super().to_json()
+        super(SqlserverOutput,self).to_json()
 
     def close(self):
-        super().close()
+        super(SqlserverOutput,self).close()

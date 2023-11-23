@@ -23,6 +23,5 @@ class DuckDBInput(IPlugin):
         df = duckdb.sql(sql,connection=con)
         self.set_result(df)
 
-
     def to_json(self):
         super(DuckDBInput, self).to_json()

@@ -7,13 +7,13 @@ from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
 from loguru import  logger
 
-class CKOutput(IPlugin):
+class ESOutput(IPlugin):
 
     def init(self, param: json, flow: Flow):
-        super(CKOutput, self).init(param, flow)
+        super(ESOutput, self).init(param, flow)
 
     def execute(self):
-        super(CKOutput, self).execute()
+        super(ESOutput, self).execute()
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
         df = self._pre_result_dict[pre_node.name]
@@ -48,4 +48,4 @@ class CKOutput(IPlugin):
                 break
 
     def to_json(self):
-        super(CKOutput, self).to_json()
+        super(ESOutput, self).to_json()
