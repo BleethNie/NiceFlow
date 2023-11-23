@@ -7,14 +7,14 @@ from NiceFlow.core.plugin import IPlugin
 from odps import ODPS
 import pyarrow as pa
 
-class ODPSOutput(IPlugin):
+class OracleOutput(IPlugin):
 
     def init(self, param: json, flow: Flow):
-        super().init(param, flow)
+        super(OracleOutput, self).init(param, flow)
 
 
     def execute(self):
-        super(ODPSOutput, self).execute()
+        super(OracleOutput, self).execute()
 
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
@@ -42,7 +42,7 @@ class ODPSOutput(IPlugin):
 
 
     def to_json(self):
-        super().to_json()
+        super(OracleOutput, self).to_json()
 
     def close(self):
-        super().close()
+        super(OracleOutput, self).close()

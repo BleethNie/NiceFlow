@@ -7,13 +7,13 @@ from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
 
 
-class ODPSInput(IPlugin):
+class OracleInput(IPlugin):
 
     def init(self, param: json, flow: Flow):
-        super().init(param, flow)
+        super(OracleInput, self).init(param, flow)
 
     def execute(self):
-        super(ODPSInput, self).execute()
+        super(OracleInput, self).execute()
 
         # param信息
         access_key = self.param["access_key"]
@@ -33,7 +33,7 @@ class ODPSInput(IPlugin):
 
 
     def to_json(self):
-        super().to_json()
+        super(OracleInput, self).to_json()
 
     def close(self):
-        super().close()
+        super(OracleInput, self).close()

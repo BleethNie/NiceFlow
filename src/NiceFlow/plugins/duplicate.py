@@ -5,6 +5,11 @@ from NiceFlow.core.plugin import IPlugin
 
 
 class Duplicate(IPlugin):
+    """
+    保留重复值
+    删除一条重复值
+    删除所有重复值
+    """
 
     def init(self, param: json,flow:Flow):
         super(Duplicate, self).init(param,flow)

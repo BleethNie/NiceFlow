@@ -12,6 +12,7 @@ class Console(IPlugin):
     def execute(self):
         super(Console, self).execute()
         row = int(self.param.get("row",10))
+
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
         console_df = self._pre_result_dict[pre_node.name]

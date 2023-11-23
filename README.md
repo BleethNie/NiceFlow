@@ -44,7 +44,7 @@ TODO
 | FakerInput    | 假数据生成      |     | 完成   |      |
 | ExcelInput    |            |     | 完成   |      |
 | ParquetInput  |            |     | 完成   |      |
-| MySQLInput    |            |     |      |      |
+| MySQLInput    |            |     | 完成     |      |
 | ESInput       |            |     |      |      |
 | DorisInput    |            |     |      |      |
 | SQLiteInput   |            |     |      |      |

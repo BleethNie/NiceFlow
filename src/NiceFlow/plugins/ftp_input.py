@@ -37,3 +37,4 @@ class FtpInput(IPlugin):
 
     def to_json(self):
         super(FtpInput, self).to_json()
+
