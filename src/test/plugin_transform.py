@@ -106,6 +106,12 @@ class TestPlugin(unittest.TestCase):
         myFlow.run()
         myFlow.close()
 
+    def test_for3(self):
+        path = getProjectPath() + "/doc/mysql_input_for_mysql_output.json"
+        myFlow: Flow = FlowManager.read(path)
+        myFlow.run()
+        myFlow.close()
+
 
 if __name__ == '__main__':
     unittest.main()

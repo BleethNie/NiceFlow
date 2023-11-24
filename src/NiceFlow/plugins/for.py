@@ -12,6 +12,11 @@ class For(IPlugin):
     将记录作为循环数据，一行记录循环一次，将行记录作为变量
     """
 
+    def __init__(self):
+        super().__init__()
+        self.count = None
+        self.dict_result = None
+
     def init(self, param: json, flow: Flow):
         super(For, self).init(param, flow)
         self.count = 0
