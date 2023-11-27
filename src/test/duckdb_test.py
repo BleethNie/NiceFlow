@@ -55,5 +55,21 @@ class TestDuckDB(unittest.TestCase):
         results = duckdb.execute(sql_script).fetchall()
         print(results)
 
+    def test_repeat_sql(self):
+        sql_script = """
+                    CREATE TABLE test (a INTEGER, b VARCHAR);
+            
+            INSERT INTO test VALUES (1, 'hello'), (2, 'world');
+            
+            SELECT 
+            LPAD(ROW_NUMBER() OVER (ORDER BY b) :: VARCHAR, 5, '0') AS seq,
+            seq  as '设施编码',
+            * FROM test;
+        """
+        # con = duckdb.connect()
+        results = duckdb.execute(sql_script).fetch_df()
+        duck_df = duckdb.from_df(results)
+        print(duck_df)
+
 if __name__ == '__main__':
     unittest.main()

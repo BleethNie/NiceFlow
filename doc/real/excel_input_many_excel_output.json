@@ -27,7 +27,7 @@
             "table": "read1"
           }
         ],
-        "sql": "CREATE SEQUENCE serial;\nselect  \nconcat('RQ-DW-',LPAD(nextval('serial')::VARCHAR, 5, '0'))  as '设备名称',\nconcat('RQ-DW-',LPAD(nextval('serial')::VARCHAR, 5, '0'))  as '设施编码',\nconcat('RQ-DW-',LPAD(nextval('serial')::VARCHAR, 5, '0'))  as '标识码',\nconcat('RQ-DW-',LPAD(nextval('serial')::VARCHAR, 5, '0'))  as '点位编码',\n'燃气监测'  as '设施名称',\n所属区域  as '行政区划',\n具体地点  as '监测位置',\n  from  read1;"
+        "sql": "select  \nconcat('RQ-DW-',LPAD(ROW_NUMBER() OVER (ORDER BY 设备IMEI)::VARCHAR, 5, '0'))  as '设备名称',\n设备名称  as '设施编码',\n设备名称  as '标识码',\n设备名称  as '点位编码',\n'燃气监测'  as '设施名称',\n所属区域  as '行政区划',\n具体地点  as '监测位置',\n  from  read1;\n"
       }
     },
     {
@@ -56,6 +56,7 @@
           {
             "field": "行政区划",
             "default": "NONE",
+            "mapping_field": "行政区划",
             "plugin_mapping": {
               "step_name": "dict1",
               "key_field": "区县代码名称",

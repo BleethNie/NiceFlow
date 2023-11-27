@@ -40,7 +40,6 @@ class TestFlow(unittest.TestCase):
     def test_project_root_path(self):
         path = getProjectPath() + "/doc/real/excel_input_many_excel_output.json"
         myFlow: Flow = FlowManager.read(path)
-
         myFlow.run()
 
 if __name__ == '__main__':
