@@ -30,10 +30,14 @@ class Mapping(IPlugin):
         step_map = {}
 
         columns = self.param["columns"]
-        field_sql = ""
+        add_sql = ""
+        replace_sql = ""
         for column in columns:
             field = column["field"]
             default = column.get("default",None)
+            mapping_field = column.get("mapping_field",field)
+
+            #映射方式处理
             if "plugin_mapping" in column:
                 plugin_mapping = column["plugin_mapping"]
                 step_name = plugin_mapping["step_name"]
@@ -45,19 +49,40 @@ class Mapping(IPlugin):
                 print(mapping)
             else:
                 mapping = column["value_mapping"]
+
+            # 默认值处理
             if default is not None:
-                field_sql = field_sql + "function_mapping( {},'{}',map {} ) as {}_mapping , " \
-                    .format(field, default, mapping, field)
-            if default is None:
-                field_sql = field_sql + "function_mapping( {},{},map {} ) as {}_mapping ," \
-                    .format(field, field, mapping, field)
-        field_sql = field_sql.removesuffix(",")
+                replace_value = default
+            else:
+                replace_value = field
 
-        # 获取上一步结果
-        pre_node = self.pre_nodes[0]
-        df = self._pre_result_dict[pre_node.name]
+            # 是否替换原有列
+            if mapping_field == field:
+                new_field = field
+                replace_sql = replace_sql + "function_mapping( {},'{}',map {} ) as {} ," \
+                    .format(field, replace_value, mapping, new_field)
+            else:
+                new_field = mapping_field
+                add_sql = add_sql + "function_mapping( {},'{}',map {} ) as {} ," \
+                    .format(field, replace_value, mapping, new_field)
 
-        sql = "select *,{} from df".format(field_sql)
+        add_sql = add_sql.removesuffix(",")
+        replace_sql = replace_sql.removesuffix(",")
+
+        final_sql = ""
+        if replace_sql !="":
+            final_sql = "REPLACE ({}) ".format(replace_sql)
+        if add_sql !="":
+            final_sql = final_sql+", {}".format(add_sql)
+            # 获取上一步结果
+        for pre_node in self.pre_nodes:
+            if pre_node.name in step_map:
+                continue
+            df = self._pre_result_dict[pre_node.name]
+
+        # 执行最后sql
+        sql = "select  * {} from df".format(final_sql)
+        logger.info("sql = ",sql)
         mapping_df = duckdb.from_df(duckdb.sql(sql).df())
         self.set_result(mapping_df)
 

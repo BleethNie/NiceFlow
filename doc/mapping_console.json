@@ -38,6 +38,7 @@
           {
             "field": "sex1",
             "default": "NONE",
+            "mapping_field": "sex1",
             "value_mapping": {
               "男": "\"1\"",
               "女": "2"
@@ -45,6 +46,7 @@
           },
           {
             "field": "sex2",
+            "mapping_field": "sex21",
             "plugin_mapping": {
               "step_name": "dict1",
               "key_field": "性别key",
