@@ -3,6 +3,7 @@ import json
 import re
 import click
 import duckdb
+import os
 from loguru import logger
 
 from NiceFlow.core.flow import Flow
@@ -19,8 +20,10 @@ def cli():
 @cli.command('exec', short_help='exec flow task')
 @click.option("--path", default="", help="input your task json file path")
 def init(path: str):
-    print("path:", path)
-    myFlow: Flow = FlowManager.read(path)
+    cmd = os.getcwd()
+    real_path = cmd+"/"+path
+    print("path:", real_path)
+    myFlow: Flow = FlowManager.read(real_path)
     myFlow.run()
     myFlow.close()
 

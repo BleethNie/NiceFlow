@@ -124,6 +124,9 @@ class FlowManager(metaclass=SingletonMeta):
         cls.flow_manager_dict[flow.flow_uid] = flow
         with open(json_path, 'r', encoding='utf8') as fp:
             flow_json = json.load(fp)
+        flow_meta_json: json = flow_json["flow"]
+        # 设置param
+        flow.set_param(flow_meta_json.get("param",{}))
         nodes_array: json = flow_json["nodes"]
         edges_array: json = flow_json["edges"]
         # 组装node,edge

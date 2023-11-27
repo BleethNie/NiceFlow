@@ -49,6 +49,10 @@ class Flow(metaclass=abc.ABCMeta):
         end_node.pre_nodes.append(start_node)
         return self
 
+    def set_project_root_path(self, root_path: str):
+        self.param_dict["root_path"] = root_path
+        return self
+
     def get_flow_uid(self):
         return self.flow_uid
 

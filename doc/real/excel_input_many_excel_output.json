@@ -1,0 +1,53 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+      "common":"E:\\02_Resource\\05_anchnet\\09_无锡生命线\\NiceFlow"
+    }
+  },
+  "nodes": [
+    {
+      "id": "ExcelInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "file_name": "${common}\\燃气数据.xlsx",
+        "sheet_name": "西维斯设备数据"
+      }
+    },
+    {
+      "id": "SQL",
+      "name": "sql",
+      "type": "output",
+      "properties": {
+        "inputs": [
+          {
+            "step": "read1",
+            "table": "read1"
+          }
+        ],
+        "sql": " CREATE SEQUENCE serial;\nselect  LPAD(nextval('serial')::VARCHAR, 5, '0')  as '设备名称'  from  read1;"
+
+
+      }
+    },{
+      "id": "ExcelOutput",
+      "name": "write1",
+      "type": "input",
+      "properties": {
+        "file_name": "${common}\\01_监测点.xlsx",
+        "sheet_name": "监测点"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "sql"
+    },{
+      "startId": "sql",
+      "endId": "write1"
+    }
+  ]
+}

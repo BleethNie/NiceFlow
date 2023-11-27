@@ -24,9 +24,10 @@ class SQL(IPlugin):
             table = input["table"]
             logger.debug(table,step)
             duckdb.register(table, self._pre_result_dict[step].to_df())
-        result_df = duckdb.sql(sql)
+        result_df = duckdb.execute(sql).fetch_df()
+        duck_df = duckdb.from_df(result_df)
         # 写入结果
-        self.set_result(result_df)
+        self.set_result(duck_df)
 
 
     def to_json(self):

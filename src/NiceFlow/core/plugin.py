@@ -43,6 +43,8 @@ class IPlugin(metaclass=abc.ABCMeta):
         self.signal = signal(self.name + "execute")
 
     def receiver(self, sender):
+        if len(self.pre_nodes)>len(self._pre_result_dict):
+            return
         self.execute()
 
     def execute(self):

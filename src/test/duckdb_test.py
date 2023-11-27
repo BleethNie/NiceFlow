@@ -43,6 +43,17 @@ class TestDuckDB(unittest.TestCase):
         duckdb.sql('''LOAD httpfs;''')
         duckdb.sql('''CREATE TABLE trek_facta AS SELECT * FROM  'https://192.168.1.88/chfs/shared/tmp/1.parquet';''')
 
+    def test_multi_sql(self):
+        sql_script = """
+            CREATE TABLE test (a INTEGER, b VARCHAR);
+            
+            INSERT INTO test VALUES (1, 'hello'), (2, 'world');
+            
+            SELECT * FROM test;
+        """
+        # con = duckdb.connect()
+        results = duckdb.execute(sql_script).fetchall()
+        print(results)
 
 if __name__ == '__main__':
     unittest.main()

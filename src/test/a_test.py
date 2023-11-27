@@ -32,7 +32,7 @@ print(replace_vars(s, d))
 class TestGit(unittest.TestCase):
 
     def test_base(self):
-        pass
+        print("aaaaab".endswith("b"))
 
 
 if __name__ == '__main__':

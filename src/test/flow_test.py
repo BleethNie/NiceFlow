@@ -13,6 +13,7 @@ def getProjectPath() -> str:
     current_directory = os.path.dirname(current_file)
     # 获取当前项目的根目录
     project_root = os.path.dirname(os.path.dirname(current_directory))
+    project_root = project_root.replace("\\", "/")
     return project_root
 
 
@@ -36,6 +37,11 @@ class TestFlow(unittest.TestCase):
 
         myFlow.run()
 
+    def test_project_root_path(self):
+        path = getProjectPath() + "/doc/real/excel_input_many_excel_output.json"
+        myFlow: Flow = FlowManager.read(path)
+
+        myFlow.run()
 
 if __name__ == '__main__':
     unittest.main()
