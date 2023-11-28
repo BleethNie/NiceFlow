@@ -11,7 +11,7 @@
       "name": "read1",
       "type": "input",
       "properties": {
-        "rows": 10,
+        "rows": 1,
         "columns": [
           "name",
           "address",
@@ -68,6 +68,14 @@
           }
         ]
       }
+    },
+    {
+      "id": "Console",
+      "name": "console",
+      "type": "output",
+      "properties": {
+        "row": 10
+      }
     }
   ],
   "edges": [
@@ -86,6 +94,10 @@
     {
       "startId": "for",
       "endId": "read2"
+    },
+    {
+      "startId": "read2",
+      "endId": "console"
     }
   ]
 }

@@ -3,6 +3,7 @@ import json
 from typing import List, Dict
 
 import duckdb
+import loguru
 from blinker import signal
 
 from NiceFlow.core.tool import extract_variable, replace_vars
@@ -106,6 +107,7 @@ class IPlugin(metaclass=abc.ABCMeta):
                     self.shadow_variable_param[param_key] = param_value
 
     def after_execute(self):
+        loguru.logger.debug("【{}】执行after",self.name)
         # 记录执行结束时间
         self.run_record.stop()
         self.run_record.print()
