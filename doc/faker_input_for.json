@@ -1,14 +1,34 @@
 {
+  "flow": {
+    "name": "东风",
+    "uid": "",
+    "param": {
+    }
+  },
   "nodes": [
     {
       "id": "FakerInput",
       "name": "read1",
       "type": "input",
       "properties": {
-        "rows":10000,
-        "columns": ["name","address","city","street_address","date_of_birth","phone_number"],
-        "randoms":[
-          {"key":"sex","values":["男","女","未知"]}
+        "rows": 10,
+        "columns": [
+          "name",
+          "address",
+          "city",
+          "street_address",
+          "date_of_birth",
+          "phone_number"
+        ],
+        "randoms": [
+          {
+            "key": "sex",
+            "values": [
+              "男",
+              "女",
+              "未知"
+            ]
+          }
         ]
       }
     },
@@ -17,7 +37,36 @@
       "name": "for",
       "type": "output",
       "properties": {
-
+        "finish_step": "read2"
+      }
+    },
+    {
+      "id": "Printer",
+      "name": "printer",
+      "type": "input",
+      "properties": {
+        "msg": "${row.name} === ${row.sex} === ${row.street_address}  "
+      }
+    },
+    {
+      "id": "FakerInput",
+      "name": "read2",
+      "type": "input",
+      "properties": {
+        "rows": 10,
+        "columns": [
+          "phone_number"
+        ],
+        "randoms": [
+          {
+            "key": "sex",
+            "values": [
+              "男",
+              "女",
+              "未知"
+            ]
+          }
+        ]
       }
     }
   ],
@@ -25,6 +74,18 @@
     {
       "startId": "read1",
       "endId": "for"
+    },
+    {
+      "startId": "for",
+      "endId": "printer"
+    },
+    {
+      "startId": "printer",
+      "endId": "for"
+    },
+    {
+      "startId": "for",
+      "endId": "read2"
     }
   ]
 }

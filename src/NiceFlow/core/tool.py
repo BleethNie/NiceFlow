@@ -58,7 +58,6 @@ def replace_vars(s: str, d: dict):
         # 用变量的值替换字符串中的变量
         s = s.replace("${" + var + "}", str(value))
     # 返回替换后的字符串
-    print("s = ",s)
     return s,True
 
 

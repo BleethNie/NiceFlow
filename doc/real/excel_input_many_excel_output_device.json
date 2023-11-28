@@ -1,0 +1,90 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+      "common": "E:\\02_Resource\\05_anchnet\\09_无锡生命线\\NiceFlow"
+    }
+  },
+  "nodes": [
+    {
+      "id": "ExcelInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "file_name": "${common}\\燃气数据.xlsx",
+        "sheet_name": "西维斯设备数据"
+      }
+    },
+    {
+      "id": "For",
+      "name": "for",
+      "type": "output",
+      "properties": {
+        "finish_step": "readSQL"
+      }
+    },
+    {
+      "id": "ExcelInput",
+      "name": "input-device",
+      "type": "input",
+      "properties": {
+        "file_name": "${common}\\燃气数据.xlsx",
+        "sheet_name": "西维斯设备型号数据"
+      }
+    },
+    {
+      "id": "SQL",
+      "name": "writeSql",
+      "type": "translate",
+      "properties": {
+        "inputs": [
+          {
+            "step": "input-device",
+            "table": "device"
+          }
+        ],
+        "sql": "select *,concat(address,'aaa') as nice from ff_dd  limit 10"
+      }
+    },
+    {
+      "id": "DuckDBInput",
+      "name": "readSQL",
+      "type": "translate",
+      "properties": {
+        "path":"C:\\Users\\xiaow\\Desktop\\duck\\1.db",
+        "sql": "select * from ab"
+      }
+    },
+    {
+      "id": "Console",
+      "name": "console",
+      "type": "output",
+      "properties": {
+        "row": 100
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "for"
+    },
+    {
+      "startId": "for",
+      "endId": "input-device"
+    },
+    {
+      "startId": "input-device",
+      "endId": "writeSql"
+    },
+    {
+      "startId": "writeSql",
+      "endId": "for"
+    },
+    {
+      "startId": "readSQL",
+      "endId": "console"
+    }
+  ]
+}

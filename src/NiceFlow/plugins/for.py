@@ -21,6 +21,9 @@ class For(IPlugin):
         super(For, self).init(param, flow)
         self.count = 0
 
+    def receiver(self, sender):
+        self.execute()
+
     def execute(self):
         super(For, self).execute()
 
@@ -39,9 +42,14 @@ class For(IPlugin):
             self.flow.param_dict["row.{}".format(k)] = v
 
         self.count = self.count + 1
-        self.set_result(None)
+        self.set_result(df)
 
     def set_result(self, df: duckdb.DuckDBPyRelation):
+        # 设置结果
+        self.df_count = 0 if df is None else len(df)
+        for node in self.next_nodes:
+            node._pre_result_dict[self.name] = df
+
         false_step = self.param.get("false_step", None)
         true_or_false = self.count > len(self.dict_result)
 
