@@ -9,13 +9,13 @@ from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
 
 
-class OracleInput(IPlugin):
+class PostgreInput(IPlugin):
 
     def init(self, param: json, flow: Flow):
-        super(OracleInput, self).init(param, flow)
+        super(PostgreInput, self).init(param, flow)
 
     def execute(self):
-        super(OracleInput, self).execute()
+        super(PostgreInput, self).execute()
 
         # param信息
         username = self.param["username"]
@@ -40,8 +40,8 @@ class OracleInput(IPlugin):
         self.set_result(None)
 
     def to_json(self):
-        super(OracleInput, self).to_json()
+        super(PostgreInput, self).to_json()
 
     def close(self):
-        super(OracleInput, self).close()
+        super(PostgreInput, self).close()
         self.con.close()

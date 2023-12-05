@@ -1,4 +1,10 @@
 {
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+
+    },
   "nodes": [
     {
       "id": "ParquetInput",

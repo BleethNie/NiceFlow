@@ -119,5 +119,13 @@ class TestPlugin(unittest.TestCase):
         myFlow.close()
 
 
+    def test_duplicate(self):
+        path = getProjectPath() + "/doc/faker_input_duplicate_console.json"
+        myFlow: Flow = FlowManager.read(path)
+        myFlow.run()
+        myFlow.close()
+
+
+
 if __name__ == '__main__':
     unittest.main()

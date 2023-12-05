@@ -18,7 +18,6 @@ class SQL(IPlugin):
         inputs = self.param["inputs"]
 
         # 获取上一步结果
-
         for input in inputs:
             step = input["step"]
             table = input["table"]

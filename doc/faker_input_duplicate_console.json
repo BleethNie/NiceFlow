@@ -1,4 +1,10 @@
 {
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+
+    },
   "nodes": [
     {
       "id": "FakerInput",
@@ -11,13 +17,14 @@
           {"key":"sex","values":["男","女","未知"]}
         ]
       }
-    },
-    {
+    },{
       "id": "Duplicate",
       "name": "duplicate",
-      "type": "output",
+      "type": "input",
       "properties": {
-        "type": "",
+        "duplicate_fields": "sex",
+        "order_fields": "name",
+        "order_type": "DESC"
       }
     },
     {
@@ -32,6 +39,9 @@
   "edges": [
     {
       "startId": "read1",
+      "endId": "duplicate"
+    },{
+      "startId": "duplicate",
       "endId": "write1"
     }
   ]
