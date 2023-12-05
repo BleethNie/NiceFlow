@@ -3,26 +3,35 @@
     "name": "",
     "uid": "",
     "param": {
-
-    },
+    }
+  },
   "nodes": [
     {
       "id": "FakerInput",
       "name": "read1",
       "type": "input",
       "properties": {
-        "rows":10000,
-        "columns": ["name","address","city","street_address","date_of_birth","phone_number"],
-        "randoms":[
-          {"key":"sex","values":["男","女","未知"]}
+        "rows": 10000,
+        "columns": [
+          "name",
+          "address",
+          "city",
+          "street_address",
+          "date_of_birth",
+          "phone_number"
+        ],
+        "randoms": [
+          { "key": "sex", "values": [  "男", "女", "未知" ] },
+          { "key": "zt", "values": [  "已婚", "未婚", "未知" ] }
         ]
       }
-    },{
+    },
+    {
       "id": "Duplicate",
       "name": "duplicate",
       "type": "input",
       "properties": {
-        "duplicate_fields": "sex",
+        "duplicate_fields": "sex,zt",
         "order_fields": "name",
         "order_type": "DESC"
       }
@@ -40,7 +49,8 @@
     {
       "startId": "read1",
       "endId": "duplicate"
-    },{
+    },
+    {
       "startId": "duplicate",
       "endId": "write1"
     }

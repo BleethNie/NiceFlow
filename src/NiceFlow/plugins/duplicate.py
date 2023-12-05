@@ -29,10 +29,10 @@ class Duplicate(IPlugin):
         sql_template = '''
         SELECT * FROM (
             SELECT *,
-            ROW_NUMBER() OVER (PARTITION BY {duplicate_fields} ORDER BY {order_fields} {order_type}) AS rn
+            ROW_NUMBER() OVER (PARTITION BY {duplicate_fields} ORDER BY {order_fields} {order_type} ) AS rn
         FROM duplicate_df ) AS t  WHERE rn = 1;
         '''
-        sql = sql_template.format(duplicate_fields=duplicate_fields,order_fields=order_fields,order_typ=order_type)
+        sql = sql_template.format(duplicate_fields=duplicate_fields,order_fields=order_fields,order_type=order_type)
         result_df = duckdb.execute(sql).fetch_df()
         duck_df = duckdb.from_df(result_df)
 
