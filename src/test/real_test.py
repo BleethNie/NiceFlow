@@ -18,11 +18,14 @@ def getProjectPath() -> str:
 class TestInputPlugin(unittest.TestCase):
 
     def test_base(self):
-        path = getProjectPath() + "/doc/real/csv_input_excel_output.json"
+        path = getProjectPath() + "/doc/real/监测点.json"
         myFlow: Flow = FlowManager.read(path)
         myFlow.run()
 
-
+    def test_base_1(self):
+        path = getProjectPath() + "/doc/real/设备.json"
+        myFlow: Flow = FlowManager.read(path)
+        myFlow.run()
 
 if __name__ == '__main__':
     unittest.main()
