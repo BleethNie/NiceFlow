@@ -1,0 +1,60 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+
+    }},
+  "nodes": [
+    {
+      "id": "FakerInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "rows":100,
+        "randoms":[
+          {"key":"BSM","values":["0"]},
+          {"key":"BJMC","values":["0"]},
+          {"key":"BJBH","values":["0"]},
+
+          {"key":"DWBSM","values":["0"]},
+          {"key":"SBBSM","values":["0"]},
+          {"key":"JCBJZB","values":["0"]},
+
+          {"key":"DQBJJB","values":["0"]},
+          {"key":"CCBJSJ","values":["0"]},
+          {"key":"CCBJZ","values":["0"]},
+
+          {"key":"DQBJSJ","values":["0"]},
+          {"key":"DQBJZ","values":["0"]},
+          {"key":"LJBJPC","values":["0"]},
+
+          {"key":"BJSFJC","values":["0"]},
+          {"key":"BJJCSJ","values":["0"]},
+          {"key":"BJJCSM","values":["0"]},
+          {"key":"BZ","values":["0"]}
+        ]
+      }
+    },
+    {
+      "id": "PostgreOutput",
+      "name": "write1",
+      "type": "output",
+      "properties": {
+        "host": "192.168.200.90",
+        "port": 5432,
+        "user": "user_e6mhYM",
+        "password": "password_RxCRBz",
+        "db": "postgres",
+        "table":"GS_JC_JCBJ",
+        "id":"name"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "write1"
+    }
+  ]
+}

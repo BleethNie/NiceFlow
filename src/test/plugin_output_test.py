@@ -48,6 +48,18 @@ class TestOutputPlugin(unittest.TestCase):
         myFlow.run()
         myFlow.close()
 
+    def test_PgOutput(self):
+        path = getProjectPath() + "/doc/faker_input_pg_output_3.json"
+        myFlow: Flow = FlowManager.read(path)
+        myFlow.run()
+        myFlow.close()
+
+    def test_PgOutput(self):
+        path = getProjectPath() + "/doc/faker_input_pg_output_3.json"
+        myFlow: Flow = FlowManager.read(path)
+        myFlow.run()
+        myFlow.close()
+
     def test_csvInput_CKOutput(self):
         path = getProjectPath() + "/doc/csv_input_ck_output.json"
         data_dir = "F:\\07_数据源大全\\车站数据\\后两周的数据"

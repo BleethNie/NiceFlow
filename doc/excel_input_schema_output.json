@@ -1,0 +1,53 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+      "common": "C:\\Users\\xiaow\\Desktop\\sql"
+    }
+  },
+  "nodes": [
+    {
+      "id": "ExcelInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "file_name": "${common}/table.xlsx"
+      }
+    },
+    {
+      "id": "TableSchemaConvert",
+      "name": "convert",
+      "type": "output",
+      "properties": {
+        "db_type": "postgre",
+        "table_field": "表名",
+        "table_cn": "中文表名",
+        "comment_field": "字段中文名",
+        "field": "字段名",
+        "data_type": "数据类型",
+        "length": "长度",
+        "condition": "约束条件"
+      }
+    },
+    {
+      "id": "ExcelOutput",
+      "name": "write1",
+      "type": "output",
+      "properties": {
+        "file_name": "${common}/table_result.xlsx",
+        "sheet_name": "sheet1"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "convert"
+    },
+    {
+      "startId": "convert",
+      "endId": "write1"
+    }
+  ]
+}

@@ -1,17 +1,15 @@
 ## NiceFlow
 
-> 类似Kettle工具，主要实现数据ETL处理
+> 类似Kettle数据ETL工具，同时比Kettle更加易用和轻量
 
-### 使用
+### 特性
+- 基于python的插件机制,目前提供70+插件,同时支持自定义插件
+- 基于json的flow任务，支持自定义任务配置
 
-#### python环境
-
-> 在 python 3.10上开发
-
-#### 安装依赖
+### 安装依赖
 
 ```shell
-pip install -r requirement.txt
+pip install NiceFlow
 ```
 
 #### 测试案例

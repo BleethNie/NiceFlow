@@ -125,7 +125,11 @@ class TestPlugin(unittest.TestCase):
         myFlow.run()
         myFlow.close()
 
-
+    def test_convert(self):
+        path = getProjectPath() + "/doc/excel_input_schema_output.json"
+        myFlow: Flow = FlowManager.read(path)
+        myFlow.run()
+        myFlow.close()
 
 if __name__ == '__main__':
     unittest.main()

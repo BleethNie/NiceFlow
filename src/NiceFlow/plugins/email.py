@@ -1,5 +1,7 @@
 import json
 
+import duckdb
+
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
 
@@ -11,6 +13,7 @@ class Email(IPlugin):
 
     def execute(self):
         super(Email, self).execute()
+        con = duckdb.connect()
 
         # 获取上一步结果
         for index,pre_node in self.pre_nodes:

@@ -1,0 +1,49 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+
+    }},
+  "nodes": [
+    {
+      "id": "FakerInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "rows":10000,
+        "randoms":[
+          {"key":"BSM","values":["0"]},
+          {"key":"XZQHDM","values":["0"]},
+          {"key":"DWMC","values":["0"]},
+          {"key":"SSMC","values":["0"]},
+          {"key":"SSBM","values":["0"]},
+          {"key":"JCWZ","values":["0"]},
+          {"key":"GC","values":["0"]},
+          {"key":"GCJZ","values":["0"]},
+          {"key":"BZ","values":["0"]}
+        ]
+      }
+    },
+    {
+      "id": "PostgreOutput",
+      "name": "write1",
+      "type": "output",
+      "properties": {
+        "host": "192.168.200.90",
+        "port": 5432,
+        "user": "user_e6mhYM",
+        "password": "password_RxCRBz",
+        "db": "postgres",
+        "table":"RQ_JS_JCD",
+        "id":"name"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "write1"
+    }
+  ]
+}

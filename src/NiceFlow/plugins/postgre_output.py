@@ -1,11 +1,14 @@
 import json
 
 from loguru import logger
+import psycopg2
 
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
 from odps import ODPS
 import pyarrow as pa
+from sqlalchemy import create_engine
+
 
 class PostgreOutput(IPlugin):
 
@@ -16,29 +19,24 @@ class PostgreOutput(IPlugin):
     def execute(self):
         super(PostgreOutput, self).execute()
 
+        # param信息
+        host = self.param.get("host","127.0.0.1")
+        port = self.param.get("port",3306)
+        db = self.param.get("db","")
+        user = self.param.get("user","root")
+        password = self.param.get("password","123456")
+        table =  self.param.get("table","")
+        id =  self.param.get("id","")
+
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
-        df = self._pre_result_dict[pre_node.name]
-        logger.debug(self.param)
+        duck_df = self._pre_result_dict[pre_node.name]
 
-        # param信息
-        access_key = self.param["access_key"]
-        access_secret = self.param.get("access_secret", "")
-        project = self.param.get("project", "")
-        end_point = self.param.get("end_point", "")
-        partition = self.param.get("partition", "")
-        table_name = self.param.get("table_name", "")
-        odps = ODPS(access_key, access_secret,
-                 project=project, endpoint=end_point)
+        conn_string = f'postgresql://{user}:{password}@{host}:{port}/{db}'
+        engine = create_engine(conn_string)
+        conn = engine.connect()
 
-
-        t = odps.get_table(table_name)
-        with t.open_writer(partition=partition, create_partition=True, arrow=True) as writer:
-            # 写入 RecordBatch
-            batch = pa.RecordBatch.from_pandas(df)
-            writer.write(batch)
-            # 也可以直接写入 Pandas DataFrame
-            writer.write(df)
+        duck_df.to_df().to_sql(table,con=conn,chunksize=10000,if_exists='replace',index=False,index_label=id)
 
 
     def to_json(self):

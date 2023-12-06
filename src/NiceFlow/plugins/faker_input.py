@@ -21,7 +21,7 @@ class FakerInput(IPlugin):
     def init(self, param: json,flow:Flow):
         super(FakerInput, self).init(param,flow)
         #  编译字节码对象
-        columns = self.param["columns"]
+        columns = self.param.get("columns",[])
         for column in columns:
             exec_str = "faker.{}()".format(column)
             compile_obj = compile(exec_str, '', 'eval')
@@ -30,8 +30,8 @@ class FakerInput(IPlugin):
     def execute(self):
         super(FakerInput, self).execute()
         rows = self.param["rows"]
-        columns = self.param["columns"]
-        randoms = self.param["randoms"]
+        columns = self.param.get("columns",[])
+        randoms = self.param.get("randoms",[])
         list_map = []
         # faker不能去掉，因为compile_obj为动态编译
         faker = Faker('zh-CN')
