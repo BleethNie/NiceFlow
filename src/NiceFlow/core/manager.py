@@ -21,13 +21,13 @@ class SingletonMeta(type):
 
 
 class PluginManager(metaclass=SingletonMeta):
-
     plugins_list: list = []
 
     registered_plugins_dict: dict = {}
 
     SELF_PLUGIN_NAME = "PyScript"
     COMMON_SCRIPT_NAME = "plugin.py"
+    SELF_PLUGIN_ROOT_PATH = ""
 
     @classmethod
     def register_user_plugin(cls):
@@ -42,11 +42,12 @@ class PluginManager(metaclass=SingletonMeta):
         # 获取当前项目的根目录
         project_root = os.path.dirname(os.path.dirname(current_directory))
         plugin_root_path = project_root + "/plugins"
-        logger.info("开始扫描自定义插件安装目录{}",plugin_root_path)
+        logger.info("开始扫描自定义插件安装目录{}", plugin_root_path)
         if not os.path.exists(plugin_root_path):
             os.makedirs(plugin_root_path)
             return
         # 动态加载可执行的python文件
+        cls.SELF_PLUGIN_ROOT_PATH = plugin_root_path
         sys.path.append(plugin_root_path)
 
         for plugin_dir in os.scandir(plugin_root_path):
@@ -59,8 +60,8 @@ class PluginManager(metaclass=SingletonMeta):
                     continue
                 cls.plugins_list.append(plugin_name)
                 # 获取类名称
-                parent_module_name= os.path.basename(head)
-                cls.__register_plugin(plugin_name, parent_module_name)
+                parent_module_name = os.path.basename(head)
+                cls.register_plugin_with_param(plugin_name, parent_module_name)
 
     @classmethod
     def register_plugin(cls):
@@ -75,10 +76,10 @@ class PluginManager(metaclass=SingletonMeta):
                 if extension != '.py':
                     continue
                 cls.plugins_list.append(plugin_name)
-                cls.__register_plugin(plugin_name)
+                cls.register_plugin_with_param(plugin_name)
 
     @classmethod
-    def __register_plugin(cls, plugin_name: str, plugins_folder_path=None):
+    def register_plugin_with_param(cls, plugin_name: str, plugins_folder_path=None):
         """
         Load the plugin and get its information
         """
@@ -130,12 +131,24 @@ class FlowManager(metaclass=SingletonMeta):
             flow_json = json.load(fp)
         flow_meta_json: json = flow_json["flow"]
         # 设置param
-        flow.set_param(flow_meta_json.get("param",{}))
+        flow.set_param(flow_meta_json.get("param", {}))
         nodes_array: json = flow_json["nodes"]
         edges_array: json = flow_json["edges"]
         # 组装node,edge
         for node_json in nodes_array:
             node_id: str = node_json["id"]
+            if node_id == PluginManager.SELF_PLUGIN_NAME:
+                # 生成文件
+                content = node_json["properties"]["content"]
+                real_dir_name = PluginManager.SELF_PLUGIN_ROOT_PATH+"\\"+ PluginManager.SELF_PLUGIN_NAME
+                if os.path.exists(real_dir_name) is False:
+                    os.makedirs(real_dir_name)
+                fh = open(real_dir_name+"\\"+PluginManager.COMMON_SCRIPT_NAME, 'w',encoding="utf8")
+                fh.write(content)
+                fh.close()
+                # 加载插件
+                PluginManager.register_plugin_with_param(PluginManager.COMMON_SCRIPT_NAME, PluginManager.SELF_PLUGIN_NAME)
+                # # 重新加载json
             node: IPlugin = PluginManager.get_plugin(node_id)
             node.init(node_json, flow)
             flow.add_node(node)

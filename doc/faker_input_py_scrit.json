@@ -1,0 +1,36 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+
+    } },
+  "nodes": [
+    {
+      "id": "FakerInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "rows":10000,
+        "columns": ["name","address","city","street_address","date_of_birth","phone_number"],
+        "randoms":[
+          {"key":"sex","values":["男","女","未知"]}
+        ]
+      }
+    },
+    {
+      "id": "PyScript",
+      "name": "write1",
+      "type": "output",
+      "properties": {
+        "content": "import json\n\nfrom NiceFlow.core.flow import Flow\nfrom NiceFlow.core.plugin import IPlugin\n\n\nclass PyScript(IPlugin):\n\n    def init(self, param: json, flow: Flow):\n        super(PyScript, self).init(param, flow)\n\n    def execute(self):\n        super(PyScript, self).execute()\n        row = int(self.param.get(\"row\",10))\n\n        # 获取上一步结果\n        pre_node = self.pre_nodes[0]\n        PyScript_df = self._pre_result_dict[pre_node.name]\n        PyScript_df.limit(row).show()\n        self.set_result(PyScript_df)\n\n\n    def to_json(self):\n        super(PyScript, self).to_json()\n\n    def close(self):\n        super(PyScript, self).close()"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "write1"
+    }
+  ]
+}

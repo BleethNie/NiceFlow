@@ -131,5 +131,11 @@ class TestPlugin(unittest.TestCase):
         myFlow.run()
         myFlow.close()
 
+    def test_script(self):
+        path = getProjectPath() + "/doc/faker_input_py_scrit.json"
+        myFlow: Flow = FlowManager.read(path)
+        myFlow.run()
+        myFlow.close()
+
 if __name__ == '__main__':
     unittest.main()
