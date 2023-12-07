@@ -21,11 +21,13 @@ class SingletonMeta(type):
 
 
 class PluginManager(metaclass=SingletonMeta):
+
     plugins_list: list = []
 
     registered_plugins_dict: dict = {}
 
-
+    SELF_PLUGIN_NAME = "PyScript"
+    COMMON_SCRIPT_NAME = "plugin.py"
 
     @classmethod
     def register_user_plugin(cls):
@@ -53,10 +55,12 @@ class PluginManager(metaclass=SingletonMeta):
             for plugin_file in os.scandir(plugin_dir.path):
                 head, plugin_file_name = os.path.split(plugin_file.path)
                 plugin_name, extension = os.path.splitext(plugin_file_name)
-                if plugin_file_name != 'plugin.py':
+                if plugin_file_name != cls.COMMON_SCRIPT_NAME:
                     continue
                 cls.plugins_list.append(plugin_name)
-                cls.__register_plugin(plugin_name, "hello")
+                # 获取类名称
+                parent_module_name= os.path.basename(head)
+                cls.__register_plugin(plugin_name, parent_module_name)
 
     @classmethod
     def register_plugin(cls):

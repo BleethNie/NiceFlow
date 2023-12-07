@@ -52,8 +52,8 @@ class TestDuckDB(unittest.TestCase):
             SELECT * FROM test;
         """
         # con = duckdb.connect()
-        results = duckdb.execute(sql_script).fetchall()
-        print(results)
+        results = duckdb.execute(sql_script).fetch_df()
+        duck_df = duckdb.from_df(results)
 
     def test_repeat_sql(self):
         sql_script = """
