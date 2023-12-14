@@ -1,0 +1,37 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+
+    }},
+  "nodes": [
+    {
+      "id": "MySQLInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "host":"192.168.200.108",
+        "port":9030,
+        "username":"jc",
+        "password":"123456",
+        "query": "select * from jc.record_report_info;"
+      }
+    },
+    {
+      "id": "DuckDBOutput",
+      "name": "duck",
+      "type": "output",
+      "properties": {
+        "path": "C:\\Users\\xiaow\\Desktop\\duck\\2.db",
+        "table": "record_report_info"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "duck"
+    }
+  ]
+}

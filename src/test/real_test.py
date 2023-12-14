@@ -27,5 +27,10 @@ class TestInputPlugin(unittest.TestCase):
         myFlow: Flow = FlowManager.read(path)
         myFlow.run()
 
+    def test_base_2(self):
+        path = getProjectPath() + "/doc/real/doris_input_duckdb_output.json"
+        myFlow: Flow = FlowManager.read(path)
+        myFlow.run()
+
 if __name__ == '__main__':
     unittest.main()

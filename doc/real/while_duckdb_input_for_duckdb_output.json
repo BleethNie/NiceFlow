@@ -1,0 +1,91 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+    }
+  },
+  "nodes": [
+    {
+      "id": "Starter",
+      "name": "starter1",
+      "type": "input",
+      "properties": {
+        "variables": [
+          {
+            "name": "while_var",
+            "value": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "While",
+      "name": "while",
+      "type": "input",
+      "properties": {
+        "decide": "${while_var} <10"
+      }
+    },
+    {
+      "id": "DuckDBInput",
+      "name": "readSQL",
+      "type": "translate",
+      "properties": {
+        "path":"C:\\Users\\xiaow\\Desktop\\duck\\2.db",
+        "sql": "select * from record_report_info"
+      }
+    },
+    {
+      "id": "For",
+      "name": "for",
+      "type": "output",
+      "properties": {
+
+      }
+    },
+    {
+      "id": "Console",
+      "name": "print",
+      "type": "output",
+      "properties": {
+        "row": 10
+      }
+    },
+    {
+      "id": "Variable",
+      "name": "variable",
+      "type": "output",
+      "properties": {
+        "variable": "while_var",
+        "script": "${while_var}+1"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "starter1",
+      "endId": "while"
+    },
+    {
+      "startId": "while",
+      "endId": "read1"
+    },
+    {
+      "startId": "read1",
+      "endId": "sort11"
+    },
+    {
+      "startId": "sort11",
+      "endId": "print"
+    },
+    {
+      "startId": "print",
+      "endId": "variable"
+    },
+    {
+      "startId": "variable",
+      "endId": "while"
+    }
+  ]
+}

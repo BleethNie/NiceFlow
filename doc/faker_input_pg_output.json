@@ -32,7 +32,7 @@
       "properties": {
         "host": "192.168.200.90",
         "port": 5432,
-        "user": "user_e6mhYM",
+        "username": "user_e6mhYM",
         "password": "password_RxCRBz",
         "db": "postgres",
         "table":"RQ_JS_JCD",

@@ -23,7 +23,7 @@ class PostgreOutput(IPlugin):
         host = self.param.get("host","127.0.0.1")
         port = self.param.get("port",3306)
         db = self.param.get("db","")
-        user = self.param.get("user","root")
+        user = self.param.get("username","root")
         password = self.param.get("password","123456")
         table =  self.param.get("table","")
         id =  self.param.get("id","")

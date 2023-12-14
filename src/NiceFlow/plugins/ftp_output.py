@@ -19,7 +19,7 @@ class FtpOutput(IPlugin):
         host = self.param["host"]
         port = self.param.get("port", 9000)
         db = self.param["db"]
-        user = self.param.get("user", "default")
+        user = self.param.get("username", "default")
         password = self.param.get("password", "")
         table = self.param.get("table", "")
         sql = self.param.get("sql", "")

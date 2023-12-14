@@ -23,7 +23,7 @@ class CKOutput(IPlugin):
         host = self.param["host"]
         port = self.param.get("port", 9000)
         db = self.param["db"]
-        user = self.param.get("user", "default")
+        user = self.param.get("username", "default")
         password = self.param.get("password", "")
         table = self.param.get("table", "")
         batch_size = self.param.get("batch_size", 100)
