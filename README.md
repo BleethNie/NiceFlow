@@ -25,194 +25,124 @@ pip install NiceFlow
 
 # 执行flow任务
 NiceFlow exec --path csv_input_ck_output.json
+
+
+NiceFlow exec --path 1.json
+
+
+NiceFlow exec --path 2.json
+
+```
+
+
+#### 代码使用
+
+```python
+import os
+from NiceFlow.core.flow import Flow
+from NiceFlow.core.manager import FlowManager
+
+def getProjectPath() -> str:
+    # 获取当前文件的绝对路径
+    current_file = os.path.abspath(__file__)
+    # 获取当前文件所在目录的绝对路径
+    current_directory = os.path.dirname(current_file)
+    # 获取当前项目的根目录
+    project_root = os.path.dirname(os.path.dirname(current_directory))
+    return project_root
+
+
+def test_base():
+    path = getProjectPath() + "/doc/1.json"
+    myFlow: Flow = FlowManager.read(path)
+    myFlow.run()
+
+
+if __name__ == '__main__':
+    test_base()
+
 ```
 
 ### 架构图
 
-TODO
 
-### 插件
+
+
+### 插件使用说明文档
 
 #### 输入
 
-| 插件            | 功能         | 类型  | 完成情况 | 文档  |
-|---------------|------------|-----|------|---------|
-| Starter       | 启动器        |     | 完成   |       |
-| CSVInput      | 读取CSV数据    |     | 完成   |      |
-| FakerInput    | 假数据生成      |     | 完成   |      |
-| ExcelInput    |            |     | 完成   |      |
-| ParquetInput  |            |     | 完成   |      |
-| MySQLInput    |            |     | 完成     |      |
-| ESInput       |            |     |      |      |
-| DorisInput    |            |     |      |      |
-| SQLiteInput   |            |     |      |      |
-| PostgrestInput|            |     |      |      |
-| HiveInput     |            |     |      |      |
-| PulsarInput   |            |     |      |      |
-| PaimonInput   |            |     |      |      |
-| IceBergInput  |            |     |      |      |
-| CKInput       | CK数据读取     |     | 完成   |      |
-| KafkaInput    |            |     |      |      |
-| MqttInput     |            |     |      |      |
-| OracleInput   |            |     |      |      |
-| SqlserverInput |            |     |      |      |
-| FlinkCDCInput |            |     |      |      |
-| MongoInput    |            |     | 完成   |      |
-| DuckDBInput   |            |     | 完成   |      |
-| HttpInput     | Http读      |     | 完成   |      |
-| HtmlInput     | 读取Html中的表格 |     |      |      |
+| 插件              | 功能             | 完成情况 | 文档                            |
+|-----------------|----------------|------|-------------------------------|
+| Starter         | 启动器            | 完成   | [启动器](doc/doc/Starter.md)     |
+| CsvInput        | 读取CSV数据        | 完成   | [CSV输入](doc/doc/CSVInput.md ) |
+| FakerInput      | 假数据生成          | 完成   |  [假数据生成](doc/doc/FakerInput.md) |       
+| ParquetInput    | 读取Parquet数据    | 完成   | [Parquet输入](doc/doc/ParquetInput.md)    |    
+| ExcelInput      | 读取Excel数据      | 完成   | [Excel输入](doc/doc/ExcelInput.md) |           
+| MySQLInput      | 读取MySQL数据      | 完成   | [MySQL输入](doc/doc/MySQLInput.md) |           
+| DuckDBInput     | 读取DuckDB数据     | 完成   | [DuckDB输入](doc/doc/DuckDBInput.md) |         
+| AkshareInput    | 读取金融股票等财经数据    | 完成   | [Akshare输入](doc/doc/AkshareInput.md) |
+| ClickHouseInput | 读取ClickHouse数据 | 完成   | [ClickHouse输入](doc/doc/ClickHouseInput.md) |
+| OdpsInput       | 读取MaxCompute数据 | 完成   | [Odps输入](doc/doc/OdpsInput.md) |           
+| ESInput         | 读取Elasticsearch数据 | 完成   | [Elasticsearch输入](doc/doc/ESInput.md) |         
+| MongoDBInput    | 读取MongoDB数据    | 完成   | [MongoDB输入](doc/doc/MongoDBInput.md) |
 
-#### 输出
 
-| 插件             | 功能            | 类型   | 完成情况 | 文档  |
-|----------------|---------------|--------|----------|-----|
-| Console  | 控制台打印         |        | 完成      |     |
-| CKOutput       | CK数据写入        |        | 完成      |     |
-| HttpOutput     | Http写         |        |     完成     |     |
-| CSVOutput      | CSV输出/切分文件    |      | 完成       |     |
-| HtmlOutput     | 将df写出到html    |      |        |     |
-| MarkdownOutput | 数据写出到markdown |     |   完成       |     |
 
 #### 转换
 
-| 插件          | 功能        | 类型  | 完成情况 |文档 |
-|-------------|-----------|-----|------|------|
-| For         | 循环        |     |      |      |
-| variable    | 变量        |     |  完成    |      |
-| While       | While变量循环 |     | 完成   |      |
-| Switch      | 分流        |     |      |      |
-| SQL         | SQL查询     |     | 完成     |      |
-| Join        | 关联        |     |      |      |
-| Samples     | 采样        |     | 完成   |      |
-| Union       | 合并流       |     |      |      |
-| SubFlow     | 子流程       |     |      |      |
-| Masking     | 数据脱敏      |     | 完成   |      |
-| Group       | 数据分组聚合    |     |      |      |
-| Checker     | 数据校验      |     |      |      |
-| Sort        | 数据排序      |     | 完成   |      |
-| AddField    | 新增字段      |     |      |      |
-| EditField   | 函数        |     |      |      |
-| Mapping     | 字段映射      |     |  完成    |      |
-| Rename      | 字段换名      |     | 完成   |      |
-| SplitColumn | 列拆分为多行    |     |      |      |
-| RowToColumn | 行转列       |     |      |      |
-| Str         | 字符串处理     |     |      |      |
-| Duplicate   | 去重        |     |      |      |
-| Unique      | 唯一行       |     |      |      |
-| ColumnToRow | 列转行       |     |      |      |
-| Pivot   | 透视        |     |      |      |
-
-#### 专业
-
-| 插件        | 功能     | 类型  | 完成情况 | 文档  |
-|-----------|------|-----|------|-----|
-| 金融        |     |     |      |     |
-| 财务        |     |     |      |     |
-| nlp       |     |     |      |     |
-| 深度学习      |     |     |      |     |
-| 报表展示      |     |     |      |     |
-|           |     |     |      |     |
+| 插件             | 功能     | 完成情况 | 文档                       |
+|----------------|--------|------|--------------------------|
+| Filter         | 过滤器    | 完成   | [过滤器](doc/doc/Filter.md) |
+| Mapping        | 映射器    | 完成   | [映射器](doc/doc/Mapping.md)    |
+| FlatMap        | 扁平化映射器 | 完成   | [扁平化映射器]()               |
+| For            | 遍历器    | 完成   | [遍历器](doc/doc/For.md)    |  
+| IF             | 条件判断器  | 完成   | [条件判断器](doc/doc/IF.md) |
+| Join           | 连接器    | 完成   | [连接器](doc/doc/Join.md)  |
+| Mask           | 脱敏器    | 完成   | [脱敏器](doc/doc/Mask.md) |
+| Pivot          | 透视表    | 完成   | [透视表](doc/doc/Pivot.md) |
+| Printer        | 打印器    | 完成   | [打印器](doc/doc/Printer.md) |
+| RegularExtract |        |      |                          |
+| Rename         | 重命名器   | 完成   | [重命名器](doc/doc/Rename.md) |
+| Samples        | 采样器    | 完成   | [采样器](doc/doc/Samples.md) |
+| Sort           | 排序器    | 完成   | [排序器](doc/doc/Sort.md) |
+| Sql            | SQL转换器 | 完成   | [SQL转换器](doc/doc/SqlTransform.md) |
+| Switch         | 条件转换器  | 完成   | [条件转换器](doc/doc/Switch.md) |
+| Unpivot        | 取消透视表  | 完成   | [取消透视表](doc/doc/Unpivot.md) |
+| Variable       | 变量转换器  | 完成   | [变量转换器](doc/doc/Variants.md) |
+| While          | 循环转换器  | 完成   | [循环转换器](doc/doc/While.md) |
+| Duplicate      | 去重器    | 完成   | [去重器](doc/doc/Duplicate.md) |
+| Console          | 控制台打印  | 完成     | [控制台输出](doc/doc/Console.md)    |
 
 
-
-### 分布式
-
-#### 角色
-
-- master:分配任务者
-- worker:任务执行者
-- operator:任务开发者
-
-#### 任务执行
-
-- 手动指定任务
-- master分配任务
-
-#### 定时器工具
-
-### 场景
-
-#### 数据清洗
-
-#### 数据分析
-
-#### 数据管理
-
-#### 报表展示
-
-#### 大数据数据同步
-
-#### 数据迁移
-
-#### 作为工具使用不同数据间转换
-
-- 需要打包发布
--
-
-#### 爬虫
-
-### 程序打包发布
-
-### 数据资源
-
-- 可以用来做示例对比 https://github.com/TurboWay/bigdata_analyse
-- 地铁人流量数据 https://github.com/geekyouth/SZT-bigdata/blob/master/.file/2018record3.zip
-
-### 二次开发
-
-- 后台管理    https://gitee.com/likeadmin/likeadmin_python?_from=gitee_search
-- sql编辑器   https://github.com/pinterest/querybook
-- 报表       https://github.com/lightdash/lightdash
-- 报表       https://github.com/getredash/redash
+#### 输出
+| 插件              | 功能           | 完成情况 | 文档                            |
+|-----------------|------------|------|-------------------------------|
+| FileOutput      | 文件输出           | 完成   | [文件输出](doc/doc/FileOutput.md) |
+| KafkaOutput     | Kafka输出          | 完成   | [Kafka输出](doc/doc/KafkaOutput.md) |
+| SqlServerOutput | SQLServer输出 | 完成   | [SQLServer输出](doc/doc/SqlServerOutput.md) |
+| S3Output        | S3输出            | 完成   | [S3输出](doc/doc/S3Output.md) |
+| PulsarOutput    | Pulsar输出         | 完成   | [Pulsar输出](doc/doc/PulsarOutput.md) |
+| PostgresOutput  | Postgres输出       | 完成   | [Postgres输出](doc/doc/PostgresOutput.md) |
+| ParquetOutput   | Parquet输出        | 完成   | [Parquet输出](doc/doc/ParquetOutput.md) |
+| PaimonOutput    | Paimon输出         | 完成   | [Paimon输出](doc/doc/PaimonOutput.md) |
+| OracleOutput    | Oracle输出         | 完成   | [Oracle输出](doc/doc/OracleOutput.md) |
+| OdpsOutput      | MaxCompute输出     | 完成   | [MaxCompute输出](doc/doc/OdpsOutput.md) |
+| MySQLOutput     | MySQL输出          | 完成   | [MySQL输出](doc/doc/MySQLOutput.md) |
+| MqttOutput      | MQTT输出           |      |      |                               |
+| MongoDBOutput   | MongoDB输出        | 完成   | [MongoDB输出](doc/doc/MongoDBOutput.md) |
+| MarkdownOutput  | Markdown输出        |      |      |                               |
+| KafkaOutput     | Kafka输出          |      |      |                               |
+| HttpOutput      | Http输出         |      |      |                               |
+| HiveOutput      | Hive输出         |      |      |                               |
+| HdfsOutput      | HDFS输出        |      |      |                               |
+| FtpOutput       | FTP输出            |      |      |                               |
+| ExcelOutput     | Excel输出          |      |      |          |  
+| EsOutput        | Elasticsearch输出 |      |      |
+| DuckOutput      | DuckDB输出         |      |      |
+| DorisOutput     | Doris输出         |      |      |
+| CsvOutput       | CSV输出           |      |      |
+| CosOutput       | COS输出           |      |      |
+| ClickHouseOutput | ClickHouse输出    |      |      |
 
 
-### 其他参考
-
-- 项目打包 https://www.cjlmonster.cn/python/setuptools/
-
-
-### 打包发布命令
- 
-- 构建源码发布包
-
-```shell
-# python setup.py sdist –formats = gztar,zip
-# python setup.py bdist_wininst   生成.exe
-# python setup.py bdist_rpm       生成.rpm
-# python setup.py bdist_egg       生成.egg
-# python setup.py bdist           生成多个平台安装包
-
-python setup.py sdist
-
-
-
-
-
-```
-
-## 使用
-
-```shell
-#打包
-python setup.py bdist_wheel
-
-#安装
-conda activate test_flow
-
-pip install NiceFlow-0.0.1-py3-none-any.whl
-
-
-```
-
-
-六、使用setup.py安装包
-python setup.py install 将模块安装到全局环境中
-
-python setup.py develop 创建一个软链接指向实际所在目录，不会真正安装
-
-七、如何发布到PyPI
-注册PyPI账号，创建~/.pypirc文件，配置PyPI访问地址和账号。
-
-python setup.py register sdist upload -r http://pypi.org 使用该信息注册
-
-python setup.py upload 上传源码包

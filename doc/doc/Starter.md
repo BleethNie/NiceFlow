@@ -8,12 +8,6 @@ ___
 
 ## 1 快速介绍
 
-MysqlReader插件实现了从Mysql读取数据。在底层实现上，MysqlReader通过JDBC连接远程Mysql数据库，并执行相应的sql语句将数据从mysql库中SELECT出来。
-
-**不同于其他关系型数据库，MysqlReader不支持FetchSize.**
-
-
-对于用户配置Table、Column、Where的信息，MysqlReader将其拼接为SQL语句发送到Mysql数据库；对于用户配置querySql信息，MysqlReader直接将其发送到Mysql数据库。
 
 
 ## 2 功能说明
