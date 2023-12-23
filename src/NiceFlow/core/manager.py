@@ -123,12 +123,11 @@ class FlowManager(metaclass=SingletonMeta):
     PluginManager.register_plugin()
     PluginManager.register_user_plugin()
 
+
     @classmethod
-    def read(cls, json_path: str) -> Flow:
+    def read_json(cls, flow_json: json) -> Flow:
         flow = Flow()
         cls.flow_manager_dict[flow.flow_uid] = flow
-        with open(json_path, 'r', encoding='utf8') as fp:
-            flow_json = json.load(fp)
         flow_meta_json: json = flow_json["flow"]
         # 设置param
         flow.set_param(flow_meta_json.get("param", {}))
@@ -156,4 +155,16 @@ class FlowManager(metaclass=SingletonMeta):
         for edge in edges_array:
             flow.set_edge(edge["startId"], edge["endId"])
 
+        return flow
+
+    @classmethod
+    def read(cls, json_path: str) -> Flow:
+        with open(json_path, 'r', encoding='utf8') as fp:
+            flow_json = json.load(fp)
+        return cls.read_json(flow_json)
+
+    @classmethod
+    def create_flow(cls) -> Flow:
+        flow = Flow()
+        cls.flow_manager_dict[flow.flow_uid] = flow
         return flow

@@ -42,6 +42,12 @@ class Flow(metaclass=abc.ABCMeta):
         self.plugin_dict[node.name] = node
         return self
 
+    def add_triple(self, start_node: IPlugin,end_node: IPlugin):
+        self.plugin_dict[start_node.name] = start_node
+        self.plugin_dict[end_node.name] = end_node
+        self.set_edge(start_node.name,end_node.name)
+        return self
+
     def set_edge(self, start_id: str, end_id: str):
         start_node = self.plugin_dict[start_id]
         end_node = self.plugin_dict[end_id]

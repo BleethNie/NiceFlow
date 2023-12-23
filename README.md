@@ -6,11 +6,15 @@
 - 基于python的插件机制,目前提供70+插件,同时支持自定义插件
 - 基于json的flow任务，支持自定义任务配置
 
+![img.png](doc/doc/img/demo.png)
+
 ### 安装依赖
 
 ```shell
 pip install NiceFlow
 ```
+
+
 
 #### 测试案例
 
@@ -37,6 +41,49 @@ NiceFlow exec --path 2.json
 
 #### 代码使用
 
+- faker_input_console.json
+
+```json
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+
+    } },
+  "nodes": [
+    {
+      "id": "FakerInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "rows":10000,
+        "columns": ["name","address","city","street_address","date_of_birth","phone_number"],
+        "randoms":[
+          {"key":"sex","values":["男","女","未知"]}
+        ]
+      }
+    },
+    {
+      "id": "Console",
+      "name": "write1",
+      "type": "output",
+      "properties": {
+        "row": 100
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "write1"
+    }
+  ]
+}
+
+```
+
+
 ```python
 import os
 from NiceFlow.core.flow import Flow
@@ -53,7 +100,7 @@ def getProjectPath() -> str:
 
 
 def test_base():
-    path = getProjectPath() + "/doc/1.json"
+    path = getProjectPath() + "/doc/faker_input_console.json"
     myFlow: Flow = FlowManager.read(path)
     myFlow.run()
 
@@ -95,24 +142,23 @@ if __name__ == '__main__':
 |----------------|--------|------|--------------------------|
 | Filter         | 过滤器    | 完成   | [过滤器](doc/doc/Filter.md) |
 | Mapping        | 映射器    | 完成   | [映射器](doc/doc/Mapping.md)    |
-| FlatMap        | 扁平化映射器 | 完成   | [扁平化映射器]()               |
 | For            | 遍历器    | 完成   | [遍历器](doc/doc/For.md)    |  
 | IF             | 条件判断器  | 完成   | [条件判断器](doc/doc/IF.md) |
 | Join           | 连接器    | 完成   | [连接器](doc/doc/Join.md)  |
 | Mask           | 脱敏器    | 完成   | [脱敏器](doc/doc/Mask.md) |
 | Pivot          | 透视表    | 完成   | [透视表](doc/doc/Pivot.md) |
-| Printer        | 打印器    | 完成   | [打印器](doc/doc/Printer.md) |
-| RegularExtract |        |      |                          |
+| Printer        | 日志打印器  | 完成   | [打印器](doc/doc/Printer.md) |
+| RegularExtract | 正则提取器  |      | [正则提取器](doc/doc/RegularExtract.md) |  
 | Rename         | 重命名器   | 完成   | [重命名器](doc/doc/Rename.md) |
 | Samples        | 采样器    | 完成   | [采样器](doc/doc/Samples.md) |
 | Sort           | 排序器    | 完成   | [排序器](doc/doc/Sort.md) |
 | Sql            | SQL转换器 | 完成   | [SQL转换器](doc/doc/SqlTransform.md) |
-| Switch         | 条件转换器  | 完成   | [条件转换器](doc/doc/Switch.md) |
+| Switch         | 条件转换器  |      | [条件转换器](doc/doc/Switch.md) |
 | Unpivot        | 取消透视表  | 完成   | [取消透视表](doc/doc/Unpivot.md) |
 | Variable       | 变量转换器  | 完成   | [变量转换器](doc/doc/Variants.md) |
 | While          | 循环转换器  | 完成   | [循环转换器](doc/doc/While.md) |
 | Duplicate      | 去重器    | 完成   | [去重器](doc/doc/Duplicate.md) |
-| Console          | 控制台打印  | 完成     | [控制台输出](doc/doc/Console.md)    |
+| Console        | 控制台打印  | 完成   | [控制台输出](doc/doc/Console.md)    |
 
 
 #### 输出
@@ -145,4 +191,6 @@ if __name__ == '__main__':
 | CosOutput       | COS输出           |      |      |
 | ClickHouseOutput | ClickHouse输出    |      |      |
 
+
+### 数据实战
 

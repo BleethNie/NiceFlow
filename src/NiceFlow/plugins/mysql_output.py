@@ -11,6 +11,8 @@ class MySQLOutput(IPlugin):
     def init(self, param: json, flow: Flow):
         super(MySQLOutput, self).init(param,flow)
 
+
+
     def execute(self):
         super(MySQLOutput, self).execute()
 
@@ -21,6 +23,7 @@ class MySQLOutput(IPlugin):
         password = self.param.get("password","123456")
         table =  self.param.get("table","")
         id =  self.param.get("id","")
+        encod_order =  self.param.get("encod_order","")
 
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
@@ -30,6 +33,9 @@ class MySQLOutput(IPlugin):
         engine = create_engine('mysql+pymysql://%s:%s@%s:%s/%s?charset=utf8'
                                % (user, password, host, port, db))
         duck_df.to_df().to_sql(table,con=engine,chunksize=10000,if_exists='replace',index=False,index_label=id)
+        #设置表编码
+        if len(encod_order)!=0:
+            engine.execute(f"ALTER TABLE {table}  CONVERT TO CHARACTER SET utf8mb4 COLLATE {encod_order};")
 
 
     def to_json(self):

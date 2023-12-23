@@ -19,7 +19,7 @@ setup(
     long_description=read_file('README.md'),  # 详细描述，一般用于 pypi 主页展示
     long_description_content_type="text/markdown",  # 详细描述的文件类型
     platforms='python3',  # 项目支持的平台
-    url='https://www.xx.cn',  # 项目主页
+    url='https://www.seeoo.top',  # 项目主页
 
     # 项目配置
     # 包含所有src文件夹下的包，但排除tests包
