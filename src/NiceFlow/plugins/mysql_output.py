@@ -1,6 +1,6 @@
 import json
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
@@ -10,7 +10,6 @@ class MySQLOutput(IPlugin):
 
     def init(self, param: json, flow: Flow):
         super(MySQLOutput, self).init(param,flow)
-
 
 
     def execute(self):
@@ -23,7 +22,7 @@ class MySQLOutput(IPlugin):
         password = self.param.get("password","123456")
         table =  self.param.get("table","")
         id =  self.param.get("id","")
-        encod_order =  self.param.get("encod_order","")
+        encode_order =  self.param.get("encode_order","")
 
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
@@ -34,8 +33,9 @@ class MySQLOutput(IPlugin):
                                % (user, password, host, port, db))
         duck_df.to_df().to_sql(table,con=engine,chunksize=10000,if_exists='replace',index=False,index_label=id)
         #设置表编码
-        if len(encod_order)!=0:
-            engine.execute(f"ALTER TABLE {table}  CONVERT TO CHARACTER SET utf8mb4 COLLATE {encod_order};")
+        if len(encode_order)!=0:
+            with engine.connect() as conn:
+                conn.execute(text(f"ALTER TABLE {table}  CONVERT TO CHARACTER SET utf8mb4 COLLATE {encode_order};"))
 
 
     def to_json(self):

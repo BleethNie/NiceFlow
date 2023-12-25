@@ -1,9 +1,7 @@
 import json
 
-import duckdb
-import cx_Oracle
-import sqlalchemy
 import pandas as pd
+import sqlalchemy
 
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin

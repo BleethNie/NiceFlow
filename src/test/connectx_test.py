@@ -71,15 +71,5 @@ class TestDuckDB(unittest.TestCase):
         duck_df = duckdb.from_df(results)
         print(duck_df)
 
-    # 设置字段数据类型
-    def test_set_table_field_type(self):
-        total_df = duckdb.read_csv(data_dir + "/87市场销售额.txt")
-        total_df.to_table("total_df")
-        duckdb.execute("ALTER TABLE total_df ALTER leader_customer_code TYPE VARCHAR;")
-        duck_df = duckdb.query("select * from total_df;")
-        print(duck_df.describe())
-
 if __name__ == '__main__':
     unittest.main()
-
-

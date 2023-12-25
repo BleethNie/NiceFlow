@@ -1,13 +1,9 @@
 import json
 
-from loguru import logger
-import psycopg2
+from sqlalchemy import create_engine
 
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
-from odps import ODPS
-import pyarrow as pa
-from sqlalchemy import create_engine
 
 
 class PostgreOutput(IPlugin):

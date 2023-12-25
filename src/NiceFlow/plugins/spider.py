@@ -1,8 +1,5 @@
 import json
 
-import duckdb
-import loguru
-
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
 

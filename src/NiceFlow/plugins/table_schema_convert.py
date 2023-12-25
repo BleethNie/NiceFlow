@@ -1,10 +1,7 @@
 import json
 
 import duckdb
-import pandas
 import pandas as pd
-from sqlalchemy import create_engine
-from sqlalchemy.sql.expression import text
 
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin

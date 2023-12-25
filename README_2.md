@@ -14,7 +14,7 @@ python 3.10
 ```shell
 
 #python setup.py bdist_wheel
-python setup.py bdist_wininst
+python setup.py bdist_wheel
 
 ```
 

@@ -1,11 +1,9 @@
 import json
 
-import duckdb
-import pandas as pd
+from loguru import logger
 
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
-from loguru import logger
 
 
 class ExcelOutput(IPlugin):

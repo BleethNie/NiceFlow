@@ -1,8 +1,8 @@
 import json
 
 import duckdb
-from loguru import  logger
-from sqlglot import condition, select
+from loguru import logger
+from sqlglot import select
 
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
