@@ -21,7 +21,7 @@ class MySQLOutput(IPlugin):
         user = self.param.get("username", "root")
         password = self.param.get("password", "123456")
         table = self.param.get("table", "")
-        write_method = self.param.get("write_method", "")
+        write_method = self.param.get("write_method", "insert")
         update_keys = self.param.get("update_keys", [])
         encode_order = self.param.get("encode_order", "")
 
@@ -35,11 +35,27 @@ class MySQLOutput(IPlugin):
                                % (user, password, host, port, db))
         duck_df.to_df().to_sql(temp_table, con=engine, chunksize=10000, if_exists='replace', index=False,
                                index_label=id)
+
         # 设置表编码
         if len(encode_order) != 0:
             with engine.connect() as conn:
                 conn.execute(
                     text(f"ALTER TABLE {temp_table}  CONVERT TO CHARACTER SET utf8mb4 COLLATE {encode_order};"))
+
+        # 判断sql
+        update_field_sql = ""
+        for key in update_keys:
+            update_field_sql = update_field_sql + f"  l_table.{key}=r_table.{key} and  "
+        if len(update_field_sql) != 0:
+            update_field_sql = update_field_sql.removesuffix("and  ")
+
+        set_sql = ""
+        columns = duck_df.columns
+        for key in columns:
+            set_sql = set_sql + f"  l_table.{key}=r_table.{key} ,  "
+        if len(set_sql) != 0:
+            set_sql = set_sql.removesuffix(",  ")
+
 
         # 写入实际的表中,表不存在则自动创建
         #  insert/只插入数据[无主键则全部插入，有主键则根据主键判断是否插入]
@@ -47,37 +63,28 @@ class MySQLOutput(IPlugin):
         #  overwrite/清空数据并导入[不需要数据]
         #  merge/根据主键判断是更新或者插入[必须有主键]
 
-        # 创建 {table}如果不存在
-        engine.execute(f"create table if not exists {table} like {temp_table}")
+        with engine.connect() as conn:
+            # 创建 {table}如果不存在
+            conn.execute(f"create table if not exists {table} like {temp_table}")
 
-        # 判断sql
-        update_sql = ""
-        for key in  update_keys:
-            update_sql =update_sql+f"  l_table.{key}=r_table.{key} and  "
-        if len(update_sql)!= 0:
-            update_sql = update_sql.removesuffix("and  ")
+            if write_method == "update":
+                update_sql = f"update  {table} l_table inner join {temp_table} r_table on {update_field_sql}  set {set_sql} ;"
+                conn.execute(update_sql)
+            elif write_method == "overwrite":
+                conn.execute(f"truncate table {table}")
+                conn.execute(f"insert into {table} select * from {temp_table}")
+            elif write_method == "merge":
+                insert_sql = f'insert into {table} select * from {temp_table} l_table where not exists (select 1 from {table} r_table where   {update_field_sql} ) ;'
+                update_sql = f"update  {table} l_table inner join {temp_table} r_table on {update_field_sql}  set {set_sql} ;"
+                conn.execute(insert_sql)
+                conn.execute(update_sql)
+            else:
+                # 默认使用insert
+                conn.execute(f"insert into {table} select * from {temp_table}")
+            # 删除临时表
+            conn.execute(f"drop table {temp_table}")
 
-        set_sql = ""
-        columns = duck_df.columns
-        for key in  columns:
-            set_sql =set_sql+f"  l_table.{key}=r_table.{key} ,  "
-        if len(set_sql)!= 0:
-            set_sql = set_sql.removesuffix(",  ")
-
-        if write_method == "update":
-            engine.execute(f"update {table} set * from {temp_table}")
-        elif write_method == "overwrite":
-            engine.execute(f"truncate table {table}")
-            engine.execute(f"insert into {table} select * from {temp_table}")
-        elif write_method == "merge":
-            engine.execute(f'insert into {table} select * from {temp_table} l_table where not exists (select 1 from {table} r_table where   {update_sql} ) ;')
-            engine.execute(f"update  {table} set {set_sql}   from {temp_table} r_table join {table} l_table on {update_sql} ;")
-        else:
-            # 默认使用insert
-            engine.excute(f"insert into {table} select * from {temp_table}")
-
-        # 删除临时表
-        engine.execute(f"drop table {temp_table}")
+        self.set_result(None)
 
     def to_json(self):
         super(MySQLOutput, self).to_json()

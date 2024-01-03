@@ -79,6 +79,9 @@ class TestDuckDB(unittest.TestCase):
         duckdb.execute("ALTER TABLE total_df ALTER leader_customer_code TYPE VARCHAR;")
         duck_df = duckdb.query("select * from total_df;")
         print(duck_df.describe())
+        print(duckdb.query("PRAGMA table_info('total_df');").show())
+        print(duckdb.query("SELECT  LENGTH(date_day) FROM total_df; ").show())
+
 
 if __name__ == '__main__':
     unittest.main()

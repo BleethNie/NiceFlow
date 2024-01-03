@@ -12,6 +12,14 @@ ___
 - overwrite/清空数据并导入[不需要数据]
 - merge/根据主键判断是更新或者插入[必须有主键]
 
+## pip依赖
+
+```shell
+pip install pymysql
+
+pip install sqlalchemy
+
+```
 
 ## 2 功能说明
 
@@ -36,6 +44,16 @@ ___
 | user | 是 | root | 数据库用户名 |
 | password | 是 | 123456 | 数据库密码 |
 | table | 是 |  | 数据库表名 |
-| write_method | 是 |  | 写入方式，支持insert、update、merge、overwrite四种模式 |
+| write_method | 是 | insert | 写入方式，支持insert、update、merge、overwrite四种模式 |
 | update_keys | 否 |  | 用于update模式的主键，如果为空，则表示不更新 |
 | encode_order | 否 |  | 编码顺序，如果为空，则表示不编码 |
+
+### 性能测试
+
+#### insert
+
+#### update
+
+#### merge
+
+#### overwrite

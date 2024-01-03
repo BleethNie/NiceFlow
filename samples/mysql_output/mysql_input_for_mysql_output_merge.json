@@ -1,0 +1,43 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+
+    }},
+  "nodes": [
+    {
+      "id": "MySQLInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "host": "127.0.0.1",
+        "port": 3306,
+        "username": "root",
+        "password": "123456",
+        "query": "select * from che.cde_config;"
+      }
+    },{
+      "id": "MySQLOutput",
+      "name": "out",
+      "type": "translate",
+      "properties": {
+        "host": "127.0.0.1",
+        "port": 3306,
+        "username": "root",
+        "password": "123456",
+        "db": "che",
+        "table":"che_insert",
+        "write_method":"merge",
+        "update_keys":["id"]
+      }
+    }
+
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "out"
+    }
+  ]
+}
