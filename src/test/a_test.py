@@ -1,11 +1,14 @@
 import calendar
 import datetime
+import json
 from datetime import datetime as dt
 import unittest
 # 导入 re 模块，用来进行正则表达式匹配
 import re
 
 # 定义一个字符串，包含多个 ${cde_config} 包裹的变量
+import pandas as pd
+
 s = "Hello, ${row.name}. Your age is ${row_age}. Your favorite color is ${color}."
 
 # 定义一个 dict，用来存储变量的值
@@ -122,6 +125,34 @@ class TestGit(unittest.TestCase):
 
         df.to_excel("C:\\Users\\xiaow\\Desktop\\sql\\dwd_cnmdb_dds_msd.xlsx",index=False)
 
+
+
+    def test_json(self):
+        json_str = '''
+        {
+            "CJSJ": "2023-12-29 00:00:00",
+            "BSM": "device_001",
+            "STATE": "0",
+            "DATAS": {
+                "SG0301":1
+            }
+        }
+    '''
+        data_json = json.loads(json_str)
+        json_list = []
+        start_time = datetime.datetime(2023, 12, 29, 0, 8, 0)
+        end_time = start_time + pd.Timedelta('120s')
+
+        time_series = pd.date_range(start=start_time, end=end_time, freq='1S')
+        list_data = time_series.tolist()
+        print(list_data)
+        for timestamp in list_data:
+            new_json = json.dumps(data_json)
+            new_json = json.loads(new_json)
+            timestamp = timestamp.strftime("%Y-%m-%d %H:%M:%S")
+            new_json["CJSJ"] = str(timestamp)
+            json_list.append(new_json)
+        print(json.dumps(json_list,indent=4))
 
 if __name__ == '__main__':
     unittest.main()

@@ -29,6 +29,7 @@ class Flow(metaclass=abc.ABCMeta):
             self.con = duckdb.connect()
         self.param_dict: dict[str, object] = {}
         self.start_signal = signal("")
+        self.result_dict = {}
         logger.info("Flow Task创建成功,FlowUid = 【{}】".format(self.flow_uid))
 
     @classmethod
@@ -42,10 +43,16 @@ class Flow(metaclass=abc.ABCMeta):
         self.plugin_dict[node.name] = node
         return self
 
-    def add_triple(self, start_node: IPlugin,end_node: IPlugin):
+    def set_result(self, plugin_name: str, df: duckdb.DuckDBPyRelation = None):
+        self.result_dict[plugin_name] = df
+
+    def get_result(self) -> dict:
+        return self.result_dict
+
+    def add_triple(self, start_node: IPlugin, end_node: IPlugin):
         self.plugin_dict[start_node.name] = start_node
         self.plugin_dict[end_node.name] = end_node
-        self.set_edge(start_node.name,end_node.name)
+        self.set_edge(start_node.name, end_node.name)
         return self
 
     def set_edge(self, start_id: str, end_id: str):

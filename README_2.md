@@ -13,7 +13,6 @@ python 3.10
 - 先打包
 ```shell
 
-#python setup.py bdist_wheel
 python setup.py bdist_wheel
 
 ```

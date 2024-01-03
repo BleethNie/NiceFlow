@@ -11,7 +11,8 @@ class TestDuckDB(unittest.TestCase):
         total_df = duckdb.read_csv(data_dir + "/87市场销售额.txt")
         self_df = duckdb.read_csv(data_dir + "/87自己的销售额.txt")
         other_df = duckdb.read_csv(data_dir + "/other市场销售额.txt")
-        final_df = duckdb.sql('''
+        print(other_df.columns)
+        final_df = duckdb.read_csv('''
                 select total_df.*,self_df.self_sale_amount,other_df.other_total_sale_amount
                 from total_df 
                 left join self_df on total_df.date_day = self_df.date_day

@@ -44,7 +44,7 @@ class IPlugin(metaclass=abc.ABCMeta):
         self.signal = signal(self.name + "execute")
 
     def receiver(self, sender):
-        if len(self.pre_nodes)>len(self._pre_result_dict):
+        if len(self.pre_nodes) > len(self._pre_result_dict):
             return
         self.execute()
 
@@ -67,6 +67,10 @@ class IPlugin(metaclass=abc.ABCMeta):
     def set_result(self, df: duckdb.DuckDBPyRelation = None):
         # 设置结果
         self.df_count = 0 if df is None else len(df)
+        # 如果是最后一个节点则将结果信息给到flow
+        if len(self.next_nodes) == 0:
+            self.flow.set_result(self.name, df)
+
         for node in self.next_nodes:
             node._pre_result_dict[self.name] = df
         # 执行下一步
@@ -107,7 +111,7 @@ class IPlugin(metaclass=abc.ABCMeta):
                     self.shadow_variable_param[param_key] = param_value
 
     def after_execute(self):
-        loguru.logger.debug("【{}】执行after",self.name)
+        loguru.logger.debug("【{}】执行after", self.name)
         # 记录执行结束时间
         self.run_record.stop()
         self.run_record.print()

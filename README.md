@@ -6,6 +6,7 @@
 - 基于python的插件机制,目前提供70+插件,同时支持自定义插件
 - 基于json的flow任务，支持自定义任务配置
 
+
 ![img.png](doc/doc/img/demo.png)
 
 ### 安装依赖
@@ -178,7 +179,6 @@ if __name__ == '__main__':
 | MqttOutput      | MQTT输出           |      |      |                               |
 | MongoDBOutput   | MongoDB输出        | 完成   | [MongoDB输出](doc/doc/MongoDBOutput.md) |
 | MarkdownOutput  | Markdown输出        |      |      |                               |
-| KafkaOutput     | Kafka输出          |      |      |                               |
 | HttpOutput      | Http输出         |      |      |                               |
 | HiveOutput      | Hive输出         |      |      |                               |
 | HdfsOutput      | HDFS输出        |      |      |                               |
@@ -186,7 +186,6 @@ if __name__ == '__main__':
 | ExcelOutput     | Excel输出          |      |      |          |  
 | EsOutput        | Elasticsearch输出 |      |      |
 | DuckOutput      | DuckDB输出         |      |      |
-| DorisOutput     | Doris输出         |      |      |
 | CsvOutput       | CSV输出           |      |      |
 | CosOutput       | COS输出           |      |      |
 | ClickHouseOutput | ClickHouse输出    |      |      |
