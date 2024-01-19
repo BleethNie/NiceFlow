@@ -13,12 +13,16 @@ class DuckDBInput(IPlugin):
 
     def execute(self):
         super(DuckDBInput, self).execute()
-        path = self.param["path"]
-        sql = self.param["sql"]
+        path = self.param.get("path","")
+        sql = self.param.get("sql","")
 
-        con = duckdb.connect(path)
-        df = duckdb.sql(sql,connection=con)
-        self.set_result(df)
+        if path=="":
+            duck_df = duckdb.sql(sql)
+        else:
+            con = duckdb.connect(path)
+            df = duckdb.sql(sql,connection=con).to_df()
+            duck_df = duckdb.from_df(df)
+        self.set_result(duck_df)
 
     def to_json(self):
         super(DuckDBInput, self).to_json()

@@ -35,7 +35,7 @@ NiceFlow exec --path csv_input_ck_output.json
 NiceFlow exec --path 1.json
 
 
-NiceFlow exec --path 2.json
+NiceFlow exec --path 2.json --cron 0 0 * * *
 
 ```
 

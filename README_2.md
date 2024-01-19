@@ -25,7 +25,7 @@ pip uninstall NiceFlow
 
 - 再安装新的
 ```shell
-pip install E:\02_Resource\01_Code\python\NiceFlow\NiceFlow\dist\NiceFlow-0.0.1-py3-none-any.whl
+pip install E:\02_Resource\01_Code\python\NiceFlow\NiceFlow\dist\NiceFlow-0.0.2-py3-none-any.whl
 ```
 
 

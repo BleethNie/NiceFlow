@@ -1,0 +1,22 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+
+    }},
+  "nodes": [
+    {
+      "id": "DuckDBInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "path": "${path}",
+        "sql": "${sql}"
+      }
+    }
+  ],
+  "edges": [
+
+  ]
+}

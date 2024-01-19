@@ -56,7 +56,6 @@ class MySQLOutput(IPlugin):
         if len(set_sql) != 0:
             set_sql = set_sql.removesuffix(",  ")
 
-
         # 写入实际的表中,表不存在则自动创建
         #  insert/只插入数据[无主键则全部插入，有主键则根据主键判断是否插入]
         #  update/只更新数据[需要更新键]
@@ -65,24 +64,24 @@ class MySQLOutput(IPlugin):
 
         with engine.connect() as conn:
             # 创建 {table}如果不存在
-            conn.execute(f"create table if not exists {table} like {temp_table}")
+            conn.execute(text(f"create table if not exists {table} like {temp_table}"))
 
             if write_method == "update":
                 update_sql = f"update  {table} l_table inner join {temp_table} r_table on {update_field_sql}  set {set_sql} ;"
-                conn.execute(update_sql)
+                conn.execute(text(update_sql))
             elif write_method == "overwrite":
-                conn.execute(f"truncate table {table}")
-                conn.execute(f"insert into {table} select * from {temp_table}")
+                conn.execute(text(f"truncate table {table}"))
+                conn.execute(text(f"insert into {table} select * from {temp_table}"))
             elif write_method == "merge":
                 insert_sql = f'insert into {table} select * from {temp_table} l_table where not exists (select 1 from {table} r_table where   {update_field_sql} ) ;'
                 update_sql = f"update  {table} l_table inner join {temp_table} r_table on {update_field_sql}  set {set_sql} ;"
-                conn.execute(insert_sql)
-                conn.execute(update_sql)
+                conn.execute(text(insert_sql))
+                conn.execute(text(update_sql))
             else:
                 # 默认使用insert
-                conn.execute(f"insert into {table} select * from {temp_table}")
+                conn.execute(text(f"insert into {table} select * from {temp_table}"))
             # 删除临时表
-            conn.execute(f"drop table {temp_table}")
+            conn.execute(text(f"drop table {temp_table}"))
 
         self.set_result(None)
 

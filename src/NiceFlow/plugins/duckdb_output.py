@@ -24,7 +24,6 @@ class DuckDBOutput(IPlugin):
 
         con.sql("CREATE TABLE {table_name} AS SELECT * FROM my_df".format(table_name=table))
 
-        # con.sql("INSERT INTO {table_name} SELECT * FROM my_df".format(table_name=table))
         con.commit()
 
         self.set_result(None)

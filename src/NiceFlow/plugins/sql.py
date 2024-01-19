@@ -6,7 +6,6 @@ from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
 from loguru import  logger
 
-# 空执行实际没有啥作用
 class SQL(IPlugin):
 
     def init(self, param: json, flow: Flow):
