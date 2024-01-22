@@ -36,10 +36,10 @@ class TestDuckDBInput(unittest.TestCase):
             "path": "",
             "sql": '''
              LOAD mysql;
+             -- ATTACH 'host=localhost user=root password=123456 port=3306 database=che' AS mysqldb (TYPE mysql_scanner);
              ATTACH 'host=localhost user=root password=123456 port=3306 database=che' AS mysqldb (TYPE mysql);
              USE mysqldb;
-
-             COPY (SELECT * FROM che_test ) TO 'che_test_1.parquet';
+             COPY (SELECT * FROM che_test  limit 1) TO 'che_test_4.parquet';
             ''',
         }
         # 从mysql导出8480496行数据，执行完成需要20秒
@@ -70,6 +70,22 @@ class TestDuckDBInput(unittest.TestCase):
         print(duck_df)
 
 
+    def test_export_mysql_to_mysql(self):
+        path = "duckdb_input_from_mysql_to_parquet.json"
+        myFlow: Flow = FlowManager.read(path)
+        flow_param = {
+            "path": "",
+            "sql": '''
+             LOAD mysql;
+             ATTACH 'host=localhost user=root password=123456 port=3306 database=che' AS che (TYPE mysql_scanner);
+             ATTACH 'host=localhost user=root password=123456 port=3306 database=dinky' AS dinky (TYPE mysql_scanner);
+             -- CREATE TABLE che.tbl AS SELECT * from dinky.dlink_flink_document;
+             
+            ''',
+        }
+        # 从mysql导出8480496行数据，执行完成需要20秒
+        myFlow.set_param(flow_param)
+        myFlow.run()
 
 
 if __name__ == '__main__':

@@ -28,6 +28,7 @@ class Flow(metaclass=abc.ABCMeta):
         if work_dir == None:
             self.con = duckdb.connect()
         self.param_dict: dict[str, object] = {}
+        self.debug = False
         self.start_signal = signal("")
         self.result_dict = {}
         logger.info("Flow Task创建成功,FlowUid = 【{}】".format(self.flow_uid))
@@ -74,8 +75,12 @@ class Flow(metaclass=abc.ABCMeta):
         self.param_dict.update(param_dict)
         return self
 
+    def debug(self,debug=True):
+        self.debug = debug
+        return self
+
     # 提交任务
-    def run(self, df: duckdb.DuckDBPyRelation = None):
+    def run(self):
         # 找到首节点
         for key in self.plugin_dict.keys():
             node: IPlugin = self.plugin_dict[key]
@@ -93,7 +98,7 @@ class Flow(metaclass=abc.ABCMeta):
                 node.close()
 
     # stream方式处理数据
-    def stream(self, df: duckdb.DuckDBPyRelation = None):
+    def stream(self):
         # 找到首节点
         for key in self.plugin_dict.keys():
             node: IPlugin = self.plugin_dict[key]

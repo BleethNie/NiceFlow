@@ -1,0 +1,43 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+
+    }},
+  "nodes": [
+    {
+      "id": "MySQLInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "host":"192.168.1.88",
+        "port":3306,
+        "username":"root",
+        "password":"123456",
+        "query": "${query}",
+        "mode": "cursor"
+      }
+    },
+    {
+      "id": "SQL",
+      "name": "sql2",
+      "type": "translate",
+      "properties": {
+        "inputs": [
+          {
+            "step": "read1",
+            "table": "che_df"
+          }
+        ],
+        "sql": "${sql}"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "sql2"
+    }
+  ]
+}

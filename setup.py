@@ -12,7 +12,7 @@ def read_file(filename):
 setup(
     # 基本信息
     name="NiceFlow",  # 项目名，确定唯一，不然上传 pypi 会失败
-    version="0.0.2",  # 项目版本
+    version="0.0.3",  # 项目版本
     author='BleethNie',  # 开发者
     author_email='xiao5406710@foxmail.com',  # 开发者邮箱
     description='ETL数据处理/数据迁移/数据分析工具',  # 摘要描述
@@ -39,7 +39,7 @@ setup(
     python_requires='>=3.8',
     # 表明当前模块依赖哪些包，若环境中没有，则会从pypi中下载安装
     install_requires=[
-        'duckdb >= 0.8.1',
+        'duckdb >= 0.9.2',
         'pandas >= 2.1.0',
         'pyarrow >= 13.0.0',
         'loguru >= 0.7.2',

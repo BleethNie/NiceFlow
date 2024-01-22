@@ -35,7 +35,6 @@ NiceFlow exec --path csv_input_ck_output.json
 NiceFlow exec --path 1.json
 
 
-NiceFlow exec --path 2.json --cron 0 0 * * *
 
 ```
 
@@ -111,12 +110,16 @@ if __name__ == '__main__':
 
 ```
 
+
+
+
 ### 架构图
 
 
 
-
 ### 插件使用说明文档
+
+
 
 #### 输入
 
