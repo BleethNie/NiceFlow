@@ -1,7 +1,8 @@
 import re
 import time
 from loguru import logger
-
+import datetime
+import random
 
 class XTimer:
 
@@ -59,6 +60,17 @@ def replace_vars(s: str, d: dict):
         s = s.replace("${" + var + "}", str(value))
     # 返回替换后的字符串
     return s,True
+
+
+def random_str()->str:
+
+    # 获取当前时间，精确到毫秒
+    current_time = datetime.datetime.now().strftime("%Y%m%d%H%M%S%f")
+    # 生成一个5位的随机码
+    random_code = ''.join(random.sample('0123456789', 5))
+    # 将时间和随机码拼接在一起
+    result = f"{current_time}_{random_code}"
+    return result
 
 
 if __name__ == '__main__':

@@ -1,0 +1,42 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+
+    }},
+  "nodes": [
+    {
+      "id": "MySQLInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "host": "127.0.0.1",
+        "port": 3306,
+        "username": "root",
+        "password": "123456",
+        "query": "select *,date_format(up_time,'%Y%m%d') as partition_day from che.che_test ",
+        "mode": "cursor"
+      }
+    },{
+      "id": "HDFSOutput",
+      "name": "out",
+      "type": "translate",
+      "properties": {
+        "url": "http://192.168.1.90:9870",
+        "user": "hdfs",
+        "source": "che_test",
+        "dest": "/user/hive/warehouse/test.db/che_test",
+        "columns": "grant_card_code,line_code,on_station,off_station,up_time,deal_time,partition_day",
+        "partitions": "partition_day",
+        "format": "parquet"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "out"
+    }
+  ]
+}
