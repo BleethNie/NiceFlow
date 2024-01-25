@@ -39,7 +39,7 @@ class IPlugin(metaclass=abc.ABCMeta):
         self.run_record: PluginTimeRecord = PluginTimeRecord(self)
         # 当前任务Flow
         from NiceFlow.core.flow import Flow
-        self.flow: Flow = None
+        self.flow: Flow
         # 设置信号
         self.signal = signal(self.name + "execute")
 
@@ -58,11 +58,6 @@ class IPlugin(metaclass=abc.ABCMeta):
         self.param = param["properties"]
         self.flow = flow
 
-        # self.bus: EventBus = self.flow.bus
-        # event = f"{self.id}:{self.name}"
-        # event_after = f"{self.id}:{self.name}:after"
-        # self.bus.add_event(self.execute, event)
-        # self.bus.add_event(self.after_execute, event_after)
 
     def set_result(self, df: duckdb.DuckDBPyRelation = None):
         # 设置结果
@@ -76,11 +71,6 @@ class IPlugin(metaclass=abc.ABCMeta):
         # 执行下一步
         for node in self.next_nodes:
             self.signal.connect(node.receiver, sender=self)
-            # if len(node._pre_result_dict) < len(node.pre_nodes):
-            #     continue
-            # node.bus.emit(event=f"{node.id}:{node.name}")
-            # logger.debug("event 执行完后执行after")
-            # node.bus.emit(event=f"{node.id}:{node.name}:after")
         self.after_execute()
         self.signal.send(self)
 

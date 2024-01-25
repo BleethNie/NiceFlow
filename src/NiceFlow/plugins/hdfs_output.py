@@ -1,5 +1,6 @@
 import json
 import os.path
+import shutil
 
 import duckdb
 from hdfs import InsecureClient
@@ -22,7 +23,7 @@ class HDFSOutput(IPlugin):
         url = self.param.get("url", "http://127.0.0.1:9870")
         user = self.param.get("user", "hdfs")
         source = self.param.get("source", "")
-        dest = self.param.get("dest", "")
+        hdfs_path = self.param.get("dest", "")
         partitions = self.param.get("partitions", "")
         format = self.param.get("format", "parquet")
         columns = self.param.get("columns", "*")
@@ -44,7 +45,8 @@ class HDFSOutput(IPlugin):
                 os.makedirs(source)
         else:
             parent_dir = os.path.dirname(source)
-            if not os.path.exists(parent_dir):
+            logger.debug(f"parent_dir: {parent_dir}")
+            if not os.path.exists(parent_dir) and parent_dir.strip():
                 os.makedirs(parent_dir)
 
         # 数据导出到本地
@@ -57,7 +59,8 @@ class HDFSOutput(IPlugin):
         # 数据写入hdfs
         client = InsecureClient(f'{url}', user=user)
         logger.debug(f"source is {source}")
-        client.upload(dest, source)
+
+        client.upload(hdfs_path, source,overwrite=True)
 
         self.set_result(None)
 
@@ -69,4 +72,4 @@ class HDFSOutput(IPlugin):
 
         source = self.param.get("source", "")
         if os.path.exists(source):
-            print("TODO:删除目录")
+            shutil.rmtree(source)

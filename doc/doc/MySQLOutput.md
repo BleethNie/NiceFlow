@@ -32,8 +32,6 @@ pip install sqlalchemy
 ```
 
 
-
-
 ### 2.2 参数说明
 
 | 参数名称     | 是否必须 | 默认值 | 描述       | 
@@ -41,7 +39,7 @@ pip install sqlalchemy
 | host | 是 | 127.0.0.1 | 数据库地址 |
 | port | 是 | 3306 | 数据库端口 |
 | db | 是 |  | 数据库名称 |
-| user | 是 | root | 数据库用户名 |
+| username | 是 | root | 数据库用户名 |
 | password | 是 | 123456 | 数据库密码 |
 | table | 是 |  | 数据库表名 |
 | write_method | 是 | insert | 写入方式，支持insert、update、merge、overwrite四种模式 |
@@ -50,10 +48,4 @@ pip install sqlalchemy
 
 ### 性能测试
 
-#### insert
 
-#### update
-
-#### merge
-
-#### overwrite

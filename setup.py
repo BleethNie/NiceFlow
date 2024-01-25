@@ -46,6 +46,7 @@ setup(
         'click>=8.1.7',
         'Faker>=19.6.1',
         'blinker>=1.7.0',
+        'pycryptodome==3.20.0',
         'sqlglot>=19.1.0'
     ],
     # 用来支持自动生成脚本，如下配置

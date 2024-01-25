@@ -33,9 +33,13 @@ class For(IPlugin):
         self.dict_result = df.to_df().to_dict(orient="records")
 
         if self.count == len(self.dict_result)+2:
+            loguru.logger.debug("self.count == len(self.dict_result)+2")
+            # 执行结束
             return
 
         if self.count == len(self.dict_result)+1:
+            loguru.logger.debug("执行set_result  len(self.dict_result)+1")
+            # 执行结束
             self.set_result(df)
             return
 
@@ -43,16 +47,16 @@ class For(IPlugin):
         for k, v in row.items():
             self.flow.param_dict["row.{}".format(k)] = v
 
+
         self.set_result(df)
 
 
     def set_result(self, df: duckdb.DuckDBPyRelation):
+            loguru.logger.debug("执行set_result")
             finish_step = self.param.get("finish_step", None)
 
             # 设置结果
             for node in self.next_nodes:
-                if finish_step is not None and node.name ==  finish_step:
-                    continue
                 node._pre_result_dict[self.name] = df
 
             true_or_false = self.count > len(self.dict_result)
@@ -63,6 +67,7 @@ class For(IPlugin):
                 if finish_step is not None :
                     loguru.logger.info("执行完成,执行完成步骤")
                     self.flow.plugin_dict[finish_step].execute()
+                    self.count = 1
                     return
 
             if true_or_false is False:
@@ -70,7 +75,6 @@ class For(IPlugin):
                     if finish_step is not None and node.name ==  finish_step:
                         continue
                     node.execute()
-
 
     def to_json(self):
         super(For, self).to_json()

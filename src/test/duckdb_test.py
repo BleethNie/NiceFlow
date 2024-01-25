@@ -23,9 +23,15 @@ class TestDuckDB(unittest.TestCase):
 
 
     def test_httpfs(self):
-        duckdb.sql('''INSTALL httpfs;''')
-        duckdb.sql('''LOAD httpfs;''')
-        duckdb.sql('''SELECT * FROM read_parquet('http://192.168.1.88/chfs/shared/tmp/1.parquet');''')
+        duck_df = duckdb.sql('''
+        FROM duckdb_extensions();
+    
+       -- LOAD httpfs;
+      --  create table  aaa as select * from   'http://192.168.1.90:14000/webhdfs/v1/tmp/che_test4.parquet?op=OPEN&user.name=hdfs' limit 3;
+      --  select * from aaa;
+        ''')
+        print(duck_df.to_df().to_clipboard())
+
 
 
     def test_httpfs_2(self):

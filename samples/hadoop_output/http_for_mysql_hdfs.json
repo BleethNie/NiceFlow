@@ -1,0 +1,83 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+    }
+  },
+  "nodes": [
+    {
+      "id": "HttpInput",
+      "name": "http",
+      "type": "input",
+      "properties": {
+        "port": 6666,
+        "handler_url": "/data"
+      }
+    },
+    {
+      "id": "For",
+      "name": "for",
+      "type": "input",
+      "properties": {
+        "finish_step": "console"
+      }
+    },
+    {
+      "id": "Console",
+      "name": "console",
+      "type": "input",
+      "properties": {
+        "row": 100
+      }
+    },
+    {
+      "id": "MySQLInput",
+      "name": "mysql",
+      "type": "input",
+      "properties": {
+        "host": "192.168.1.88",
+        "port": 3306,
+        "username": "root",
+        "password": "123456",
+        "db": "che",
+        "query": "select *,date_format(up_time,'%Y%m%d') as dt from ${row.table_name} where up_time >= '${row.start_up_time}' and  up_time < '${row.end_up_time}' ",
+        "mode": "cursor"
+      }
+    },
+    {
+      "id": "HDFSOutput",
+      "name": "hdfs",
+      "type": "translate",
+      "properties": {
+        "url": "http://192.168.1.90:14000",
+        "user": "hdfs",
+        "source": "${row.table_name}/dt=${row.start_up_time_format}/data.parquet",
+        "dest": "/user/hive/warehouse/test.db/${row.table_name}/dt=${row.start_up_time_format}/data.parquet",
+        "format": "parquet"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "http",
+      "endId": "for"
+    },
+    {
+      "startId": "for",
+      "endId": "console"
+    },
+    {
+      "startId": "for",
+      "endId": "mysql"
+    },
+    {
+      "startId": "mysql",
+      "endId": "hdfs"
+    },
+    {
+      "startId": "hdfs",
+      "endId": "for"
+    }
+  ]
+}

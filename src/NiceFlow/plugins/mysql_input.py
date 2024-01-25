@@ -1,6 +1,7 @@
 import json
 
 import duckdb
+import loguru
 import pandas as pd
 import pymysql
 from sqlalchemy import create_engine, text
@@ -34,6 +35,7 @@ class MySQLInput(IPlugin):
             self.connection = pymysql.connect(host=host, user=user, db=db,
                                       password=password, port=port, charset='utf8mb4')
             cursor = self.connection.cursor()
+            loguru.logger.debug(f"执行query = {query}")
             cursor.execute(query)
             # 获取表头
             des_list = cursor.description
