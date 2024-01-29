@@ -19,9 +19,11 @@ class ExcelOutput(IPlugin):
         logger.debug(self.param)
 
         file_name = self.param["file_name"]
-        sheet_name = self.param["sheet_name"]
-        duckdb_df.to_df().to_excel(file_name, sheet_name, index=False)
-
+        sheet_name = self.param.get("sheet_name", "")
+        if sheet_name == "":
+            duckdb_df.to_df().to_excel(file_name, index=False)
+        else:
+            duckdb_df.to_df().to_excel(file_name, sheet_name=sheet_name, index=False)
         self.set_result(None)
 
     def to_json(self):

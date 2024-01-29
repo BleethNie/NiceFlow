@@ -41,13 +41,10 @@ setup(
     install_requires=[
         'duckdb >= 0.9.2',
         'pandas >= 2.1.0',
-        'pyarrow >= 13.0.0',
         'loguru >= 0.7.2',
         'click>=8.1.7',
-        'Faker>=19.6.1',
         'blinker>=1.7.0',
-        'pycryptodome==3.20.0',
-        'sqlglot>=19.1.0'
+        'pycryptodome==3.20.0'
     ],
     # 用来支持自动生成脚本，如下配置
     # 在类Unix系统下，会在 /usr/local/bin下生成 NiceFlow 命令

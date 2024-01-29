@@ -16,7 +16,7 @@ class MarkdownOutput(IPlugin):
         super(MarkdownOutput, self).execute()
 
         file_path = self.param["file_path"]
-        limit = self.param.get("limit", 10)
+        limit = self.param.get("limit", 1000)
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
         df = self._pre_result_dict[pre_node.name]
