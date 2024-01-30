@@ -3,7 +3,7 @@ import unittest
 
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.manager import FlowManager
-from NiceFlow.core.mysqldb_logging_handler import MySQLDBLogHandler
+from NiceFlow.log.mysqldb_logging_handler import MySQLDBLogHandler
 
 
 def getProjectPath() -> str:

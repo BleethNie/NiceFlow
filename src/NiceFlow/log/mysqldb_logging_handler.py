@@ -4,7 +4,6 @@ import logging
 import pymysql
 
 
-
 class MySQLDBLogHandler(logging.Handler):
     """
     CREATE TABLE `flow_log` (

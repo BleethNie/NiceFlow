@@ -34,7 +34,8 @@ class Flow(metaclass=abc.ABCMeta):
         logger.info("Flow Task创建成功,FlowUid = 【{}】".format(self.flow_uid))
 
     @classmethod
-    def register_log_handler(cls, handler: logging.Handler = None):
+    def register_log_handler(cls,level="INFO", handler: logging.Handler = None):
+        logging.basicConfig(level=level)
         if handler is None:
             logger.configure(handlers=[{"sink": logging.StreamHandler, "serialize": True}])
         else:
@@ -75,9 +76,6 @@ class Flow(metaclass=abc.ABCMeta):
         self.param_dict.update(param_dict)
         return self
 
-    def debug(self,debug=True):
-        self.debug = debug
-        return self
 
     # 提交任务
     def run(self):
