@@ -21,5 +21,13 @@ class TestDuckDBInput(unittest.TestCase):
         myFlow.set_param(flow_param)
         myFlow.run()
 
+    def test_hdfs_import_data_to_mysql(self):
+        path = "mysql_input_to_hdfs_all_sync.json"
+        myFlow: Flow = FlowManager.read(path)
+        flow_param ={}
+        myFlow.set_param(flow_param)
+        myFlow.run()
+
+
 if __name__ == '__main__':
     unittest.main()

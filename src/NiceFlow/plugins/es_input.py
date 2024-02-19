@@ -2,7 +2,7 @@ import json
 
 import duckdb
 import pandas as pd
-from clickhouse_driver import Client
+from elasticsearch import Elasticsearch
 
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
@@ -16,24 +16,33 @@ class ESInput(IPlugin):
     def execute(self):
         super(ESInput, self).execute()
         # param信息
-        host = self.param["host"]
-        port = self.param.get("port", 9000)
-        db = self.param["db"]
-        user = self.param.get("username", "default")
-        password = self.param.get("password", "")
-        table = self.param.get("table", "")
-        sql = self.param.get("sql", "")
+        url = self.param["url"]
+        index = self.param.get("index", "")
+        query = self.param.get("query", "")
 
         # 配置数据库
-        client = Client(host=host, port=port, database=db, user=user, password=password)
+        es = Elasticsearch(hosts=url)
+        res = es.search(index=index, scroll='1m', body=query)
+        sid = res['_scroll_id']
+        scroll_size_max = res['hits']['total']['value']
+        count = 0
+        print(scroll_size_max)
 
-        # 读取数据
-        data,columns = client.execute(sql,with_column_types=True)
-        real_columns = [item[0] for item in columns]
-        df = pd.DataFrame(data,columns=real_columns)
-        ck_df = duckdb.from_df(df)
+        save_data = []
+        while count < scroll_size_max:
+            for data in res['hits']['hits']:
+                print(count, data)
+                save_data.append(data['_source'])
+                count += 1
+            res = es.scroll(scroll_id=sid, scroll='2m')
+            sid = res['_scroll_id']
+
+        # 清除scroll_id
+        es.clear_scroll(scroll_id=sid)
+        df = pd.DataFrame(save_data)
+        duck_df = duckdb.from_df(df)
         # 写入结果
-        self.set_result(ck_df)
+        self.set_result(duck_df)
 
     def to_json(self):
         super(ESInput, self).to_json()

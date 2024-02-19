@@ -1,0 +1,52 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+    }
+  },
+  "nodes": [
+    {
+      "id": "FakerInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "rows": 10000,
+        "columns": [
+          "name",
+          "address",
+          "city",
+          "street_address",
+          "date_of_birth",
+          "phone_number"
+        ],
+        "randoms": [
+          {
+            "key": "sex",
+            "values": [
+              "男",
+              "女",
+              "未知"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "ESOutput",
+      "name": "out",
+      "type": "output",
+      "properties": {
+        "url": "${url}",
+        "basic_auth": ["elastic","Elastic_pxs4wn"],
+        "index": "${index}"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "out"
+    }
+  ]
+}

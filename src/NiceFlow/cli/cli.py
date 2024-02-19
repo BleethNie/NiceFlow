@@ -43,8 +43,10 @@ def explore():
 @click.option("--res_path", default="", help="输入文件路径，该路径下的文件会被自动加载到db中[可选]")
 @click.option("--function_path", default="", help="输入函数路径，该路径为python文件,可以作为数据库自定义函数使用[可选]")
 @click.option("--result_path", default="", help="输入结果路径,支持csv,json,parquet,txt,excel,clipboard当输入为clipboard时,结果直接写入剪贴板")
+@click.option("--is_overwrite", default="False", help="是否重新加载数据")
+@click.option("--all_varchar", default="", help="是否全为varchar类型")
 def sql(sql_script: str = None, sql_path: str = None, db_path: str = None, res_path: str = None,
-        function_path: str = None, result_path: str = None):
+        function_path: str = None, result_path: str = None, is_overwrite=False, all_varchar=False):
     if db_path:
         con = duckdb.connect(db_path)
     else:
@@ -57,10 +59,17 @@ def sql(sql_script: str = None, sql_path: str = None, db_path: str = None, res_p
                 continue
             table_name = file.split(".")[0]
             file_suffix = file.split(".")[1]
+
+            # 表存在并且不是覆盖模式，则跳过
+            table_name_result = con.execute(f'''SELECT * FROM sqlite_master WHERE type='table' AND name='{table_name}';''')
+            if is_overwrite is False and len(table_name_result.fetchall()) > 0:
+                continue
+
+            # 表需要重新加载
             if file_suffix.lower() == "csv":
                 con.sql(f'''
                 drop table if EXISTS  {table_name};
-                CREATE TABLE {table_name} AS SELECT * FROM read_csv_auto('{table_path}',header = true);
+                CREATE TABLE {table_name} AS SELECT * FROM read_csv_auto('{table_path}',header = true,ALL_VARCHAR={all_varchar});
                 ''')
             if file_suffix.lower() == "parquet":
                 con.sql(f'''
@@ -79,11 +88,13 @@ def sql(sql_script: str = None, sql_path: str = None, db_path: str = None, res_p
                 drop table if EXISTS  {table_name};
                 CREATE TABLE {table_name} AS SELECT * FROM read_json('{table_path}',auto_detect=true);
                 ''')
+    # 加载自定义函数
     if function_path:
         module = load_module(function_path)
         items = inspect.getmembers(module, inspect.isfunction)
         for item in items:
             con.create_function(item[0], item[1])
+    #
     if sql_script:
         duck_df = con.sql(sql_script)
     else:
@@ -160,6 +171,42 @@ def decrypt(path: str, password: str):
                     node_properties[key] = decrypt
     with open(path, 'w', encoding='utf8') as fp:
         json.dump(flow_json, fp, indent=2, ensure_ascii=False)
+
+
+
+@cli.command('serve', short_help='启动server服务')
+@click.password_option()
+def serve():
+
+    pass
+
+
+
+@cli.command('client', short_help='客户端可以提交任务到服务端，查看服务端相关内容')
+@click.password_option()
+def decrypt(path: str, password: str):
+    from NiceFlow.core.utils.encrypt_data import EncryptData
+
+    eg = EncryptData(password)
+    with open(path, 'r', encoding='utf8') as fp:
+        flow_json = json.load(fp)
+        nodes_array: json = flow_json["nodes"]
+        # 组装node,edge
+        for node_json in nodes_array:
+            node_properties: json = node_json["properties"]
+            items = node_properties.items()
+            for key, value in items:
+                if key in ["password", "passwd"]:
+                    decrypt_content = re.findall("AES\\((.*)\\)", value)[0]
+                    decrypt = eg.decrypt(decrypt_content)
+                    if decrypt is None:
+                        return
+                    node_properties[key] = decrypt
+    with open(path, 'w', encoding='utf8') as fp:
+        json.dump(flow_json, fp, indent=2, ensure_ascii=False)
+
+
+
 
 
 if __name__ == '__main__':

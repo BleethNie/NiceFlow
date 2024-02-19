@@ -15,7 +15,7 @@
         "port": 3306,
         "username": "root",
         "password": "123456",
-        "query": "select * from che.che_test where up_time >= '2010-01-25 00:00:00' and  up_time < '2012-12-30 00:00:00' ",
+        "query": "select *,LEFT(create_time,10) as dt from wulian.wvp_log ",
         "mode": "cursor"
       }
     },
@@ -26,10 +26,9 @@
       "properties": {
         "url": "http://192.168.1.90:14000",
         "user": "hdfs",
-        "source": "che_test4.parquet",
-        "dest": "/tmp/che_test4.parquet",
-        "columns": "grant_card_code,line_code,on_station,off_station,up_time,deal_time",
-        "partitions": "",
+        "source": "wvp_log",
+        "dest": "/user/hive/warehouse/test.db/wvp_log",
+        "partitions": "dt",
         "format": "parquet"
       }
     }

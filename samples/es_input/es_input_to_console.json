@@ -1,0 +1,23 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+
+    }},
+  "nodes": [
+    {
+      "id": "ESInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "url": "${path}",
+        "index": "${sql}",
+        "query": "${query}"
+      }
+    }
+  ],
+  "edges": [
+
+  ]
+}
