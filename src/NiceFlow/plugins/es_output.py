@@ -1,7 +1,6 @@
 import json
 
 from pandas import DataFrame
-from pyarrow import RecordBatch
 from elasticsearch import Elasticsearch, helpers
 
 from NiceFlow.core.flow import Flow

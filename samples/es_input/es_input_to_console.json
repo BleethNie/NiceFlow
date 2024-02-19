@@ -11,8 +11,9 @@
       "name": "read1",
       "type": "input",
       "properties": {
-        "url": "${path}",
-        "index": "${sql}",
+        "url": "${url}",
+        "basic_auth": ["elastic","Elastic_pxs4wn"],
+        "index": "${index}",
         "query": "${query}"
       }
     }
