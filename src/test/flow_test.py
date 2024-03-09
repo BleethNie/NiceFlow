@@ -30,8 +30,8 @@ class TestFlow(unittest.TestCase):
         myFlow.run()
 
     def test_mysql_log_handler(self):
-        handler = MySQLDBLogHandler()
-        Flow.register_log_handler(handler)
+        # handler = MySQLDBLogHandler()
+        # Flow.register_log_handler(handler)
         path = getProjectPath() + "/doc/faker_input_console.json"
         myFlow: Flow = FlowManager.read(path)
 

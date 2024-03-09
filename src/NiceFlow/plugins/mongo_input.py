@@ -1,5 +1,6 @@
 import json
 
+import duckdb
 import pandas as pd
 from pymongo import MongoClient
 
@@ -21,7 +22,8 @@ class MongoInput(IPlugin):
         db = self.client['database_name']
         collection = db['collection_name']
         df = pd.DataFrame(list(collection.find()))
-        self.set_result(df)
+        duck_df = duckdb.from_df(df)
+        self.set_result(duck_df)
 
     def to_json(self):
         super(MongoInput, self).to_json()
