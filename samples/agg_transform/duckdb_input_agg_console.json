@@ -1,0 +1,72 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+    }
+  },
+  "nodes": [
+    {
+      "id": "FakerInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "rows": 10000,
+        "columns": [
+          "name",
+          "address",
+          "city",
+          "street_address",
+          "date_of_birth",
+          "phone_number"
+        ],
+        "randoms": [
+          {
+            "key": "sex",
+            "values": [
+              "男",
+              "女",
+              "未知"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "Agg",
+      "name": "duck",
+      "type": "output",
+      "properties": {
+        "key": "name",
+        "aggs": [
+          {
+            "value": "sex",
+            "agg": "group_concat"
+          },
+          {
+            "value": "date_of_birth",
+            "agg": "count"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Console",
+      "name": "res",
+      "type": "output",
+      "properties": {
+        "row": 1000
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "duck"
+    },
+    {
+      "startId": "duck",
+      "endId": "res"
+    }
+  ]
+}

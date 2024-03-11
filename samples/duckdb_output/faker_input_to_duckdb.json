@@ -1,0 +1,37 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+
+    }},
+  "nodes": [
+    {
+      "id": "FakerInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "rows":10000,
+        "columns": ["name","address","city","street_address","date_of_birth","phone_number"],
+        "randoms":[
+          {"key":"sex","values":["男","女","未知"]}
+        ]
+      }
+    },
+    {
+      "id": "DuckDBOutput",
+      "name": "duck",
+      "type": "output",
+      "properties": {
+        "path": "C:\\Users\\xiaow\\Desktop\\CCC\\11.db",
+        "table": "ab"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "duck"
+    }
+  ]
+}
