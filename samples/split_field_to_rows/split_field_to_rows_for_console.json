@@ -1,0 +1,49 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+    }
+  },
+  "nodes": [
+    {
+      "id": "FakerInput",
+      "name": "faker",
+      "type": "input",
+      "properties": {
+        "rows":10,
+        "columns": ["name","address","city","street_address","date_of_birth","phone_number"],
+        "randoms":[
+          {"key":"sex","values":["男:1","女:2","未知:3"]}
+        ]
+      }
+    },
+    {
+      "id": "SplitFieldToRowsInput",
+      "name": "convert",
+      "type": "input",
+      "properties": {
+        "column": "sex",
+        "split": ":",
+        "new_column": "new_sex"
+      }
+    },
+    {
+      "id": "Console",
+      "name": "out",
+      "type": "translate",
+      "properties": {
+        "row": 100
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "faker",
+      "endId": "convert"
+    }, {
+      "startId": "convert",
+      "endId": "out"
+    }
+  ]
+}

@@ -168,7 +168,7 @@ if __name__ == '__main__':
 | OdpsInput       | 读取MaxCompute数据    | 完成   | [Odps输入](doc/doc/OdpsInput.md) |           
 | ESInput         | 读取Elasticsearch数据 | 完成   | [Elasticsearch输入](doc/doc/ESInput.md) |         
 | MongoDBInput    | 读取MongoDB数据       | 完成   | [MongoDB输入](doc/doc/MongoDBInput.md) |
-| MqttInput       | 从Mqtt Broker读取数据  |    | [MqttInput输入](doc/doc/MqttInput.md) |
+| MqttInput       | 从Mqtt Broker读取数据  |  完成  | [MqttInput输入](doc/doc/MqttInput.md) |
 
 #### 转换
 
@@ -193,6 +193,8 @@ if __name__ == '__main__':
 | While          | 循环转换器 | 完成   | [循环转换器](doc/doc/While.md) |
 | Duplicate      | 去重器  | 完成   | [去重器](doc/doc/Duplicate.md) |
 | Console        | 控制台打印 | 完成   | [控制台输出](doc/doc/Console.md)    |
+| SplitFieldToRows         | 列拆分为多行 |  完成  | [列转行](doc/doc/SplitFieldToRows.md)    |
+
 
 #### 输出
 
