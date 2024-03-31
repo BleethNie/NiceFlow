@@ -15,9 +15,9 @@ class HelloInput(IPlugin):
     def execute(self):
         super(HelloInput, self).execute()
         df = pd.DataFrame([{"F1":"1","F2":"2"}])
-        ck_df = duckdb.from_df(df)
+        duck_df = duckdb.from_df(df)
         # 写入结果
-        self.set_result(ck_df)
+        self.set_result(duck_df)
 
 
     def to_json(self):

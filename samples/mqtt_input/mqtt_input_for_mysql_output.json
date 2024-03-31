@@ -1,0 +1,42 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+    }
+  },
+  "nodes": [
+    {
+      "id": "MqttInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "host": "192.168.1.90",
+        "port": 1883,
+        "topic": "/a/a",
+        "username": "",
+        "password": ""
+      }
+    },
+    {
+      "id": "MySQLOutput",
+      "name": "out",
+      "type": "translate",
+      "properties": {
+        "host": "127.0.0.1",
+        "port": 3306,
+        "username": "root",
+        "password": "123456",
+        "db": "che",
+        "table": "che_config",
+        "write_method": "insert"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "out"
+    }
+  ]
+}
