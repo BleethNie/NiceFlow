@@ -11,9 +11,9 @@ ___
 
 
 
-## 2 功能说明
+## 3 功能说明
 
-### 2.1 配置样例
+### 3.1 配置样例
 
 * 配置一个从csv文件同步抽取数据到本地的作业:
 
@@ -31,7 +31,7 @@ ___
       "name": "read1",
       "type": "input",
       "properties": {
-        "file_name": "F:\\07_数据源大全\\store_order\\sales.csv"
+        "filename": "F:\\07_数据源大全\\store_order\\sales.csv"
       }
     },
     {
@@ -39,7 +39,7 @@ ___
       "name": "read2",
       "type": "input",
       "properties": {
-        "file_name": "F:\\07_数据源大全\\store_order\\store.csv"
+        "filename": "F:\\07_数据源大全\\store_order\\store.csv"
       }
     },
     {
@@ -88,7 +88,7 @@ ___
 
 
 
-### 2.2 参数说明
+### 3.2 参数说明
 
 * **file_name**
 

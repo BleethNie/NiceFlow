@@ -156,7 +156,7 @@ if __name__ == '__main__':
 
 | 插件              | 功能                | 完成情况 | 文档                            |
 |-----------------|-------------------|------|-------------------------------|
-| Starter         | 启动器               | 完成   | [启动器](doc/doc/Starter.md)     |
+| Starter         | 启动器               |    | [启动器](doc/doc/Starter.md)     |
 | CsvInput        | 读取CSV数据           | 完成   | [CSV输入](doc/doc/CSVInput.md ) |
 | FakerInput      | 假数据生成             | 完成   |  [假数据生成](doc/doc/FakerInput.md) |       
 | ParquetInput    | 读取Parquet数据       | 完成   | [Parquet输入](doc/doc/ParquetInput.md)    |    

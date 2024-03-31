@@ -11,7 +11,7 @@
       "name": "read1",
       "type": "input",
       "properties": {
-        "file_name": "F:\\07_数据源大全\\ssb.csv"
+        "filename": "F:\\07_数据源大全\\ssb.csv"
       }
     },
     {

@@ -11,8 +11,7 @@
       "name": "read1",
       "type": "input",
       "properties": {
-        "file_name": "F:/07_数据源大全/store_order/sales.csv",
-        "type": "csv"
+        "filename": "F:/07_数据源大全/store_order/sales.csv"
       }
     },
     {

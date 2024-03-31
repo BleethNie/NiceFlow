@@ -1,5 +1,7 @@
 import json
 
+import duckdb.duckdb
+
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
 
@@ -22,8 +24,19 @@ class CsvInput(IPlugin):
 
     def execute(self):
         super(CsvInput, self).execute()
-        file_name = self.param["file_name"]
-        csv_df = self.flow.con.read_csv(file_name,header=True)
+        filename = self.param["filename"]
+        header = self.param.get("header", True)
+        all_varchar = self.param.get("all_varchar", None)
+        compression = self.param.get("compression", "auto")
+        delim = self.param.get("delim", ",")
+        names = self.param.get("names", [])
+        sample_size = self.param.get("sample_size", 20480)
+        dtype = self.param.get("dtype", [])
+        encoding = self.param.get("encoding", None)
+        skip = self.param.get("skip", None)
+
+        csv_df = duckdb.read_csv(name=filename, header=header, compression=compression, sep=delim, dtype=dtype,
+                                 encoding=encoding, sample_size=sample_size, all_varchar=all_varchar,skiprows=skip, names=names)
         self.set_result(csv_df)
 
     def to_json(self):

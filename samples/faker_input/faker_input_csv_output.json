@@ -7,21 +7,23 @@
     }},
   "nodes": [
     {
-      "id": "ParquetInput",
+      "id": "FakerInput",
       "name": "read1",
       "type": "input",
       "properties": {
-        "file_name": "F:\\07_数据源大全\\车站数据\\后两周的数据\\bus0416.parquet",
-        "type": "parquet"
+        "rows":10000,
+        "columns": ["name","address","city","street_address","date_of_birth","phone_number"],
+        "randoms":[
+          {"key":"sex","values":["男","女","未知"]}
+        ]
       }
     },
     {
-      "id": "Console",
+      "id": "CsvOutput",
       "name": "write1",
       "type": "output",
       "properties": {
-        "file_name": "F:\\07_数据源大全\\车站数据\\后两周的数据\\bus0416.parquet",
-        "type": "parquet"
+        "file_name": "1.csv"
       }
     }
   ],

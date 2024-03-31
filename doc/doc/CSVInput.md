@@ -1,19 +1,14 @@
-
 # CsvInput 插件文档
 
 ___
 
-
-
 ## 1 快速介绍
 
-从csv文件中读取数据
+从csv文件中读取数据,参数配置可以参考duckdb的read_csv函数，https://duckdb.org/docs/data/csv/overview.html
 
+## 3 功能说明
 
-
-## 2 功能说明
-
-### 2.1 配置样例
+### 3.1 配置样例
 
 * 配置一个从csv文件同步抽取数据到本地的作业:
 
@@ -31,7 +26,7 @@ ___
       "name": "read1",
       "type": "input",
       "properties": {
-        "file_name": "F:\\07_数据源大全\\store_order\\sales.csv"
+        "filename": "F:\\07_数据源大全\\store_order\\sales.csv"
       }
     },
     {
@@ -39,7 +34,7 @@ ___
       "name": "read2",
       "type": "input",
       "properties": {
-        "file_name": "F:\\07_数据源大全\\store_order\\store.csv"
+        "filename": "F:\\07_数据源大全\\store_order\\store.csv"
       }
     },
     {
@@ -85,24 +80,9 @@ ___
 }
 ```
 
+### 3.2 参数说明
 
-
-
-### 2.2 参数说明
-
-* **file_name**
-
-    * 描述：csv文件名 支持文件夹 如：'folder/*.csv' 
-
-    * 必选：是 <br />
-
-    * 默认值：无 <br />
-
-* **header**
-
-    * 描述：boolean类型，是否包含表头,true为包含，false为不包含。
-
-    * 必选：否 <br />
-
-    * 默认值：无 <br />
-
+| 参数名称     | 是否必须 | 默认值/示例值 | 描述                                                             | 
+|----------|------|----|----------------------------------------------------------------|
+| filename | 是    |  | 需要读取的文件，支持通配符和读取文件夹                                            |
+| 其它参数     |     |  | 其它参数都是非必填参数， 参考：https://duckdb.org/docs/data/csv/overview.html |

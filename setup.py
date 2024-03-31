@@ -39,7 +39,7 @@ setup(
     python_requires='>=3.8',
     # 表明当前模块依赖哪些包，若环境中没有，则会从pypi中下载安装
     install_requires=[
-        'duckdb >= 0.9.2',
+        'duckdb >= 0.10.1',
         'pandas >= 2.1.0',
         'loguru >= 0.7.2',
         'click>=8.1.7',

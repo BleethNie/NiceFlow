@@ -1,5 +1,5 @@
 hdfs==2.7.2
-duckdb==0.8.1
+duckdb==0.10.1
 pandas==2.1.0
 SQLAlchemy==2.0.20
 Faker==19.6.1
