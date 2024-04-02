@@ -1,0 +1,33 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+    }
+  },
+  "nodes": [
+    {
+      "id": "KafkaInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "hosts": ["192.168.1.90:9092"],
+        "topic": "a-a"
+      }
+    },
+    {
+      "id": "Console",
+      "name": "out",
+      "type": "translate",
+      "properties": {
+        "rows": 100
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "out"
+    }
+  ]
+}

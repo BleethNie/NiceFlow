@@ -6,18 +6,18 @@ ___
 
 一列转多行,将下列2行数据，通过features列分割成5行
 
-| id | features |
-|------|------|
-|1|    feature1;feature2;feature3|
-|2 |    feature4;feature5|
+| id  | features                   |
+|-----|----------------------------|
+| 1   | feature1;feature2;feature3 |
+| 2   | feature4;feature5          |
 
-| id | features |new_features|
-|------|------|------|
-|1    |feature1;feature2;feature3    |feature1|
-|1    |feature1;feature2;feature3|    feature2|
-|1    |feature1;feature2;feature3    |feature3|
-|2    |feature4;feature5    |feature4|
-|2    |feature4;feature5|    feature5|
+| id | features                       | new_features |
+|------|--------------------------------|--------------|
+|1    | feature1;feature2;feature3     | feature1     |
+|1    | feature1;feature2;feature3     | feature2     |
+|1    | feature1;feature2;feature3     | feature3     |
+|2    | feature4;feature5              | feature4     |
+|2    | feature4;feature5              | feature5     |
 
 ## 2 pip依赖
 
