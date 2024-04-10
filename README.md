@@ -9,8 +9,13 @@
 - 基于json的flow任务，支持自定义任务配置
 - 底层基于duckdb的内存数据库，支持sql脚本和json配置,支持亿级别的数据进行join查询，并且毫秒出结果
 
+#### 示例
 
-![img.png](doc/doc/img/demo.png)
+![img1.png](doc/doc/img/demo1.png)
+
+![img2.png](doc/doc/img/demo2.png)
+
+
 
 ### 安装依赖
 
