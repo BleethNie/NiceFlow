@@ -23,7 +23,7 @@
       "name": "write1",
       "type": "output",
       "properties": {
-        "file_name": "1.csv"
+        "filename": "1.csv"
       }
     }
   ],

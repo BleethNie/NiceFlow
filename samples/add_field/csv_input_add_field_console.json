@@ -23,7 +23,7 @@
       "type": "translate",
       "properties": {
         "columns": [
-          {"key": "on_station", "function": "print_hello(line_code)"}
+          {"key": "on_station", "function": "print_hello('line_code')"}
         ]
       }
     },

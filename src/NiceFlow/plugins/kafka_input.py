@@ -49,3 +49,4 @@ class KafkaInput(IPlugin):
 
     def to_json(self):
         super(KafkaInput, self).to_json()
+

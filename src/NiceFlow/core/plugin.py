@@ -58,7 +58,6 @@ class IPlugin(metaclass=abc.ABCMeta):
         self.param = param["properties"]
         self.flow = flow
 
-
     def set_result(self, df: duckdb.DuckDBPyRelation = None):
         # 设置结果
         self.df_count = 0 if df is None else len(df)
@@ -73,6 +72,11 @@ class IPlugin(metaclass=abc.ABCMeta):
             self.signal.connect(node.receiver, sender=self)
         self.after_execute()
         self.signal.send(self)
+
+    # 获取字段信息
+    def query_field(self) -> dict:
+        df: duckdb.DuckDBPyRelation =  self.flow.get_result()[self.name]
+        return df.dtypes
 
     # 关闭资源
     def close(self):
@@ -120,3 +124,4 @@ class IPlugin(metaclass=abc.ABCMeta):
             "type": self.type,
             "properties": self.param
         }
+

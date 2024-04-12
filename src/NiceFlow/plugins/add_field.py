@@ -3,12 +3,10 @@ import inspect
 import json
 
 import duckdb
+from loguru import logger
 
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
-from loguru import logger
-
-from build.lib.NiceFlow.common.module_util import load_module
 
 
 class AddField(IPlugin):
@@ -32,7 +30,7 @@ class AddField(IPlugin):
             key = column["key"]
             function = column["function"]
             sql = sql + f"{function} as {key}, "
-        sql = sql.removesuffix(", ")+" from df"
+        sql = sql.removesuffix(", ") + " from df"
 
         # 获取上一步结果
         pre_node = self.pre_nodes[0]

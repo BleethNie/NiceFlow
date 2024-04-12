@@ -11,7 +11,7 @@ class CsvOutput(IPlugin):
 
     def execute(self):
         super(CsvOutput, self).execute()
-        file_name = self.param["file_name"]
+        file_name = self.param["filename"]
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
         duck_df = self._pre_result_dict[pre_node.name]
