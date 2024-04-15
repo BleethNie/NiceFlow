@@ -9,10 +9,10 @@ from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
 
 
-class AddField(IPlugin):
+class Function(IPlugin):
 
     def init(self, param: json, flow: Flow):
-        super(AddField, self).init(param, flow)
+        super(Function, self).init(param, flow)
         self.con = duckdb.connect()
 
         # 注册函数
@@ -22,7 +22,7 @@ class AddField(IPlugin):
             self.con.create_function(item[0], item[1])
 
     def execute(self):
-        super(AddField, self).execute()
+        super(Function, self).execute()
 
         sql = "select *, "
         columns = self.param["columns"]
@@ -41,7 +41,7 @@ class AddField(IPlugin):
         self.set_result(df)
 
     def to_json(self):
-        super(AddField, self).to_json()
+        super(Function, self).to_json()
 
     def close(self):
-        super(AddField, self).close()
+        super(Function, self).close()

@@ -47,7 +47,7 @@ ___
             "step": "read1",
             "table": "sales_df"
           },
-          {
+          { 
             "step": "read2",
             "table": "store_df"
           }
