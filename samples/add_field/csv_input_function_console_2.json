@@ -1,0 +1,56 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": ""
+  },
+  "nodes": [
+    {
+      "id": "Function",
+      "name": "Function",
+      "type": "input",
+      "properties": {
+        "columns": [
+          {
+            "key": "jcz",
+            "function": "md5(dwbsm)"
+          },
+          {
+            "key": "ffff",
+            "function": "md5(dwbsm)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "CsvInput",
+      "name": "CsvInput",
+      "type": "input",
+      "properties": {
+        "filename": "C:/Users/xiaow/Downloads/aaa.csv",
+        "delimiter": "\t",
+        "file_header": true,
+        "file_encode": "UTF-8",
+        "dtype": {"dwbsm": "varchar"}
+      }
+    },
+    {
+      "id": "Console",
+      "name": "Console",
+      "type": "input",
+      "properties": {
+        "row": "100"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "CsvInput",
+      "endId": "Function"
+    },
+    {
+      "startId": "Function",
+      "endId": "Console"
+    }
+  ]
+}

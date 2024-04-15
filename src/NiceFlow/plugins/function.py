@@ -24,17 +24,26 @@ class Function(IPlugin):
     def execute(self):
         super(Function, self).execute()
 
-        sql = "select *, "
+        # 获取上一步结果
+        pre_node = self.pre_nodes[0]
+        df = self._pre_result_dict[pre_node.name]
+        table_columns = df.columns
+
+        sql = "select * "
+        replace_sql = "REPLACE ( "
+        as_sql = ""
         columns = self.param["columns"]
         for column in columns:
             key = column["key"]
             function = column["function"]
-            sql = sql + f"{function} as {key}, "
-        sql = sql.removesuffix(", ") + " from df"
-
-        # 获取上一步结果
-        pre_node = self.pre_nodes[0]
-        df = self._pre_result_dict[pre_node.name]
+            if key in table_columns:
+                replace_sql = replace_sql + f'{function} as {key}, '
+            else:
+                as_sql = as_sql + f"{function} as {key} , "
+        if replace_sql != "REPLACE ( ":
+            sql = sql + replace_sql.removesuffix(", ") + "), " + as_sql.removesuffix(", ") + "from df"
+        else:
+            sql = sql + as_sql.removesuffix(", ") + "from df"
 
         logger.debug("sql = {}".format(sql))
         df = duckdb.from_df(self.con.sql(sql).df())

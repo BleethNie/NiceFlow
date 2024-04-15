@@ -28,14 +28,14 @@ class CsvInput(IPlugin):
         header = self.param.get("header", True)
         all_varchar = self.param.get("all_varchar", None)
         compression = self.param.get("compression", "auto")
-        delim = self.param.get("delim", ",")
+        delimiter = self.param.get("delimiter", ",")
         names = self.param.get("names", [])
         sample_size = self.param.get("sample_size", 20480)
         dtype = self.param.get("dtype", [])
         encoding = self.param.get("encoding", None)
         skip = self.param.get("skip", None)
 
-        csv_df = duckdb.read_csv(name=filename, header=header, compression=compression, sep=delim, dtype=dtype,
+        csv_df = duckdb.read_csv(name=filename, header=header, compression=compression, sep=delimiter, dtype=dtype,
                                  encoding=encoding, sample_size=sample_size, all_varchar=all_varchar,skiprows=skip, names=names)
         self.set_result(csv_df)
 
