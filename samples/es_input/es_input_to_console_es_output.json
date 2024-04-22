@@ -12,15 +12,26 @@
       "type": "input",
       "properties": {
         "url": "${url}",
-        "basic_auth": [
-          "elastic",
-          "Elastic_pxs4wn"
-        ],
+
         "index": "${index}",
         "query": "${query}"
+      }
+    },
+    {
+      "id": "ESOutput",
+      "name": "write",
+      "type": "output",
+      "properties": {
+        "url": "${url}",
+        "index": "aaa",
+        "batch_size": 1000
       }
     }
   ],
   "edges": [
+    {
+      "startId": "read1",
+      "endId": "write"
+    }
   ]
 }

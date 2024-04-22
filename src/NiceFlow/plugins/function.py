@@ -43,7 +43,7 @@ class Function(IPlugin):
         if replace_sql != "REPLACE ( ":
             sql = sql + replace_sql.removesuffix(", ") + "), " + as_sql.removesuffix(", ") + "from df"
         else:
-            sql = sql + as_sql.removesuffix(", ") + "from df"
+            sql = sql + "," + as_sql.removesuffix(", ") + "from df"
 
         logger.debug("sql = {}".format(sql))
         df = duckdb.from_df(self.con.sql(sql).df())

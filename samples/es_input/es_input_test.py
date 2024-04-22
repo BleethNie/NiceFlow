@@ -27,5 +27,23 @@ class TestESInput(unittest.TestCase):
         duck_df = list(result_dict.values())[0]
         print(duck_df)
 
+
+    def test_es_input_to_console_es_output(self):
+        path = "es_input_to_console_es_output.json"
+        myFlow: Flow = FlowManager.read(path)
+        flow_param = {
+            "url": "http://127.0.0.1:9200",
+            "index": "test",
+            "query": '''{
+                "query":{
+                    "match_all":{}
+                }
+            }'''
+        }
+        myFlow.set_param(flow_param)
+        myFlow.run()
+
+
+
 if __name__ == '__main__':
     unittest.main()

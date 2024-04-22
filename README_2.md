@@ -90,10 +90,13 @@ pip install E:\02_Resource\01_Code\python\NiceFlow\NiceFlow\dist\NiceFlow-0.0.5-
 #打包
 python setup.py bdist_wheel
 
-#安装
-conda activate test_flow
 
-pip install NiceFlow-0.0.1-py3-none-any.whl
+#安装
+conda activate fluentui
+
+pip uninstall NiceFlow
+
+pip install NiceFlow-0.0.5-py3-none-any.whl
 
 
 twine upload --repository pypi dist/*

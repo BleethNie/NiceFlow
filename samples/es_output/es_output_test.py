@@ -11,7 +11,7 @@ class TestESOutput(unittest.TestCase):
         path = "es_output_to_console.json"
         myFlow: Flow = FlowManager.read(path)
         flow_param = {
-            "url": "http://192.168.1.90:9200",
+            "url": "http://127.0.0.1:9200",
             "index": "test"
         }
         myFlow.set_param(flow_param)
