@@ -1,0 +1,25 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+    }
+  },
+  "nodes": [
+    {
+      "id": "FakerInput",
+      "name": "faker",
+      "type": "input",
+      "properties": {
+        "rows":10,
+        "columns": ["name","address","city","street_address","date_of_birth","phone_number"],
+        "randoms":[
+          {"key":"sex","values":["男:1","女:2","未知:3"]}
+        ]
+      }
+    }
+  ],
+  "edges": [
+
+  ]
+}

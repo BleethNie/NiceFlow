@@ -1,0 +1,32 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+    }
+  },
+  "nodes": [
+    {
+      "id": "FrameInput",
+      "name": "frame",
+      "type": "input",
+      "properties": {
+        "frame_name":"frame_input"
+      }
+    },
+    {
+      "id": "Console",
+      "name": "out",
+      "type": "translate",
+      "properties": {
+        "row": 100
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "frame",
+      "endId": "out"
+    }
+  ]
+}
