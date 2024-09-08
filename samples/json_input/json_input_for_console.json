@@ -1,0 +1,33 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+    }
+  },
+  "nodes": [
+    {
+      "id": "JsonInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "filename": "che_test_*.jsonl",
+        "format": "newline_delimited"
+      }
+    },
+    {
+      "id": "Console",
+      "name": "out",
+      "type": "translate",
+      "properties": {
+        "row": 100
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "out"
+    }
+  ]
+}
