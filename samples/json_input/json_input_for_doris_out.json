@@ -37,17 +37,17 @@
       }
     },
     {
-      "id": "MySQLOutput",
+      "id": "DorisOutput",
       "name": "out",
       "type": "translate",
       "properties": {
-        "host": "192.168.199.2",
-        "port": 9030,
+        "fe_host": "192.168.199.2",
+        "fe_query_port": "9030",
+        "fe_http_port": "8040",
         "username": "root",
-        "password": "",
+        "password": "doris_new_passwd",
         "db": "test",
-        "table":"news_record",
-        "write_method":"insert"
+        "table":"news_record"
       }
     }
 

@@ -12,7 +12,7 @@ class TestJsonInput(unittest.TestCase):
         myFlow.run()
 
     def test_Json_input_mysql_output(self):
-        path = "json_input_for_mysql_out.json"
+        path = "json_input_for_doris_out.json"
         myFlow: Flow = FlowManager.read(path)
         myFlow.run()
 
