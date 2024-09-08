@@ -1,0 +1,68 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+    }
+  },
+  "nodes": [
+    {
+      "id": "JsonInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "filename": "F:\\12_新闻数据集\\1623-0000001\\zh\\part-663de978334d-000000.jsonl",
+        "format": "newline_delimited"
+      }
+    },
+    {
+      "id": "Console",
+      "name": "c1",
+      "type": "output",
+      "properties": {
+        "row": 100
+      }
+    },
+    {
+      "id": "Rename",
+      "name": "rename",
+      "type": "translate",
+      "properties": {
+        "columns": [
+          {
+            "field": "date",
+            "rename": "publish_date"
+          }
+        ]
+      }
+    },
+    {
+      "id": "MySQLOutput",
+      "name": "out",
+      "type": "translate",
+      "properties": {
+        "host": "192.168.199.2",
+        "port": 9030,
+        "username": "root",
+        "password": "",
+        "db": "test",
+        "table":"news_record",
+        "write_method":"insert"
+      }
+    }
+
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "c1"
+    },  {
+      "startId": "c1",
+      "endId": "rename"
+    },
+    {
+      "startId": "rename",
+      "endId": "out"
+    }
+  ]
+}
