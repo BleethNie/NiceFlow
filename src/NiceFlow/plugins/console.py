@@ -16,7 +16,7 @@ class Console(IPlugin):
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
         console_df = self._pre_result_dict[pre_node.name]
-        console_df.limit(row).show()
+        console_df.limit(row).show(max_col_width=10,max_width=800)
         self.set_result(console_df)
 
 
