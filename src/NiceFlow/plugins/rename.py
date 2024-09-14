@@ -17,15 +17,30 @@ class Rename(IPlugin):
 
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
-        df = self._pre_result_dict[pre_node.name]
+        duck_df = self._pre_result_dict[pre_node.name]
+        # 需要修改名称的字段
+        columns = self.param.get("columns",[])
+        # 需要选择的字段
+        selects = self.param.get("selects",[])
+        # 需要排除的字段
+        excludes = self.param.get("excludes",[])
 
-        columns = self.param["columns"]
-        rename_dict = {}
-        for column in columns:
-            rename_dict[column["field"]] = column["rename"]
-        df = df.to_df().rename(rename_dict, axis=1)
-        df = duckdb.from_df(df)
-        self.set_result(df)
+        if len(selects)>0:
+            duck_df = duck_df.select(selects)
+
+        if len(excludes)>0:
+            df = duck_df.to_df().drop(columns=excludes)
+            duck_df = duckdb.from_df(df)
+
+        if len(columns)>0:
+            rename_dict = {}
+            for column in columns:
+                rename_dict[column["field"]] = column["rename"]
+            df = duck_df.to_df().rename(rename_dict, axis=1)
+            duck_df = duckdb.from_df(df)
+
+
+        self.set_result(duck_df)
 
     def to_json(self):
         super(Rename, self).to_json()

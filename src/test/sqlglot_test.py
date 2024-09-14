@@ -10,23 +10,55 @@ class TestSQL(unittest.TestCase):
 
     def test_base(self):
         a = sqlglot.transpile('''
-       CREATE TABLE `rq_real` (
-  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `JCZ` double NOT NULL COMMENT '检测值',
-  `JCZB` varchar(32) NOT NULL COMMENT '检测指标',
-  `BZ` varchar(255) NOT NULL COMMENT '备注',
-  `DEVICESRCID` varchar(32) NOT NULL COMMENT '设备原标识码',
-  `DWBSM` varchar(32) NOT NULL COMMENT '点位标识码',
-  `JCCJSJ` datetime NOT NULL COMMENT '采集时间',
-  `JCSBSJ` datetime NOT NULL COMMENT '上报时间',
-  `RKSJ` datetime NOT NULL COMMENT '入库时间',
-  `SBBSM` varchar(32) NOT NULL COMMENT '设备标识码',
-  `SRC` varchar(32) DEFAULT NULL COMMENT '数据来源'
 
-) ENGINE=InnoDB AUTO_INCREMENT=51796845 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='燃气实时数据'
+select date_format(RKSJ, '%Y-%m-%d') as dat,SRC, count(*) as coun
+from a_rq_real
+group by date_format(RKSJ, '%Y-%m-%d'),SRC;
+;
 ''',
-                              read="mysql", write="hive")[0]
+                              read="mysql", write="duckdb")[0]
         print(a)
+
+
+    def test_base_1(self):
+        a = sqlglot.transpile('''
+
+
+SELECT 
+    l1.DEVICESRCID,
+    TIMESTAMPDIFF(MINUTE, l1.JCCJSJ, l2.JCCJSJ) AS login_interval_minutes
+FROM 
+    (
+        SELECT 
+            DEVICESRCID, 
+            JCCJSJ,
+            ROW_NUMBER() OVER (PARTITION BY DEVICESRCID ORDER BY JCCJSJ) AS rn
+        FROM 
+            a_rq_real
+        WHERE 
+            JCCJSJ BETWEEN '2024-07-16' AND '2024-07-16 23:59:59'
+    ) l1
+INNER JOIN 
+    (
+        SELECT 
+           DEVICESRCID, 
+            JCCJSJ,
+            ROW_NUMBER() OVER (PARTITION BY DEVICESRCID ORDER BY JCCJSJ) AS rn
+        FROM 
+            a_rq_real
+        WHERE 
+            JCCJSJ BETWEEN '2024-07-16' AND '2024-07-16 23:59:59'
+    ) l2 ON l1.DEVICESRCID = l2.DEVICESRCID AND l1.rn = l2.rn - 1
+WHERE 
+    l1.rn = 1 AND l2.rn = 2;
+
+
+
+''',
+                              read="mysql", write="duckdb")[0]
+        print(a)
+
+
 
     def test_base_1(self):
         a = sqlglot.transpile('''from a;''',

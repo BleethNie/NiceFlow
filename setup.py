@@ -12,7 +12,7 @@ def read_file(filename):
 setup(
     # 基本信息
     name="NiceFlow",  # 项目名，确定唯一，不然上传 pypi 会失败
-    version="0.0.5",  # 项目版本
+    version="0.0.7",  # 项目版本
     author='BleethNie',  # 开发者
     author_email='xiao5406710@foxmail.com',  # 开发者邮箱
     description='ETL数据处理/数据迁移/数据分析工具',  # 摘要描述

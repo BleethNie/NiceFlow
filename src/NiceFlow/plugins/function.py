@@ -26,8 +26,9 @@ class Function(IPlugin):
 
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
-        df = self._pre_result_dict[pre_node.name]
-        table_columns = df.columns
+        pre_df = self._pre_result_dict[pre_node.name]
+        pre_df = pre_df.to_df()
+        table_columns = pre_df.columns
 
         sql = "select * "
         replace_sql = "REPLACE ( "
@@ -41,13 +42,14 @@ class Function(IPlugin):
             else:
                 as_sql = as_sql + f"{function} as {key} , "
         if replace_sql != "REPLACE ( ":
-            sql = sql + replace_sql.removesuffix(", ") + "), " + as_sql.removesuffix(", ") + "from df"
+            sql = f"{sql} {replace_sql.removesuffix(', ')}  {as_sql.removesuffix(', ')}) from pre_df"
         else:
-            sql = sql + "," + as_sql.removesuffix(", ") + "from df"
+            sql = sql + "," + as_sql.removesuffix(", ") + "from pre_df"
 
         logger.debug("sql = {}".format(sql))
-        df = duckdb.from_df(self.con.sql(sql).df())
-        self.set_result(df)
+        df = duckdb.sql(sql,connection=self.con).to_df()
+        next_df = duckdb.from_df(df)
+        self.set_result(next_df)
 
     def to_json(self):
         super(Function, self).to_json()

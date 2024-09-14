@@ -96,7 +96,7 @@ conda activate fluentui
 
 pip uninstall NiceFlow
 
-pip install NiceFlow-0.0.5-py3-none-any.whl
+pip install NiceFlow-0.0.7-py3-none-any.whl
 
 
 twine upload --repository pypi dist/*

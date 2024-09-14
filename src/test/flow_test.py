@@ -49,6 +49,7 @@ class TestFlow(unittest.TestCase):
         myFlow.run()
         result_dict = myFlow.get_result()
         duck_df = list(result_dict.values())[0]
+        myFlow.set_result("frame_input",duck_df)
         print(duck_df)
 
 if __name__ == '__main__':
