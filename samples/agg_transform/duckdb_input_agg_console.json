@@ -33,8 +33,16 @@
       }
     },
     {
+      "id": "Console",
+      "name": "print1",
+      "type": "output",
+      "properties": {
+        "row": 1000
+      }
+    },
+    {
       "id": "Agg",
-      "name": "duck",
+      "name": "agg",
       "type": "output",
       "properties": {
         "key": "name",
@@ -52,7 +60,7 @@
     },
     {
       "id": "Console",
-      "name": "res",
+      "name": "print2",
       "type": "output",
       "properties": {
         "row": 1000
@@ -62,11 +70,15 @@
   "edges": [
     {
       "startId": "read1",
-      "endId": "duck"
+      "endId": "print1"
     },
     {
-      "startId": "duck",
-      "endId": "res"
+      "startId": "print1",
+      "endId": "agg"
+    },
+    {
+      "startId": "agg",
+      "endId": "print2"
     }
   ]
 }

@@ -15,7 +15,6 @@ class TestAgg(unittest.TestCase):
         flow_param = {
 
         }
-        # 导入8480496行数据，执行完成需要4分46秒
         myFlow.set_param(flow_param)
         myFlow.run()
 
