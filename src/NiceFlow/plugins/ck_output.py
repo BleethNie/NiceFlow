@@ -26,7 +26,7 @@ class CKOutput(IPlugin):
         user = self.param.get("username", "default")
         password = self.param.get("password", "")
         table = self.param.get("table", "")
-        batch_size = self.param.get("batch_size", 100)
+        batch_size = self.param.get("batch_size", 1000)
 
         # 配置数据库
         client = Client(host=host, port=port, database=db, user=user, password=password)

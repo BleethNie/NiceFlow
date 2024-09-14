@@ -159,21 +159,21 @@ if __name__ == '__main__':
 
 #### 输入
 
-| 插件              | 功能                | 完成情况 | 文档                            |
-|-----------------|-------------------|------|-------------------------------|
-| AkshareInput    | 读取金融股票等财经数据       | 完成   | [Akshare输入](doc/doc/AkshareInput.md) |
-| Starter         | 启动器               |    | [启动器](doc/doc/Starter.md)     |
-| CsvInput        | 读取CSV数据           | 完成   | [CSV输入](doc/doc/CSVInput.md ) |
-| FakerInput      | 假数据生成             | 完成   |  [假数据生成](doc/doc/FakerInput.md) |       
+| 插件              | 功能                | 完成情况 | 文档                                      |
+|-----------------|-------------------|------|-----------------------------------------|
+| AkshareInput    | 读取金融股票等财经数据       | 完成   | [Akshare输入](doc/doc/AkshareInput.md)    |
+| Starter         | 启动器               |    | [启动器](doc/doc/Starter.md)               |
+| CsvInput        | 读取CSV数据           | 完成   | [CSV输入](doc/doc/CSVInput.md )           |
+| FakerInput      | 假数据生成             | 完成   | [假数据生成](doc/doc/FakerInput.md)          |       
 | ParquetInput    | 读取Parquet数据       | 完成   | [Parquet输入](doc/doc/ParquetInput.md)    |    
-| ExcelInput      | 读取Excel数据         | 完成   | [Excel输入](doc/doc/ExcelInput.md) |           
-| MySQLInput      | 读取MySQL数据         | 完成   | [MySQL输入](doc/doc/MySQLInput.md) |           
-| DuckDBInput     | 读取DuckDB数据        | 完成   | [DuckDB输入](doc/doc/DuckDBInput.md) |         
-| ClickHouseInput | 读取ClickHouse数据    | 完成   | [ClickHouse输入](doc/doc/ClickHouseInput.md) |
-| OdpsInput       | 读取MaxCompute数据    | 完成   | [Odps输入](doc/doc/OdpsInput.md) |           
-| ESInput         | 读取Elasticsearch数据 | 完成   | [Elasticsearch输入](doc/doc/ESInput.md) |         
-| MongoDBInput    | 读取MongoDB数据       | 完成   | [MongoDB输入](doc/doc/MongoDBInput.md) |
-| MqttInput       | 从Mqtt Broker读取数据  |  完成  | [MqttInput输入](doc/doc/MqttInput.md) |
+| ExcelInput      | 读取Excel数据         | 完成   | [Excel输入](doc/doc/ExcelInput.md)        |           
+| MySQLInput      | 读取MySQL数据         | 完成   | [MySQL输入](doc/doc/MySQLInput.md)        |           
+| DuckDBInput     | 读取DuckDB数据        | 完成   | [DuckDB输入](doc/doc/DuckDBInput.md)      |         
+| ClickHouseInput | 读取ClickHouse数据    | 完成   | [ClickHouse输入](doc/doc/CKInput.md) |
+| OdpsInput       | 读取MaxCompute数据    | 完成   | [Odps输入](doc/doc/OdpsInput.md)          |           
+| ESInput         | 读取Elasticsearch数据 | 完成   | [Elasticsearch输入](doc/doc/ESInput.md)   |         
+| MongoDBInput    | 读取MongoDB数据       | 完成   | [MongoDB输入](doc/doc/MongoDBInput.md)    |
+| MqttInput       | 从Mqtt Broker读取数据  |  完成  | [MqttInput输入](doc/doc/MqttInput.md)     |
 
 #### 转换
 
@@ -205,32 +205,32 @@ if __name__ == '__main__':
 
 #### 输出
 
-| 插件              | 功能           | 完成情况 | 文档                            |
-|-----------------|------------|------|-------------------------------|
-| FileOutput      | 文件输出           | 完成   | [文件输出](doc/doc/FileOutput.md) |
-| KafkaOutput     | Kafka输出          | 完成   | [Kafka输出](doc/doc/KafkaOutput.md) |
+| 插件              | 功能           | 完成情况 | 文档                                        |
+|-----------------|------------|------|-------------------------------------------|
+| FileOutput      | 文件输出           | 完成   | [文件输出](doc/doc/FileOutput.md)             |
+| KafkaOutput     | Kafka输出          | 完成   | [Kafka输出](doc/doc/KafkaOutput.md)         |
 | SqlServerOutput | SQLServer输出 | 完成   | [SQLServer输出](doc/doc/SqlServerOutput.md) |
-| S3Output        | S3输出            | 完成   | [S3输出](doc/doc/S3Output.md) |
-| PulsarOutput    | Pulsar输出         | 完成   | [Pulsar输出](doc/doc/PulsarOutput.md) |
-| PostgresOutput  | Postgres输出       | 完成   | [Postgres输出](doc/doc/PostgresOutput.md) |
-| ParquetOutput   | Parquet输出        | 完成   | [Parquet输出](doc/doc/ParquetOutput.md) |
-| PaimonOutput    | Paimon输出         | 完成   | [Paimon输出](doc/doc/PaimonOutput.md) |
-| OracleOutput    | Oracle输出         | 完成   | [Oracle输出](doc/doc/OracleOutput.md) |
-| OdpsOutput      | MaxCompute输出     | 完成   | [MaxCompute输出](doc/doc/OdpsOutput.md) |
-| MySQLOutput     | MySQL输出          | 完成   | [MySQL输出](doc/doc/MySQLOutput.md) |
-| MqttOutput      | MQTT输出           |      |      |                               |
-| MongoDBOutput   | MongoDB输出        | 完成   | [MongoDB输出](doc/doc/MongoDBOutput.md) |
-| MarkdownOutput  | Markdown输出        | 完成   | [Markdown输出](doc/doc/MarkdownOutput.md) |                              |
-| HttpOutput      | Http输出         |      |      |                               |
-| HiveOutput      | Hive输出         |      |      |                               |
-| HdfsOutput      | HDFS输出        |      |      |                               |
-| FtpOutput       | FTP输出            |      |      |                               |
-| ExcelOutput     | Excel输出          | 完成   | [Excel输出](doc/doc/ExcelOutput.md) |  
-| EsOutput        | Elasticsearch输出 |      |      |
-| DuckOutput      | DuckDB输出         |      |      |
-| CsvOutput       | CSV输出           | 完成   | [CSV输出](doc/doc/CsvOutput.md) |
-| CosOutput       | COS输出           |      |      |
-| ClickHouseOutput | ClickHouse输出    |      |      |
+| S3Output        | S3输出            | 完成   | [S3输出](doc/doc/S3Output.md)               |
+| PulsarOutput    | Pulsar输出         | 完成   | [Pulsar输出](doc/doc/PulsarOutput.md)       |
+| PostgresOutput  | Postgres输出       | 完成   | [Postgres输出](doc/doc/PostgresOutput.md)   |
+| ParquetOutput   | Parquet输出        | 完成   | [Parquet输出](doc/doc/ParquetOutput.md)     |
+| PaimonOutput    | Paimon输出         | 完成   | [Paimon输出](doc/doc/PaimonOutput.md)       |
+| OracleOutput    | Oracle输出         | 完成   | [Oracle输出](doc/doc/OracleOutput.md)       |
+| OdpsOutput      | MaxCompute输出     | 完成   | [MaxCompute输出](doc/doc/OdpsOutput.md)     |
+| MySQLOutput     | MySQL输出          | 完成   | [MySQL输出](doc/doc/MySQLOutput.md)         |
+| MqttOutput      | MQTT输出           |      |                                           |                               |
+| MongoDBOutput   | MongoDB输出        | 完成   | [MongoDB输出](doc/doc/MongoDBOutput.md)     |
+| MarkdownOutput  | Markdown输出        | 完成   | [Markdown输出](doc/doc/MarkdownOutput.md)   |                              |
+| HttpOutput      | Http输出         |      |                                           |                               |
+| HiveOutput      | Hive输出         |      |                                           |                               |
+| HdfsOutput      | HDFS输出        |      |                                           |                               |
+| FtpOutput       | FTP输出            |      |                                           |                               |
+| ExcelOutput     | Excel输出          | 完成   | [Excel输出](doc/doc/ExcelOutput.md)         |  
+| EsOutput        | Elasticsearch输出 |      |                                           |
+| DuckOutput      | DuckDB输出         |      |                                           |
+| CsvOutput       | CSV输出           | 完成   | [CSV输出](doc/doc/CsvOutput.md)             |
+| CosOutput       | COS输出           |      |                                           |
+| ClickHouseOutput | ClickHouse输出    |      | [ClickHouse输出](doc/doc/CKOutput.md)             |
 
 #### 自定义脚本插件[PyScript]
 

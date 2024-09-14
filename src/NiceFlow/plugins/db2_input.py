@@ -15,25 +15,8 @@ class DB2Input(IPlugin):
 
     def execute(self):
         super(DB2Input, self).execute()
-        # param信息
-        host = self.param["host"]
-        port = self.param.get("port", 9000)
-        db = self.param["db"]
-        user = self.param.get("username", "default")
-        password = self.param.get("password", "")
-        table = self.param.get("table", "")
-        sql = self.param.get("sql", "")
-
-        # 配置数据库
-        client = Client(host=host, port=port, database=db, user=user, password=password)
-
-        # 读取数据
-        data,columns = client.execute(sql,with_column_types=True)
-        real_columns = [item[0] for item in columns]
-        df = pd.DataFrame(data,columns=real_columns)
-        ck_df = duckdb.from_df(df)
         # 写入结果
-        self.set_result(ck_df)
+        self.set_result()
 
     def to_json(self):
         super(DB2Input, self).to_json()
