@@ -4,6 +4,7 @@ import duckdb
 
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
+from loguru import logger
 
 
 class Agg(IPlugin):
@@ -14,20 +15,25 @@ class Agg(IPlugin):
     def execute(self):
         super(Agg, self).execute()
         # param信息
-        key = self.param["key"]
+        keys = self.param.get("keys")
         aggs = self.param.get("aggs")
+
+        keys = ",".join(keys)
+
         res = ""
         for item in aggs:
             value = item["value"]
             a = item["agg"]
             res = res +f"{a}({value}),"
         res = res.removesuffix(",")
+
+
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
         duck_df = self._pre_result_dict[pre_node.name]
-
-        result_df = duckdb.sql(f"select {key},{res} from duck_df group by {key} ")
-
+        sql_str = f"select {keys} , {res} from duck_df group by {keys} "
+        logger.info(f"执行脚本为：{sql_str}" )
+        result_df = duckdb.sql(sql_str)
         # 写入结果
         self.set_result(result_df)
 

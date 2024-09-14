@@ -161,6 +161,7 @@ if __name__ == '__main__':
 
 | 插件              | 功能                | 完成情况 | 文档                            |
 |-----------------|-------------------|------|-------------------------------|
+| AkshareInput    | 读取金融股票等财经数据       | 完成   | [Akshare输入](doc/doc/AkshareInput.md) |
 | Starter         | 启动器               |    | [启动器](doc/doc/Starter.md)     |
 | CsvInput        | 读取CSV数据           | 完成   | [CSV输入](doc/doc/CSVInput.md ) |
 | FakerInput      | 假数据生成             | 完成   |  [假数据生成](doc/doc/FakerInput.md) |       
@@ -168,7 +169,6 @@ if __name__ == '__main__':
 | ExcelInput      | 读取Excel数据         | 完成   | [Excel输入](doc/doc/ExcelInput.md) |           
 | MySQLInput      | 读取MySQL数据         | 完成   | [MySQL输入](doc/doc/MySQLInput.md) |           
 | DuckDBInput     | 读取DuckDB数据        | 完成   | [DuckDB输入](doc/doc/DuckDBInput.md) |         
-| AkshareInput    | 读取金融股票等财经数据       | 完成   | [Akshare输入](doc/doc/AkshareInput.md) |
 | ClickHouseInput | 读取ClickHouse数据    | 完成   | [ClickHouse输入](doc/doc/ClickHouseInput.md) |
 | OdpsInput       | 读取MaxCompute数据    | 完成   | [Odps输入](doc/doc/OdpsInput.md) |           
 | ESInput         | 读取Elasticsearch数据 | 完成   | [Elasticsearch输入](doc/doc/ESInput.md) |         
@@ -177,29 +177,30 @@ if __name__ == '__main__':
 
 #### 转换
 
-| 插件               | 功能      | 完成情况 | 文档                                 |
-|------------------|---------|------|------------------------------------|
-| Filter           | 过滤器     | 完成   | [过滤器](doc/doc/Filter.md)           |
-| Mapping          | 映射器     | 完成   | [映射器](doc/doc/Mapping.md)          |
-| For              | 遍历器     | 完成   | [遍历器](doc/doc/For.md)              |  
-| IF               | 条件判断器   | 完成   | [条件判断器](doc/doc/IF.md)             |
-| Join             | 连接器     | 完成   | [连接器](doc/doc/Join.md)             |
-| Mask             | 脱敏器     | 完成   | [脱敏器](doc/doc/Mask.md)             |
-| Pivot            | 透视表     | 完成   | [透视表](doc/doc/Pivot.md)            |
-| Printer          | 打印器     | 完成   | [打印器](doc/doc/Printer.md)          |
-| RegularExtract   | 正则提取器   |      | [正则提取器](doc/doc/RegularExtract.md) |  
-| Rename           | 重命名器    | 完成   | [重命名器](doc/doc/Rename.md)          |
-| Samples          | 采样器     | 完成   | [采样器](doc/doc/Samples.md)          |
-| Sort             | 排序器     | 完成   | [排序器](doc/doc/Sort.md)             |
-| Sql              | SQL转换器  | 完成   | [SQL转换器](doc/doc/SqlTransform.md)  |
-| Switch           | 条件转换器   |      | [条件转换器](doc/doc/Switch.md)         |
-| Unpivot          | 取消透视表   | 完成   | [取消透视表](doc/doc/Unpivot.md)        |
-| Variable         | 变量转换器   | 完成   | [变量转换器](doc/doc/Variants.md)       |
-| While            | 循环转换器   | 完成   | [循环转换器](doc/doc/While.md)          |
-| Duplicate        | 去重器     | 完成   | [去重器](doc/doc/Duplicate.md)        |
-| Console          | 控制台打印   | 完成   | [控制台输出](doc/doc/Console.md)        |
-| SplitFieldToRows | 列拆分为多行  |  完成  | [列转行](doc/doc/SplitFieldToRows.md) |
-| Function         | 动态函数 |  完成  | [动态函数](doc/doc/Function.md)         |
+| 插件               | 功能     | 完成情况 | 文档                                 |
+|------------------|--------|------|------------------------------------|
+| Agg              | 聚合组件   | 完成   | [聚合组件](doc/doc/Agg.md)             |
+| Filter           | 过滤器    | 完成   | [过滤器](doc/doc/Filter.md)           |
+| Mapping          | 映射器    | 完成   | [映射器](doc/doc/Mapping.md)          |
+| For              | 遍历器    | 完成   | [遍历器](doc/doc/For.md)              |  
+| IF               | 条件判断器  | 完成   | [条件判断器](doc/doc/IF.md)             |
+| Join             | 连接器    | 完成   | [连接器](doc/doc/Join.md)             |
+| Mask             | 脱敏器    | 完成   | [脱敏器](doc/doc/Mask.md)             |
+| Pivot            | 透视表    | 完成   | [透视表](doc/doc/Pivot.md)            |
+| Printer          | 打印器    | 完成   | [打印器](doc/doc/Printer.md)          |
+| RegularExtract   | 正则提取器  |      | [正则提取器](doc/doc/RegularExtract.md) |  
+| Rename           | 重命名器   | 完成   | [重命名器](doc/doc/Rename.md)          |
+| Samples          | 采样器    | 完成   | [采样器](doc/doc/Samples.md)          |
+| Sort             | 排序器    | 完成   | [排序器](doc/doc/Sort.md)             |
+| Sql              | SQL转换器 | 完成   | [SQL转换器](doc/doc/SqlTransform.md)  |
+| Switch           | 条件转换器  |      | [条件转换器](doc/doc/Switch.md)         |
+| Unpivot          | 取消透视表  | 完成   | [取消透视表](doc/doc/Unpivot.md)        |
+| Variable         | 变量转换器  | 完成   | [变量转换器](doc/doc/Variants.md)       |
+| While            | 循环转换器  | 完成   | [循环转换器](doc/doc/While.md)          |
+| Duplicate        | 去重器    | 完成   | [去重器](doc/doc/Duplicate.md)        |
+| Console          | 控制台打印  | 完成   | [控制台输出](doc/doc/Console.md)        |
+| SplitFieldToRows | 列拆分为多行 |  完成  | [列转行](doc/doc/SplitFieldToRows.md) |
+| Function         | 动态函数   |  完成  | [动态函数](doc/doc/Function.md)        |
 
 
 #### 输出

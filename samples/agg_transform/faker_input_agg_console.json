@@ -1,0 +1,84 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+    }
+  },
+  "nodes": [
+    {
+      "id": "FakerInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "rows": 10000,
+        "columns": [
+          "name",
+          "address",
+          "city",
+          "street_address",
+          "date_of_birth",
+          "phone_number"
+        ],
+        "randoms": [
+          {
+            "key": "sex",
+            "values": [
+              "男",
+              "女",
+              "未知"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "Console",
+      "name": "print1",
+      "type": "output",
+      "properties": {
+        "row": 1000
+      }
+    },
+    {
+      "id": "Agg",
+      "name": "agg",
+      "type": "output",
+      "properties": {
+        "keys": ["name"],
+        "aggs": [
+          {
+            "value": "sex",
+            "agg": "group_concat"
+          },
+          {
+            "value": "date_of_birth",
+            "agg": "count"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Console",
+      "name": "print2",
+      "type": "output",
+      "properties": {
+        "row": 1000
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "print1"
+    },
+    {
+      "startId": "print1",
+      "endId": "agg"
+    },
+    {
+      "startId": "agg",
+      "endId": "print2"
+    }
+  ]
+}

@@ -2,9 +2,9 @@ import json
 
 import duckdb
 from loguru import logger
+
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
-import akshare as ak
 
 
 class AKShareInput(IPlugin):
@@ -23,10 +23,15 @@ class AKShareInput(IPlugin):
                 k_v_str = ""
             k_v_str = k_v_str + "{}='{}',".format(key, value)
         k_v_str = k_v_str.removesuffix(",")
-        script_str = "ak.{api_name}({k_v})".format(api_name=api_name, k_v=k_v_str)
-        logger.info("执行脚本为：{}", script_str)
+
+        script_str = f'ak.{api_name}({k_v_str})'
+        logger.info(f"执行脚本为：{script_str}" )
+
+        # 脚本编译执行
+        import akshare as ak
         compile_obj = compile(script_str, '', 'eval')
         df = eval(compile_obj)
+
         duck_df = duckdb.from_df(df)
         # 写入结果
         self.set_result(duck_df)
