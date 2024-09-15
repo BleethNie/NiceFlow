@@ -1,0 +1,32 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+    }
+  },
+  "nodes": [
+    {
+      "id": "ExcelInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "file_name":"${file_name}"
+      }
+    },
+    {
+      "id": "ExcelOutput",
+      "name": "write1",
+      "type": "output",
+      "properties": {
+        "file_name": "${out_name}"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "write1"
+    }
+  ]
+}

@@ -1,7 +1,5 @@
 import unittest
 
-import sqlglot
-
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.manager import FlowManager
 
