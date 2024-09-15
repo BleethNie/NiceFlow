@@ -1,0 +1,36 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+
+    } },
+  "nodes": [
+    {
+      "id": "FakerInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "rows":10000,
+        "columns": ["name","address","city","street_address","date_of_birth","phone_number"],
+        "randoms":[
+          {"key":"sex","values":["男","女","未知"]}
+        ]
+      }
+    },
+    {
+      "id": "HtmlOutput",
+      "name": "write1",
+      "type": "output",
+      "properties": {
+        "filename": "1.html"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "write1"
+    }
+  ]
+}

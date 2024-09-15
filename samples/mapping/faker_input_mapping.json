@@ -1,0 +1,82 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+
+    }
+  },
+  "nodes": [
+    {
+      "id": "FakerInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "rows":1000,
+        "columns": ["phone_number"],
+        "randoms":[
+          {"key":"sex1","values":["男","女","未知"]},
+          {"key":"sex2","values":["男","女","未知"]}
+        ]
+      }
+    },
+    {
+      "id": "ExcelInput",
+      "name": "dict1",
+      "type": "input",
+      "properties": {
+        "file_name": "excel格式字典.xlsx",
+        "sheet_name": "性别"
+      }
+    },
+    {
+      "id": "Mapping",
+      "name": "mapping",
+      "type": "translate",
+      "properties": {
+        "columns": [
+          {
+            "field": "sex1",
+            "default": "NONE",
+            "mapping_field": "sex1",
+            "value_mapping": {
+              "男": "1",
+              "女": "2"
+            }
+          },
+          {
+            "field": "sex2",
+            "mapping_field": "sex21",
+            "plugin_mapping": {
+              "step_name": "dict1",
+              "key_field": "性别key",
+              "value_field": "字典值"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "Console",
+      "name": "print",
+      "type": "output",
+      "properties": {
+        "row": 10
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "mapping"
+    },
+    {
+      "startId": "dict1",
+      "endId": "mapping"
+    },
+    {
+      "startId": "mapping",
+      "endId": "print"
+    }
+  ]
+}
