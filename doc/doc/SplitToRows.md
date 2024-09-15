@@ -1,4 +1,4 @@
-# SplitFieldToRows 插件文档
+# SplitToRows 插件文档
 
 ___
 
@@ -63,7 +63,7 @@ ___
       }
     },
     {
-      "id": "SplitFieldToRowsInput",
+      "id": "SplitToRows",
       "name": "convert",
       "type": "input",
       "properties": {

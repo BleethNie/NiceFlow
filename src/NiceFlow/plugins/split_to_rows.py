@@ -6,13 +6,13 @@ from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
 
 
-class SplitFieldToRowsInput(IPlugin):
+class SplitToRows(IPlugin):
 
     def init(self, param: json, flow: Flow):
-        super(SplitFieldToRowsInput, self).init(param, flow)
+        super(SplitToRows, self).init(param, flow)
 
     def execute(self):
-        super(SplitFieldToRowsInput, self).execute()
+        super(SplitToRows, self).execute()
         column = self.param.get("column", None)
         split = self.param.get("split", ",")
         # mode = override[覆盖原字段]、new[生成新字段]
@@ -28,5 +28,5 @@ class SplitFieldToRowsInput(IPlugin):
         self.set_result(duckdb_df)
 
     def to_json(self):
-        super(SplitFieldToRowsInput, self).to_json()
+        super(SplitToRows, self).to_json()
 

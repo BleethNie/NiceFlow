@@ -19,7 +19,7 @@
       }
     },
     {
-      "id": "SplitFieldToRowsInput",
+      "id": "SplitToRows",
       "name": "convert",
       "type": "input",
       "properties": {
