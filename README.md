@@ -211,40 +211,41 @@ if __name__ == '__main__':
 
 #### 输出
 
-| 插件               | 功能           | 完成情况 | 文档                                        |
-|------------------|--------------|------|-------------------------------------------|
-| FileOutput       | 文件输出         | 完成   | [文件输出](doc/doc/FileOutput.md)             |
-| KafkaOutput      | Kafka输出      | 完成   | [Kafka输出](doc/doc/KafkaOutput.md)         |
-| SqlServerOutput  | SQLServer输出  | 完成   | [SQLServer输出](doc/doc/SqlServerOutput.md) |
-| S3Output         | S3输出         | 完成   | [S3输出](doc/doc/S3Output.md)               |
-| PulsarOutput     | Pulsar输出     | 完成   | [Pulsar输出](doc/doc/PulsarOutput.md)       |
-| PostgresOutput   | Postgres输出   | 完成   | [Postgres输出](doc/doc/PostgresOutput.md)   |
-| ParquetOutput    | Parquet输出    | 完成   | [Parquet输出](doc/doc/ParquetOutput.md)     |
-| PaimonOutput     | Paimon输出     | 完成   | [Paimon输出](doc/doc/PaimonOutput.md)       |
-| OracleOutput     | Oracle输出     | 完成   | [Oracle输出](doc/doc/OracleOutput.md)       |
-| OdpsOutput       | MaxCompute输出 | 完成   | [MaxCompute输出](doc/doc/OdpsOutput.md)     |
-| MySQLOutput      | MySQL输出      | 完成   | [MySQL输出](doc/doc/MySQLOutput.md)         |
-| MqttOutput       | MQTT输出       |      |                                           |                               |
-| MongoDBOutput    | MongoDB输出    | 完成   | [MongoDB输出](doc/doc/MongoDBOutput.md)     |
-| MarkdownOutput   | Markdown输出   | 完成   | [Markdown输出](doc/doc/MarkdownOutput.md)   |                              |
-| HttpOutput       | Http输出       |      |                                           |                               |
-| HiveOutput       | Hive输出       |      |                                           |                               |
-| HdfsOutput       | HDFS输出       |      |                                           |                               |
-| FtpOutput        | FTP输出        |      |                                           |                               |
-| DB2Output        | 写入数据到DB2数据库  |    |                                           |
-| DorisOutput      | 写入数据到Doris数据库 |    |                                           |
-| DuckDBOutput     | 写入数据到DuckDB数据库 |    |                                           |
-| ExcelOutput      | Excel输出      | 完成   | [Excel输出](doc/doc/ExcelOutput.md)         |  
+| 插件               | 功能              | 完成情况 | 文档                                        |
+|------------------|-----------------|------|-------------------------------------------|
+| FileOutput       | 文件输出            | 完成   | [文件输出](doc/doc/FileOutput.md)             |
+| KafkaOutput      | Kafka输出         | 完成   | [Kafka输出](doc/doc/KafkaOutput.md)         |
+| SqlServerOutput  | SQLServer输出     | 完成   | [SQLServer输出](doc/doc/SqlServerOutput.md) |
+| S3Output         | S3输出            | 完成   | [S3输出](doc/doc/S3Output.md)               |
+| PulsarOutput     | Pulsar输出        | 完成   | [Pulsar输出](doc/doc/PulsarOutput.md)       |
+| PostgresOutput   | Postgres输出      | 完成   | [Postgres输出](doc/doc/PostgresOutput.md)   |
+| ParquetOutput    | Parquet输出       | 完成   | [Parquet输出](doc/doc/ParquetOutput.md)     |
+| PaimonOutput     | Paimon输出        | 完成   | [Paimon输出](doc/doc/PaimonOutput.md)       |
+| OracleOutput     | Oracle输出        | 完成   | [Oracle输出](doc/doc/OracleOutput.md)       |
+| OdpsOutput       | MaxCompute输出    | 完成   | [MaxCompute输出](doc/doc/OdpsOutput.md)     |
+| MySQLOutput      | MySQL输出         | 完成   | [MySQL输出](doc/doc/MySQLOutput.md)         |
+| MqttOutput       | MQTT输出          |      |                                           |                               |
+| MongoDBOutput    | MongoDB输出       | 完成   | [MongoDB输出](doc/doc/MongoDBOutput.md)     |
+| MarkdownOutput   | Markdown输出      | 完成   | [Markdown输出](doc/doc/MarkdownOutput.md)   |                              |
+| HttpOutput       | Http输出          |      |                                           |                               |
+| HiveOutput       | Hive输出          |      |                                           |                               |
+| HdfsOutput       | HDFS输出          |      |                                           |                               |
+| FtpOutput        | FTP输出           |      |                                           |                               |
+| DB2Output        | 写入数据到DB2数据库     |    |                                           |
+| DorisOutput      | 写入数据到Doris数据库   |    |                                           |
+| DuckDBOutput     | 写入数据到DuckDB数据库  |    |                                           |
+| ExcelOutput      | Excel输出         | 完成   | [Excel输出](doc/doc/ExcelOutput.md)         |  
 | ESOutput         | Elasticsearch输出 |      |                                           |
-| DuckOutput       | DuckDB输出     |      |                                           |
-| CsvOutput        | CSV输出        | 完成   | [CSV输出](doc/doc/CsvOutput.md)             |
-| CosOutput        | COS输出        |      |                                           |
-| ClickHouseOutput | ClickHouse输出 |      | [ClickHouse输出](doc/doc/CKOutput.md)       |
-| JsonOutput       | Json输出       |      | [Json输出](doc/doc/JsonOutput.md)           |
+| DuckOutput       | DuckDB输出        |      |                                           |
+| CsvOutput        | CSV输出           | 完成   | [CSV输出](doc/doc/CsvOutput.md)             |
+| CosOutput        | COS输出           |      |                                           |
+| ClickHouseOutput | ClickHouse输出    |      | [ClickHouse输出](doc/doc/CKOutput.md)       |
+| JsonOutput       | Json输出          |      | [Json输出](doc/doc/JsonOutput.md)           |
+| HtmlOutput       | html输出          |      | [Html输出](doc/doc/HtmlOutput.md)           |
 
 
 
-#### 自定义脚本插件[PyScript]
+#### 自定义脚本插件【方式1】[PyScript]
 
 - 系统内置PyScript插件，该插件没有固定内容，可以自定义脚本,如下所示
 
@@ -286,6 +287,39 @@ if __name__ == '__main__':
   ]
 }
 ```
+
+
+
+#### 自定义脚本插件【方式2】
+
+- 使用`PluginManager.register_user_plugin("C://Users//xiaow//Downloads//plugins")`指定自定义插件路径
+- 该目录下插件示例参考项目`src/plugins`目录
+
+
+```python
+import unittest
+
+from NiceFlow.core.flow import Flow
+from NiceFlow.core.manager import FlowManager, PluginManager
+
+
+class TestLoadUserPlugin(unittest.TestCase):
+
+    def test_load_user_plugin(self):
+        path = "faker_input_to_hello.json"
+        PluginManager.register_user_plugin("C://Users//xw//Downloads//plugins")
+        myFlow: Flow = FlowManager.read(path)
+        flow_param = {
+        }
+        myFlow.set_param(flow_param)
+        myFlow.run()
+
+
+if __name__ == '__main__':
+    unittest.main()
+
+```
+
 
 
 ### 数据实战

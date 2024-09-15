@@ -36,7 +36,7 @@ class Masking(IPlugin):
 
         sql = "select *,function_mask( {} ,{},{},'{}') as {}_mask from df" \
             .format(field, startIndex, length, sign, field)
-        logger.debug("sql = {}".format(sql))
+        logger.info(f"执行sql = {sql}")
         df = duckdb.from_df(duckdb.sql(sql).df())
         self.set_result(df)
 

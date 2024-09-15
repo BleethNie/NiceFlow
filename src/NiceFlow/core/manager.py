@@ -30,11 +30,10 @@ class PluginManager(metaclass=SingletonMeta):
     SELF_PLUGIN_ROOT_PATH = ""
 
     @classmethod
-    def register_user_plugin(cls):
+    def register_user_plugin(cls, plugin_dir_root=None):
         """
         Find plugins from other directory
         """
-
         # 获取当前文件的绝对路径
         current_file = os.path.abspath(__file__)
         # 获取当前文件所在目录的绝对路径
@@ -42,6 +41,9 @@ class PluginManager(metaclass=SingletonMeta):
         # 获取当前项目的根目录
         project_root = os.path.dirname(os.path.dirname(current_directory))
         plugin_root_path = project_root + "/plugins"
+        if plugin_dir_root != None:
+            plugin_root_path = plugin_dir_root
+
         logger.info("开始扫描自定义插件安装目录{}", plugin_root_path)
         if not os.path.exists(plugin_root_path):
             os.makedirs(plugin_root_path)
@@ -64,7 +66,7 @@ class PluginManager(metaclass=SingletonMeta):
                 cls.register_plugin_with_param(plugin_name, parent_module_name)
 
     @classmethod
-    def register_plugin(cls):
+    def register_sys_plugin(cls):
         """
         Find plugins and add them to list
         """
@@ -118,10 +120,8 @@ class PluginManager(metaclass=SingletonMeta):
 
 class FlowManager(metaclass=SingletonMeta):
     flow_manager_dict: dict[str, Flow] = {}
-
     # 注册系统插件
-    PluginManager.register_plugin()
-    PluginManager.register_user_plugin()
+    PluginManager.register_sys_plugin()
 
 
     @classmethod

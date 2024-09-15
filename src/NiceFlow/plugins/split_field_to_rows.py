@@ -6,7 +6,6 @@ from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
 
 
-
 class SplitFieldToRowsInput(IPlugin):
 
     def init(self, param: json, flow: Flow):

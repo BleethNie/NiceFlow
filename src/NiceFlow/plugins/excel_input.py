@@ -15,12 +15,12 @@ class ExcelInput(IPlugin):
     def execute(self):
         super(ExcelInput, self).execute()
 
-        file_name = self.param["file_name"]
+        filename = self.param["filename"]
         sheet_name = self.param.get("sheet_name", "")
         if len(sheet_name) == 0:
-            df = pd.read_excel(file_name)
+            df = pd.read_excel(filename)
         else:
-            df = pd.read_excel(file_name, sheet_name=sheet_name)
+            df = pd.read_excel(filename, sheet_name=sheet_name)
         excel_df = duckdb.from_df(df)
         self.set_result(excel_df)
 

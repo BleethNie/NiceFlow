@@ -24,7 +24,7 @@ ___
       "name": "read1",
       "type": "input",
       "properties": {
-        "file_name":"${file_name}"
+        "filename":"${filename}"
       }
     },
     {

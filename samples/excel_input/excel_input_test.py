@@ -10,7 +10,7 @@ class TestExcelInput(unittest.TestCase):
         path = "excel_input_to_console.json"
         myFlow: Flow = FlowManager.read(path)
         flow_param = {
-            "file_name": "total_RQ_SITE_20231226.xlsx",
+            "filename": "total_RQ_SITE_20231226.xlsx",
         }
         myFlow.set_param(flow_param)
         myFlow.run()
