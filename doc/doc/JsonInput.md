@@ -1,3 +1,33 @@
+
+# JsonInput 插件文档
+
+___
+
+
+## 1 快速介绍
+
+json文件读取组件,需要duckdb 扩展支持
+
+```shell
+INSTALL json;
+LOAD json;
+
+```
+duckdb参考：
+
+- https://duckdb.org/docs/extensions/json
+- https://duckdb.org/docs/data/json/overview
+
+##  2 pip依赖
+
+无
+
+
+## 3 功能说明
+
+### 3.1 配置样例
+
+```json
 {
   "flow": {
     "name": "",
@@ -37,17 +67,11 @@
       }
     },
     {
-      "id": "DorisOutput",
-      "name": "out",
-      "type": "translate",
+      "id": "Console",
+      "name": "c2",
+      "type": "output",
       "properties": {
-        "fe_host": "192.168.199.2",
-        "fe_query_port": "9030",
-        "fe_http_port": "8040",
-        "username": "root",
-        "password": "doris_new_passwd",
-        "db": "test",
-        "table":"news_record"
+        "row": 100
       }
     }
 
@@ -62,7 +86,22 @@
     },
     {
       "startId": "rename",
-      "endId": "out"
+      "endId": "c2"
     }
   ]
 }
+
+```
+
+
+
+### 3.2 参数说明
+
+| 参数名称      | 是否必须 | 默认值/示例值 | 描述                                   | 
+|-----------|------|----|--------------------------------------|
+| filename | 是    |  | 文件名，支持通配符 *                          |
+| format | 否    |  |  | 文件格式
+
+
+
+

@@ -16,6 +16,7 @@ class IF(IPlugin):
         super(IF, self).execute()
         self.set_result(None)
 
+
     def set_result(self, df: duckdb.DuckDBPyRelation):
         decide_script = self.param["decide"]
         false_step = self.param.get("false_step", None)

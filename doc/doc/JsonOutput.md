@@ -1,3 +1,24 @@
+
+# JsonInput 插件文档
+
+___
+
+
+## 1 快速介绍
+
+写入json文件插件,借助pandas实现 `pd.to_json(filename)`
+
+
+##  2 pip依赖
+
+无
+
+
+## 3 功能说明
+
+### 3.1 配置样例
+
+```json
 {
   "flow": {
     "name": "",
@@ -31,17 +52,18 @@
       "name": "duplicate",
       "type": "input",
       "properties": {
-        "duplicate_fields":  ["sex","zt"],
+        "duplicate_fields": ["sex","zt"],
         "order_fields": "name",
         "order_type": "DESC"
       }
     },
     {
-      "id": "Console",
+      "id": "JsonOutput",
       "name": "write1",
       "type": "output",
       "properties": {
-        "row": 100
+        "filename": "1.json",
+        "indent": 4
       }
     }
   ],
@@ -56,3 +78,17 @@
     }
   ]
 }
+```
+
+
+
+### 3.2 参数说明
+
+| 参数名称     | 是否必须 | 默认值/示例值 | 描述                   | 
+|----------|------|----|----------------------|
+| filename | 是    |  | 文件名                  |
+| -        | 否    |  | 其它参数参考pandas to_json |
+
+
+
+
