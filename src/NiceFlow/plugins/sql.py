@@ -31,7 +31,7 @@ class SQL(IPlugin):
             step = input["step"]
             table = input["table"]
             logger.debug("{}-{}", table, step)
-            duckdb.register(table, self._pre_result_dict[step].to_df())
+            duckdb.register(table, self._pre_result_dict[step].to_df(),connection=self.con)
 
         df = duckdb.sql(sql,connection=self.con).to_df()
         next_df = duckdb.from_df(df)

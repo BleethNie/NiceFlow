@@ -35,7 +35,7 @@ class CsvInput(IPlugin):
         encoding = self.param.get("encoding", None)
         skip = self.param.get("skip", None)
 
-        csv_df = duckdb.read_csv(name=filename, header=header, compression=compression, sep=delimiter, dtype=dtype,
+        csv_df = duckdb.read_csv(filename, header=header, compression=compression, sep=delimiter, dtype=dtype,
                                  encoding=encoding, sample_size=sample_size, all_varchar=all_varchar,skiprows=skip, names=names)
         self.set_result(csv_df)
 
