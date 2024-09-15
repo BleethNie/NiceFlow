@@ -3,6 +3,7 @@ import inspect
 import json
 
 import duckdb
+from NiceFlow.common.module_util import load_module
 from loguru import logger
 
 from NiceFlow.core.flow import Flow
@@ -15,7 +16,7 @@ class Function(IPlugin):
         super(Function, self).init(param, flow)
         self.con = duckdb.connect()
 
-        # 注册函数
+        # 注册系统函数
         module = importlib.import_module("NiceFlow.core.functions")
         items = inspect.getmembers(module, inspect.isfunction)
         for item in items:
@@ -23,6 +24,10 @@ class Function(IPlugin):
 
     def execute(self):
         super(Function, self).execute()
+
+        function_paths = self.param.get("function_paths",[])
+        for path in function_paths:
+            self.register_user_function(path)
 
         # 获取上一步结果
         pre_node = self.pre_nodes[0]
@@ -51,6 +56,11 @@ class Function(IPlugin):
         next_df = duckdb.from_df(df)
         self.set_result(next_df)
 
+    def register_user_function(self,function_path):
+        module = load_module(function_path)
+        items = inspect.getmembers(module, inspect.isfunction)
+        for item in items:
+            self.con.create_function(item[0], item[1])
     def to_json(self):
         super(Function, self).to_json()
 

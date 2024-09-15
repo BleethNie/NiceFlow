@@ -4,3 +4,7 @@ def print_hello(content) -> str:
 
 def empty() -> str:
     return ""
+
+
+def value_map() -> str:
+    return ""
