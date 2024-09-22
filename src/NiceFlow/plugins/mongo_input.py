@@ -4,6 +4,7 @@ import duckdb
 import pandas as pd
 from pymongo import MongoClient
 
+from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
 
 
@@ -12,7 +13,7 @@ class MongoInput(IPlugin):
     def __init__(self):
         super().__init__()
 
-    def init(self, param: json):
+    def init(self, param: json, flow: Flow):
         super(MongoInput, self).init(param)
         self.client = MongoClient("uri")
 

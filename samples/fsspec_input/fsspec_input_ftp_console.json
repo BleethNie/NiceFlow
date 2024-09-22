@@ -1,0 +1,37 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+
+    }},
+  "nodes": [
+    {
+      "id": "FSSpecInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "protocol": "ftp",
+        "host": "192.168.199.4",
+        "username": "admin",
+        "password": "123456",
+        "path": "/che_test_2.csv"
+
+      }
+    },
+    {
+      "id": "Console",
+      "name": "write1",
+      "type": "output",
+      "properties": {
+        "row": 100
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "write1"
+    }
+  ]
+}
