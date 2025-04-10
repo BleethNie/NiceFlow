@@ -1,0 +1,48 @@
+{
+  "flow": {
+    "name": "",
+    "uid": "",
+    "param": {
+    }
+  },
+  "nodes": [
+    {
+      "id": "CsvInput",
+      "name": "read1",
+      "type": "input",
+      "properties": {
+        "filename": "grok_demo.csv",
+        "encoding": "utf-8",
+        "sample_size": 1,
+        "delimiter": "None"
+      }
+    },
+    {
+      "id": "FGrok",
+      "name": "grok",
+      "type": "translate",
+      "properties": {
+        "pattern": "%{TIMESTAMP_ISO8601:date},%{NUMBER:date_s}%{SPACE}",
+        "field": "msg"
+      }
+    },
+    {
+      "id": "Console",
+      "name": "print",
+      "type": "output",
+      "properties": {
+        "row": 10
+      }
+    }
+  ],
+  "edges": [
+    {
+      "startId": "read1",
+      "endId": "grok"
+    },
+    {
+      "startId": "grok",
+      "endId": "print"
+    }
+  ]
+}

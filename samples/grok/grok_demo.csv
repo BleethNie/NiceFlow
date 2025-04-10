@@ -1,0 +1,7 @@
+msg
+2025-04-10 21:04:04,250 [Quartz Scheduler [clusterScheduler]] INFO  o.s.s.quartz.SchedulerFactoryBean ? - Starting Quartz Scheduler now, after delay of 60 seconds
+2025-04-10 21:04:04,260 [Quartz Scheduler [clusterScheduler]] INFO  o.s.s.quartz.LocalDataSourceJobStore 3644 - ClusterManager: detected 1 failed or restarted instances.
+2025-04-10 21:04:04,261 [Quartz Scheduler [clusterScheduler]] INFO  o.s.s.quartz.LocalDataSourceJobStore 3503 - ClusterManager: Scanning for instance "810016ccc4731744206503538"'s failed in-progr
+2025-04-10 21:04:04,265 [Quartz Scheduler [clusterScheduler]] INFO  org.quartz.core.QuartzScheduler 547 - Scheduler clusterScheduler_$_810016ccc4731744290165745 started.
+2025-04-10 21:04:04,279 [QuartzScheduler_clusterScheduler-810016ccc4731744290165745_MisfireHandler] INFO  o.s.s.quartz.LocalDataSourceJobStore 973 - Handling 2 trigger(s) that missed their scheduled fire-time.
+2025-04-10 21:04:04,790 [Thread-23] INFO  org.quartz.core.QuartzScheduler 547 - Scheduler clusterScheduler_$_810016ccc4731744290165745 started.
