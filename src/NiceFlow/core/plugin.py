@@ -20,6 +20,8 @@ class IPlugin(metaclass=abc.ABCMeta):
         self.id = ""
         # 参数
         self.param = {}
+        # 参数
+        self.show_summarize  = "N"
         # 设置plugin状态
         self.status = ""
         # 影子参数
@@ -56,6 +58,7 @@ class IPlugin(metaclass=abc.ABCMeta):
         self.type = param["type"]
         self.name = param["name"]
         self.param = param["properties"]
+        self.show_summarize  = param.get("show_summarize", "N")
         self.flow = flow
 
     def set_result(self, df: duckdb.DuckDBPyRelation = None):
@@ -70,6 +73,10 @@ class IPlugin(metaclass=abc.ABCMeta):
         # 执行下一步
         for node in self.next_nodes:
             self.signal.connect(node.receiver, sender=self)
+            # 打印表结构信息
+        if self.show_summarize ==1 and df is not None:
+
+            loguru.logger.info("【{}】表结构信息：\r\n{}", self.name,df.describe())
         self.after_execute()
         self.signal.send(self)
 
@@ -112,6 +119,7 @@ class IPlugin(metaclass=abc.ABCMeta):
         # 变量还原
         for key, value in self.shadow_variable_param.items():
             self.param[key] = value
+
 
     def __param_check(self):
         # 必要参数校验失败则直接退出
