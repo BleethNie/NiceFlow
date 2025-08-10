@@ -3,7 +3,7 @@
     "name": "",
     "uid": "",
     "param": {
-      "common":"E:\\02_Resource\\05_anchnet\\09_无锡生命线\\NiceFlow"
+      "common":""
     }
   },
   "nodes": [
@@ -12,8 +12,8 @@
       "name": "read1",
       "type": "input",
       "properties": {
-        "file_name": "${common}\\燃气数据.xlsx",
-        "sheet_name": "西维斯设备数据"
+        "file_name": "",
+        "sheet_name": ""
       }
     }
   ],
