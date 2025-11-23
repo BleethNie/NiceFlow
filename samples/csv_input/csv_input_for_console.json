@@ -11,8 +11,8 @@
       "name": "read1",
       "type": "input",
       "properties": {
-        "filename": "che_test_*.csv",
-        "dtype": {"on_station":"varchar"}
+        "filename": "F:\\07_数据源大全\\水位数据\\后两周的数据\\bus*.csv"
+
       }
     },
     {

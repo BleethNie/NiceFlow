@@ -11,9 +11,10 @@
       "name": "read1",
       "type": "input",
       "properties": {
-        "filename": "che_test_*.csv",
+        "filename": "aaa-*.csv",
+        "all_varchar": true,
         "dtype": {
-          "on_station": "varchar"
+          "单位净值": "varchar"
         }
       }
     },
@@ -23,7 +24,7 @@
       "type": "translate",
       "properties": {
         "columns": [
-          {"key": "on_station", "function": "print_hello()"}
+          {"key": "基金名称", "function": "print_hello(基金名称)"}
         ]
       }
     },
@@ -32,7 +33,7 @@
       "name": "out",
       "type": "translate",
       "properties": {
-        "row": 100
+        "max_row": 100
       }
     }
   ],

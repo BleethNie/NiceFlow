@@ -28,7 +28,7 @@ class CsvInput(IPlugin):
         header = self.param.get("header", True)
         all_varchar = self.param.get("all_varchar", None)
         compression = self.param.get("compression", "auto")
-        delimiter = self.param.get("delimiter", ",")
+        delimiter = self.param.get("delimiter", None)
         names = self.param.get("names", [])
         sample_size = self.param.get("sample_size", 20480)
         dtype = self.param.get("dtype", [])
