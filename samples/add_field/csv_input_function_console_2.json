@@ -13,11 +13,11 @@
         "columns": [
           {
             "key": "jcz",
-            "function": "md5(dwbsm)"
+            "function": "md5(基金代码)"
           },
           {
             "key": "ffff",
-            "function": "md5(dwbsm)"
+            "function": "md5(基金代码)"
           }
         ]
       }
@@ -27,11 +27,11 @@
       "name": "CsvInput",
       "type": "input",
       "properties": {
-        "filename": "C:/Users/xiaow/Downloads/aaa.csv",
+        "filename": "aaa.csv",
         "delimiter": "\t",
         "file_header": true,
         "file_encode": "UTF-8",
-        "dtype": {"dwbsm": "varchar"}
+        "dtype": {"单位净值": "varchar"}
       }
     },
     {
@@ -39,7 +39,7 @@
       "name": "Console",
       "type": "input",
       "properties": {
-        "row": "100"
+        "max_rows": 100
       }
     }
   ],

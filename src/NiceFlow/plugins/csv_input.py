@@ -1,6 +1,6 @@
 import json
 
-import duckdb.duckdb
+import duckdb
 
 from NiceFlow.core.flow import Flow
 from NiceFlow.core.plugin import IPlugin
